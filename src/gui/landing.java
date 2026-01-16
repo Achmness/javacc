@@ -1,5 +1,12 @@
 package gui;
+import config.config;
 import internal.dashboard;
+import javax.swing.JOptionPane;
+import internal.admin;
+import internal.client;
+import internal.vet;
+import java.util.List;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -146,12 +153,74 @@ public class landing extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       dashboard db = new dashboard();
-       db.setVisible(true);
-       this.dispose();
+           String email = jTextField3.getText().trim();
+        String password = new String(jPasswordField2.getPassword()).trim();
+
+        if(email.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter email and password!");
+            return;
+        }
+
+        try {
+            config db = new config();
+            String hashedPass = config.hashPassword(password);
+
+            String qry = "SELECT * FROM account WHERE acc_email = ? AND acc_pass = ?";
+            java.util.List<Map<String, Object>> result = db.fetchRecords(qry, email, hashedPass);
+
+            if(result == null || result.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Invalid credentials!");
+                return;
+            }
+
+            Map<String, Object> user = result.get(0);
+            Object idObj = user.get("acc_id");
+            Object typeObj = user.get("type");
+            Object statusObj = user.get("status");
+
+            if(idObj == null) {
+                JOptionPane.showMessageDialog(this, "User ID not found!");
+                return;
+            }
+
+            int acc_id = Integer.parseInt(idObj.toString());
+            String status = statusObj != null ? statusObj.toString() : "Active";
+            String type = typeObj != null ? typeObj.toString() : "Client";
+
+            if(status.equalsIgnoreCase("Pending")) {
+                JOptionPane.showMessageDialog(this, "Account is Pending. Contact Admin!");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Login Success!");
+
+            // Open the correct dashboard
+            switch(type.toLowerCase()) {
+                case "admin":
+                    admin a = new admin();
+                    a.setVisible(true);
+                    break;
+                case "client":
+                    client c = new client();
+                    c.setVisible(true);
+                    break;
+                case "veterinarian":
+                    vet v = new vet();
+                    v.setVisible(true);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Unknown user type!");
+                    break;
+            }
+
+            this.dispose(); // Close login window
        
     }//GEN-LAST:event_jButton1ActionPerformed
-
+catch(Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error logging in: " + e.getMessage());
+        }
+    }
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
        signup signup = new signup();
     

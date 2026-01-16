@@ -1,4 +1,8 @@
-package gui;/*
+package gui;
+import config.config;
+import javax.swing.JOptionPane;
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -89,11 +93,44 @@ public class signup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String email = jTextField1.getText().trim();
+        String username = jTextField2.getText().trim();
+        String password = new String(jPasswordField1.getPassword()).trim();
+
+        if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields");
+            return;
+            
+    }//GEN-LAST:event_jButton1ActionPerformed
+        String hashedPassword = config.hashPassword(password);
+
+        if (hashedPassword == null) {
+            JOptionPane.showMessageDialog(this, "Error processing password");
+            return;
+        }
+
+        config db = new config();
+
+        // Check if username already exists
+        String checkSql = "SELECT * FROM account WHERE acc_user = ?";
+        java.util.List<java.util.Map<String, Object>> existing = db.fetchRecords(checkSql, username);
+
+        if (!existing.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username already exists. Choose another.");
+            return;
+        }
+
+        // Insert new account
+        String insertSql = "INSERT INTO account (acc_user, acc_pass, acc_email) VALUES (?, ?, ?)";
+        db.addRecord(insertSql, username, hashedPassword, email);
+
+        JOptionPane.showMessageDialog(this, "Account registered successfully!");
+
+        // Redirect to login screen
         landing land = new landing();
         land.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
