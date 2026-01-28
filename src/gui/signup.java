@@ -150,12 +150,12 @@ public class signup extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Account registered successfully!");
 
         // Redirect to login screen
-        landing land = new landing();
+        signins land = new signins();
         land.setVisible(true);
         this.dispose();
 }
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        landing landing = new landing();
+        signins landing = new signins();
         landing.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked

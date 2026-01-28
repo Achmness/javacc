@@ -100,7 +100,7 @@ public class profile extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        landing ld = new landing();
+        signins ld = new signins();
         ld.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
