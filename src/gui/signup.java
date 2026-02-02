@@ -1,12 +1,12 @@
-package gui;
-import config.config;
-import javax.swing.JOptionPane;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package gui;
+import config.config;
+import internal_admin.account;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +21,6 @@ public class signup extends javax.swing.JFrame {
         initComponents();
     }
 
- 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,134 +30,208 @@ public class signup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        email = new javax.swing.JTextField();
+        usertype = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
-        jLabel5.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jLabel5.setText("Password");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(39, 129, 221));
+        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Georgia", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 26)); // NOI18N
         jLabel1.setText("Sign up");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 182, 82));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jLabel2.setText("User Type");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 233, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 233, -1));
+        user.setBackground(new java.awt.Color(248, 247, 219));
+        user.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        user.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        user.setPreferredSize(new java.awt.Dimension(84, 42));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 272, 52));
 
-        jLabel3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jLabel3.setText("Email");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
+        password.setBackground(new java.awt.Color(248, 247, 219));
+        password.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        password.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 272, 52));
 
-        jLabel4.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jLabel4.setText("Username");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+        email.setBackground(new java.awt.Color(248, 247, 219));
+        email.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        email.setPreferredSize(new java.awt.Dimension(84, 42));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 272, 52));
 
-        jButton1.setBackground(new java.awt.Color(61, 156, 208));
-        jButton1.setFont(new java.awt.Font("Georgia", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(61, 119, 193));
-        jButton1.setText("Sign up");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        usertype.setBackground(new java.awt.Color(248, 247, 219));
+        usertype.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        usertype.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        usertype.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User Type", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        usertype.setPreferredSize(new java.awt.Dimension(84, 42));
+        jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 272, 52));
+
+        jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jButton2.setText("SIGN UP");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 230, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 111, 43));
 
-        jLabel6.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jLabel6.setText("Password");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, -1, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 233, -1));
-
-        jLabel8.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        jLabel8.setText("Already have an account?Sign in");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel3.setText("X");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                jLabel3MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel4.setText("—");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
+
+        jPanel4.setBackground(new java.awt.Color(190, 176, 112));
+
+        jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setText("Welcome Back!");
+
+        jLabel7.setText("sdadsadsadsaddsadadsads");
+
+        jButton3.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jButton3.setText("SIGN UP");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jLabel7)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 430));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String email = jTextField1.getText().trim();
-        String username = jTextField3.getText().trim();
-        String usertype = jTextField2.getText().trim();
-        String password = new String(jPasswordField2.getPassword()).trim();
-
-        if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         
+        String userup = user.getText().trim();
+        String emailup = email.getText().trim();
+        String usertypeup = usertype.getText().trim();
+        String passwordup = password.getText().trim();
+      
+        
+        String hashedPassword = config.hashPassword(passwordup);
+         if(email.getText().isEmpty() || user.getText().isEmpty() || usertype.getText().isEmpty() ||password.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-                String hashedPassword = config.hashPassword(password);
-
-        if (hashedPassword == null) {
+         }
+         
+         if (hashedPassword == null) {
             JOptionPane.showMessageDialog(this, "Error processing password");
             return;
         }
-
         config db = new config();
-
-        // Check if username already exists
-        String checkSql = "SELECT * FROM account WHERE acc_user = ?";
-        java.util.List<java.util.Map<String, Object>> existing = db.fetchRecords(checkSql, username);
-
+        String checkSql = "SELECT * FROM account WHERE acc_email = ?";
+        java.util.List<java.util.Map<String, Object>> existing = db.fetchRecords(checkSql, emailup);
         if (!existing.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username already exists. Choose another.");
+            JOptionPane.showMessageDialog(this, "Email already exists. Choose another.");
             return;
         }
-
-        // Insert new account
-        String insertSql = "INSERT INTO account (acc_user, acc_pass, acc_email, acc_type) VALUES (?, ?, ?, ?)";
-        db.addRecord(insertSql, username, hashedPassword, email, usertype);
-
-        JOptionPane.showMessageDialog(this, "Account registered successfully!");
-
-        // Redirect to login screen
-        landing land = new landing();
-        land.setVisible(true);
+        
+        String insertSql = "INSERT INTO account(acc_user, acc_email, acc_pass, acc_type, acc_status) VALUES (?, ?, ?, ?, ?)";
+        db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "pending");
+        JOptionPane.showMessageDialog(this, "Account Added Successfully!");
+        
+        signin signin = new signin();
+        signin.setVisible(true);
         this.dispose();
-}
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        landing landing = new landing();
-        landing.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jLabel8MouseClicked
+        
+        
+         
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        setState(ICONIFIED);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        signin signin = new signin();
+        signin.setVisible(true);
+        this.dispose();        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,18 +269,19 @@ public class signup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField email;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField user;
+    private javax.swing.JTextField usertype;
     // End of variables declaration//GEN-END:variables
 }
