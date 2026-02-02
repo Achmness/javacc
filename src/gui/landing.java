@@ -7,12 +7,16 @@ package gui;
 
 /**
  *
- * @author James
+ * @author USER27
  */
 public class landing extends javax.swing.JFrame {
 
     /**
+<<<<<<< HEAD
      * Creates new form signin
+=======
+     * Creates new form landin
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
      */
     public landing() {
         initComponents();
@@ -27,15 +31,19 @@ public class landing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+=======
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+<<<<<<< HEAD
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Get Started");
@@ -67,20 +75,30 @@ public class landing extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/land.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 440));
 
+=======
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addGap(0, 740, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+<<<<<<< HEAD
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         signin signin = new signin();
@@ -95,6 +113,8 @@ public class landing extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         System.exit(0);        
     }//GEN-LAST:event_jLabel3MouseClicked
+=======
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
 
     /**
      * @param args the command line arguments
@@ -123,6 +143,11 @@ public class landing extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+<<<<<<< HEAD
+=======
+        //</editor-fold>
+        //</editor-fold>
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -133,10 +158,13 @@ public class landing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+=======
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
     // End of variables declaration//GEN-END:variables
 }

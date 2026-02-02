@@ -206,6 +206,7 @@ public class signup extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Email already exists. Choose another.");
             return;
         }
+<<<<<<< HEAD
         
         String insertSql = "INSERT INTO account(acc_user, acc_email, acc_pass, acc_type, acc_status) VALUES (?, ?, ?, ?, ?)";
         db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "pending");
@@ -232,6 +233,25 @@ public class signup extends javax.swing.JFrame {
         signin.setVisible(true);
         this.dispose();        
     }//GEN-LAST:event_jButton3ActionPerformed
+=======
+
+        // Insert new account
+        String insertSql = "INSERT INTO account (acc_user, acc_pass, acc_email, acc_type) VALUES (?, ?, ?, ?)";
+        db.addRecord(insertSql, username, hashedPassword, email, usertype);
+
+        JOptionPane.showMessageDialog(this, "Account registered successfully!");
+
+        // Redirect to login screen
+        signins land = new signins();
+        land.setVisible(true);
+        this.dispose();
+}
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        signins landing = new signins();
+        landing.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
+>>>>>>> 24f74471a5ebf87848dc4278805d52246e65740b
 
     /**
      * @param args the command line arguments
