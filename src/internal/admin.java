@@ -27,7 +27,7 @@ public class admin extends javax.swing.JFrame {
         internal_admin.account profile = new internal_admin.account();
         maindesktop.add(profile).setVisible(true);
 
-    }
+    }   
 
     
 

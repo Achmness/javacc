@@ -20,7 +20,7 @@ import internal_admin.users;
 public class signin extends javax.swing.JFrame {
 
     /**
-     * Creates new form signin
+
      */
     public signin() {
         initComponents();
@@ -53,6 +53,7 @@ public class signin extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(190, 176, 112));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setBackground(new java.awt.Color(214, 206, 160));
         jButton1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton1.setText("SIGN UP");
         jButton1.setPreferredSize(new java.awt.Dimension(101, 27));
@@ -61,7 +62,7 @@ public class signin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 111, 43));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 111, 43));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("X");
@@ -81,21 +82,21 @@ public class signin extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 13, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Georgia", 1, 26)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
         jLabel2.setText("Hello , Friend!");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 210, 40));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 260, 40));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel5.setText("or receiving the best care");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, 43));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, 43));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel6.setText("Enter your details to start providing");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 240, 43));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 240, 43));
 
         jLabel7.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel7.setText("for your furry friends ");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, 50));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, 50));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
         jLabel1.setText("Sign in");
@@ -119,7 +120,7 @@ public class signin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(158, 127, 57));
+        jButton2.setBackground(new java.awt.Color(214, 206, 160));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton2.setText("SIGN IN");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -132,14 +133,14 @@ public class signin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 79, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 53, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(74, 74, 74))
+                        .addGap(70, 70, 70))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -149,7 +150,7 @@ public class signin extends javax.swing.JFrame {
                                 .addGap(155, 155, 155)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +198,7 @@ public class signin extends javax.swing.JFrame {
         }
         
         
-        String sql = "SELECT acc_type, acc_status FROM account WHERE acc_email = ? AND acc_pass = ?";
+        String sql = "SELECT acc_id, acc_type, acc_status FROM account WHERE acc_email = ? AND acc_pass = ?";
 java.util.List<java.util.Map<String, Object>> result =
         db.fetchRecords(sql, emailin, hashedPassword);
 
@@ -205,6 +206,7 @@ if (result.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Invalid email or password");
     return;
 }
+config.currentUserId = Integer.parseInt(result.get(0).get("acc_id").toString());
         String status = result.get(0).get("acc_status").toString();
         String type   = result.get(0).get("acc_type").toString();
 

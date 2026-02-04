@@ -222,5 +222,5 @@ public void displayData(String sql, javax.swing.JTable table) {
         System.out.println("Error displaying data: " + e.getMessage());
     }
 }
-
+public static int currentUserId;
 }
