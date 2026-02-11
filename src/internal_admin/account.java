@@ -8,10 +8,12 @@ import config.config;
 import gui.signin;
 import gui.signup.*;
 import internal.admin;
+import config.session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class account extends javax.swing.JInternalFrame {
@@ -21,33 +23,54 @@ public class account extends javax.swing.JInternalFrame {
      */
     public account() {
         initComponents();
+        displayCurrentUser();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
-        displayCurrentUser();
+
       
     }
-    public void displayCurrentUser() {
-        
+public void displayCurrentUser() {
+
+    int accId = session.getInstance().getAccId();
     config db = new config();
 
-    String sql = "SELECT acc_user, acc_email, acc_type FROM account "
-               + "WHERE acc_id = " + config.currentUserId;
+    String sql = "SELECT a_user, a_email, a_type, a_fname, a_lname, a_contact, a_address FROM account WHERE a_id = ?";
 
     try (Connection conn = db.connectDB();
-         PreparedStatement pst = conn.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        pst.setInt(1, accId);
+
+        ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            user.setText("User: " + rs.getString("acc_user"));
-            email.setText("Email: " + rs.getString("acc_email"));
-            usertype.setText("User Type: " + rs.getString("acc_type"));
+            user.setText("User: " + rs.getString("a_user"));
+            email.setText("Email: " + rs.getString("a_email"));
+            usertype.setText("User Type: " + rs.getString("a_type"));
+
+            // Combine first name and last name to show full name
+            String fullName = "";
+            String fname = rs.getString("a_fname");
+            String lname = rs.getString("a_lname");
+
+            if (fname != null) fullName += fname;
+            if (lname != null) fullName += " " + lname;
+
+            fullname.setText("Full Name: " + fullName.trim());
+            String cont = rs.getString("a_contact");
+            String addr = rs.getString("a_address");
+            contact.setText("Contact: " + String.valueOf(cont).trim());
+            address.setText("Address: " + String.valueOf(addr).trim());
         }
 
     } catch (SQLException e) {
         System.out.println("Error loading account: " + e.getMessage());
     }
+
 }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +92,14 @@ public class account extends javax.swing.JInternalFrame {
         user = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
         usertype = new javax.swing.JLabel();
+        fullname = new javax.swing.JLabel();
+        contact = new javax.swing.JLabel();
+        address = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,8 +158,8 @@ public class account extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jPanel2.setBackground(new java.awt.Color(248, 247, 219));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
@@ -136,15 +167,55 @@ public class account extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         user.setText("User:");
-        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 34, -1, -1));
 
         email.setText("Email:");
-        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 112, -1, -1));
 
         usertype.setText("User Type:");
-        jPanel2.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        jPanel2.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 128, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 170));
+        fullname.setText("Full Name");
+        jPanel2.add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 50, -1, -1));
+
+        contact.setText("Contact Number");
+        jPanel2.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 66, -1, -1));
+
+        address.setText("Address");
+        jPanel2.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 84, -1, -1));
+
+        jPanel8.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Set up");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel8.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
+
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 164, 66, 32));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 206));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Edit Profile");
+        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 8, -1, -1));
+
+        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 162, 162, 32));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 60, 176, 206));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,17 +232,18 @@ public class account extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.dispose();
-        java.awt.Window window =
-        javax.swing.SwingUtilities.getWindowAncestor(this);
-
-if (window != null) {
-    window.dispose();
-}
-        signin signin = new signin();
-        signin.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+        new signin().setVisible(true);
                 
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+            add add = new add();
+            add.setVisible(true);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            mainFrame.dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -210,15 +282,23 @@ if (window != null) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel address;
+    private javax.swing.JLabel contact;
     private javax.swing.JLabel email;
+    private javax.swing.JLabel fullname;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel user;
     private javax.swing.JLabel usertype;
     // End of variables declaration//GEN-END:variables

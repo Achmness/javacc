@@ -214,13 +214,18 @@ public void displayData(String sql, javax.swing.JTable table) {
     try (Connection conn = connectDB();
          PreparedStatement pstmt = conn.prepareStatement(sql);
          ResultSet rs = pstmt.executeQuery()) {
-        
-        // This line automatically maps the Resultset to your JTable
+       
         table.setModel(DbUtils.resultSetToTableModel(rs));
         
     } catch (SQLException e) {
         System.out.println("Error displaying data: " + e.getMessage());
     }
-}
+}   
 public static int currentUserId;
+public static boolean isValidEmail(String email) {
+    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+    return email.matches(emailRegex);
+}
+
+
 }

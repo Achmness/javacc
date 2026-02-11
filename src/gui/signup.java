@@ -10,15 +10,19 @@ package gui;
  * @author James
  */
 import config.config;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 public class signup extends javax.swing.JFrame {
 
     /**
-     * Creates new form signups
+     * Creates new form 
      */
     public signup() {
         initComponents();
     }
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(248,247,219);
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,10 +35,8 @@ public class signup extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        user = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
         email = new javax.swing.JTextField();
-        usertype = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -44,6 +46,7 @@ public class signup extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        user = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -53,36 +56,27 @@ public class signup extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
         jLabel1.setText("Sign up");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
-
-        user.setBackground(new java.awt.Color(248, 247, 219));
-        user.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        user.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
-        user.setPreferredSize(new java.awt.Dimension(84, 42));
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 272, 52));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
 
         password.setBackground(new java.awt.Color(248, 247, 219));
         password.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 272, 52));
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 262, 272, 52));
 
         email.setBackground(new java.awt.Color(248, 247, 219));
         email.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
         email.setPreferredSize(new java.awt.Dimension(84, 42));
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 272, 52));
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 192, 272, 52));
 
-        usertype.setBackground(new java.awt.Color(248, 247, 219));
-        usertype.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        usertype.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usertype.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User Type", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
-        usertype.setPreferredSize(new java.awt.Dimension(84, 42));
-        jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 272, 52));
-
-        jButton2.setBackground(new java.awt.Color(214, 206, 160));
+        jButton2.setBackground(new java.awt.Color(190, 176, 112));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton2.setText("SIGN UP");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +84,7 @@ public class signup extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 111, 43));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 111, 43));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("X");
@@ -99,7 +93,7 @@ public class signup extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 20, 50));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setText("—");
@@ -108,7 +102,7 @@ public class signup extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, 30));
 
         jPanel4.setBackground(new java.awt.Color(190, 176, 112));
 
@@ -120,7 +114,7 @@ public class signup extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(214, 206, 160));
         jButton3.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jButton3.setText("SIGN UP");
+        jButton3.setText("SIGN IN");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -140,26 +134,25 @@ public class signup extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(104, 104, 104)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addComponent(jLabel2))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(47, 47, 47))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addGap(85, 85, 85)
                         .addComponent(jLabel5)))
-                .addGap(131, 131, 131))
+                .addGap(295, 295, 295))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(70, 70, 70)
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,12 +160,19 @@ public class signup extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 430));
+
+        user.setBackground(new java.awt.Color(248, 247, 219));
+        user.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        user.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        user.setPreferredSize(new java.awt.Dimension(84, 42));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 124, 272, 52));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,28 +193,39 @@ public class signup extends javax.swing.JFrame {
 
         String userup = user.getText().trim();
         String emailup = email.getText().trim();
-        String usertypeup = usertype.getText().trim();
+        String usertypeup = "CLIENT";
         String passwordup = password.getText().trim();
 
+
+if (userup.isEmpty() || emailup.isEmpty() || passwordup.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields");
+        return;
+    }
+if (!config.isValidEmail(emailup)) {
+    JOptionPane.showMessageDialog(
+        this,
+        "Invalid email format!\nExample: test@gmail.com"
+    );
+    return;
+    } 
+
+
         String hashedPassword = config.hashPassword(passwordup);
-        if(email.getText().isEmpty() || user.getText().isEmpty() || usertype.getText().isEmpty() ||password.getText().isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Please fill in all fields");
-            return;
-        }
+
 
         if (hashedPassword == null) {
             JOptionPane.showMessageDialog(this, "Error processing password");
             return;
         }
         config db = new config();
-        String checkSql = "SELECT * FROM account WHERE acc_email = ?";
+        String checkSql = "SELECT * FROM account WHERE a_email = ?";
         java.util.List<java.util.Map<String, Object>> existing = db.fetchRecords(checkSql, emailup);
         if (!existing.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Email already exists. Choose another.");
             return;
         }
 
-        String insertSql = "INSERT INTO account(acc_user, acc_email, acc_pass, acc_type, acc_status) VALUES (?, ?, ?, ?, ?)";
+        String insertSql = "INSERT INTO account(a_user, a_email, a_pass, a_type, a_status) VALUES (?, ?, ?, ?, ?)";
         db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "pending");
         JOptionPane.showMessageDialog(this, "Account Added Successfully!");
 
@@ -237,6 +248,10 @@ public class signup extends javax.swing.JFrame {
         signin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+   
+    }//GEN-LAST:event_emailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,6 +304,5 @@ public class signup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField user;
-    private javax.swing.JTextField usertype;
     // End of variables declaration//GEN-END:variables
 }

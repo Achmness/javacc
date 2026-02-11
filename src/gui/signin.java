@@ -6,12 +6,14 @@
 package gui;
 
 import config.config;
+import config.session;
 import javax.swing.JOptionPane;
 import gui.signup.*;
 import internal.admin;
 import internal.client;
 import internal.vet;
 import internal_admin.users;
+import java.awt.Color;
 
 /**
  *
@@ -25,6 +27,8 @@ public class signin extends javax.swing.JFrame {
     public signin() {
         initComponents();
     }
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(248,247,219);
 
 
     @SuppressWarnings("unchecked")
@@ -44,6 +48,8 @@ public class signin extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
+        showpass = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -80,7 +86,7 @@ public class signin extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 13, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
         jLabel2.setText("Hello , Friend!");
@@ -102,7 +108,7 @@ public class signin extends javax.swing.JFrame {
         jLabel1.setText("Sign in");
 
         email.setBackground(new java.awt.Color(248, 247, 219));
-        email.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
         email.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +118,7 @@ public class signin extends javax.swing.JFrame {
         });
 
         pass.setBackground(new java.awt.Color(248, 247, 219));
+        pass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
         pass.addActionListener(new java.awt.event.ActionListener() {
@@ -120,14 +127,34 @@ public class signin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(214, 206, 160));
+        jButton2.setBackground(new java.awt.Color(190, 176, 112));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton2.setText("SIGN IN");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton2MouseExited(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        showpass.setBackground(new java.awt.Color(248, 247, 219));
+        showpass.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        showpass.setText("Show password");
+        showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpassActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        jLabel8.setText("Forgot password?");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,18 +163,22 @@ public class signin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 53, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(70, 70, 70))
+                        .addContainerGap(53, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(showpass, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8))
+                            .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(153, 153, 153)
+                                .addGap(134, 134, 134)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
+                                .addGap(140, 140, 140)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,13 +189,17 @@ public class signin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
+                .addGap(30, 30, 30)
                 .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,7 +233,7 @@ public class signin extends javax.swing.JFrame {
         }
         
         
-        String sql = "SELECT acc_id, acc_type, acc_status FROM account WHERE acc_email = ? AND acc_pass = ?";
+        String sql = "SELECT a_id, a_type, a_status FROM account WHERE a_email = ? AND a_pass = ?";
 java.util.List<java.util.Map<String, Object>> result =
         db.fetchRecords(sql, emailin, hashedPassword);
 
@@ -206,9 +241,17 @@ if (result.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Invalid email or password");
     return;
 }
-config.currentUserId = Integer.parseInt(result.get(0).get("acc_id").toString());
-        String status = result.get(0).get("acc_status").toString();
-        String type   = result.get(0).get("acc_type").toString();
+     Object idObj     = result.get(0).get("a_id");
+    Object statusObj = result.get(0).get("a_status");
+    Object typeObj   = result.get(0).get("a_type");
+
+    if (idObj == null || statusObj == null || typeObj == null) {
+        JOptionPane.showMessageDialog(this, "Account data is invalid. Contact admin.");
+        return;
+    }
+        int accId = Integer.parseInt(result.get(0).get("a_id").toString());
+        String status = result.get(0).get("a_status").toString();
+        String type = result.get(0).get("a_type").toString().toUpperCase();
 
 
 if (!status.equalsIgnoreCase("active")) {
@@ -218,26 +261,24 @@ if (!status.equalsIgnoreCase("active")) {
     );
     return;
 }
+session.getInstance().setAccount(accId, emailin, type, status);
 
-// 🎯 User type routing
-switch (type.toLowerCase()) {
-    case "admin":
+switch (type) {
+    case "ADMIN":
         users u = new users();
         new admin(u).setVisible(true);
         break;
 
-    case "client":
-        new client().setVisible(true);
-        break;
-
-    case "veterinarian":
+    case "VETERINARIAN":
         new vet().setVisible(true);
         break;
 
+    case "CLIENT":
     default:
-        JOptionPane.showMessageDialog(this, "Unknown user type");
-        return;
-        }
+        new client().setVisible(true);
+        break;
+}
+
     this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -258,6 +299,22 @@ switch (type.toLowerCase()) {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         setState(ICONIFIED);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+        if(showpass.isSelected()){
+            pass.setEchoChar((char)0);
+        }else{
+            pass.setEchoChar('*');
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_showpassActionPerformed
+
+    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
+
+    }//GEN-LAST:event_jButton2MouseEntered
+
+    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
+        
+    }//GEN-LAST:event_jButton2MouseExited
 
     /**
      * @param args the command line arguments
@@ -305,8 +362,10 @@ switch (type.toLowerCase()) {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField pass;
+    private javax.swing.JCheckBox showpass;
     // End of variables declaration//GEN-END:variables
 }
