@@ -227,5 +227,22 @@ public static boolean isValidEmail(String email) {
     return email.matches(emailRegex);
 }
 
+public boolean updateRecords(String sql, Object... params){
+    try(Connection conn = connectDB();
+        PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        for(int i=0; i<params.length; i++){
+            pst.setObject(i+1, params[i]);
+        }
+
+        int affectedRows = pst.executeUpdate();
+        return affectedRows > 0;
+
+    } catch(SQLException e){
+        e.printStackTrace();
+        return false;
+    }
+}
+
 
 }

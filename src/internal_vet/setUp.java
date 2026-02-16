@@ -7,6 +7,7 @@ package internal_vet;
 
 import config.config;
 import config.session;
+import config.singleton;
 import internal.client;
 import internal.vet;
 import javax.swing.JOptionPane;
@@ -50,6 +51,7 @@ public class setUp extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(248, 247, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -157,6 +159,7 @@ public class setUp extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -171,24 +174,38 @@ public class setUp extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String fn = fname.getText().trim();
-        String ln = lname.getText().trim();
-        String cont = contact.getText().trim();
-        String addr = address.getText().trim();
+    String ln = lname.getText().trim();
+    String cont = contact.getText().trim();
+    String addr = address.getText().trim();
+
 
         if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
-        int accId = session.getInstance().getAccId();
-        config db = new config();
-        String updateSql = "UPDATE account SET a_fname = ?, a_lname = ?, a_contact = ?, a_address = ? WHERE a_id = ?";
-        db.updateRecord(updateSql, fn, ln, cont, addr, accId);
 
-        JOptionPane.showMessageDialog(this, "Account details updated successfully!");
+    singleton sess = singleton.getInstance();  
+    int accId = sess.getId(); 
 
-        this.dispose();
-        vet vet = new vet();
-        vet.setVisible(true);
+    config db = new config();
+    
+    String updateSql = "UPDATE account SET a_fname = ?, a_lname = ?, a_contact = ?, a_address = ? WHERE a_id = ?";
+    boolean success = db.updateRecords(updateSql, fn, ln, cont, addr, accId);
+
+        if(success){
+            sess.setFname(fn);
+            sess.setLname(ln);
+            sess.setContact(cont);
+            sess.setAddress(addr);
+            
+            JOptionPane.showMessageDialog(this, "Account details updated successfully!");
+
+            this.dispose();
+            vet vet = new vet();
+            vet.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to update account. Please try again.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -56,13 +56,13 @@ public class signup extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
         jLabel1.setText("Sign up");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 68, -1, -1));
 
         password.setBackground(new java.awt.Color(248, 247, 219));
         password.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         password.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 262, 272, 52));
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 254, 274, 52));
 
         email.setBackground(new java.awt.Color(248, 247, 219));
         email.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
@@ -74,7 +74,7 @@ public class signup extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 192, 272, 52));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 192, 272, 52));
 
         jButton2.setBackground(new java.awt.Color(190, 176, 112));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
@@ -84,7 +84,7 @@ public class signup extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 111, 43));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 346, 111, 43));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("X");
@@ -172,7 +172,7 @@ public class signup extends javax.swing.JFrame {
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         user.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
         user.setPreferredSize(new java.awt.Dimension(84, 42));
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 124, 272, 52));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 132, 270, 52));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -226,7 +226,7 @@ if (!config.isValidEmail(emailup)) {
         }
 
         String insertSql = "INSERT INTO account(a_user, a_email, a_pass, a_type, a_status) VALUES (?, ?, ?, ?, ?)";
-        db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "pending");
+        db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "Pending");
         JOptionPane.showMessageDialog(this, "Account Added Successfully!");
 
         signin signin = new signin();

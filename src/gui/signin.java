@@ -7,6 +7,8 @@ package gui;
 
 import config.config;
 import config.session;
+import config.singleton;
+
 import javax.swing.JOptionPane;
 import gui.signup.*;
 import internal.admin;
@@ -14,6 +16,8 @@ import internal.client;
 import internal.vet;
 import internal_admin.users;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 /**
  *
@@ -233,36 +237,66 @@ public class signin extends javax.swing.JFrame {
         }
         
         
-        String sql = "SELECT a_id, a_type, a_status FROM account WHERE a_email = ? AND a_pass = ?";
-java.util.List<java.util.Map<String, Object>> result =
-        db.fetchRecords(sql, emailin, hashedPassword);
+        
+       try {
 
-if (result.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Invalid email or password");
-    return;
-}
-     Object idObj     = result.get(0).get("a_id");
+    String sql = "SELECT * FROM account WHERE a_email = ? AND a_pass = ?";
+    java.util.List<java.util.Map<String, Object>> result = db.fetchRecords(sql, emailin, hashedPassword);
+
+    if (result.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Invalid email or password");
+        return;
+    }
+
+    // Get values from result
+    Object idObj = result.get(0).get("a_id");
     Object statusObj = result.get(0).get("a_status");
-    Object typeObj   = result.get(0).get("a_type");
+    Object typeObj = result.get(0).get("a_type");
 
     if (idObj == null || statusObj == null || typeObj == null) {
         JOptionPane.showMessageDialog(this, "Account data is invalid. Contact admin.");
         return;
     }
-        int accId = Integer.parseInt(result.get(0).get("a_id").toString());
-        String status = result.get(0).get("a_status").toString();
-        String type = result.get(0).get("a_type").toString().toUpperCase();
 
+    int accId = Integer.parseInt(idObj.toString());
+    String status = statusObj.toString();
+    String type = typeObj.toString().toUpperCase();
 
-if (!status.equalsIgnoreCase("active")) {
-    JOptionPane.showMessageDialog(
-        this,
-        "Your account is " + status + ". Please wait for approval."
-    );
+    if(status.equalsIgnoreCase("Pending")){
+    
+    JOptionPane.showMessageDialog(this,
+        "Your account is still Pending. Please wait for admin approval.");
     return;
-}
-session.getInstance().setAccount(accId, emailin, type, status);
 
+}else if(status.equalsIgnoreCase("Suspension")){
+    
+    JOptionPane.showMessageDialog(this,
+        "Your account has been Suspended. Please contact the administrator.");
+    return;
+
+}else if(status.equalsIgnoreCase("Active")){
+    
+    JOptionPane.showMessageDialog(this, "Login Successful!");
+
+}
+
+    // ==========================
+    // Populate Singleton (prof-style)
+    // ==========================
+     singleton sess = singleton.getInstance();
+    sess.setFullDetails(
+        accId,
+        result.get(0).get("a_user") != null ? result.get(0).get("a_user").toString() : "",
+        result.get(0).get("a_email") != null ? result.get(0).get("a_email").toString() : "",
+        status,
+        result.get(0).get("a_fname") != null ? result.get(0).get("a_fname").toString() : "",
+        result.get(0).get("a_lname") != null ? result.get(0).get("a_lname").toString() : "",
+        result.get(0).get("a_contact") != null ? result.get(0).get("a_contact").toString() : "",
+        result.get(0).get("a_address") != null ? result.get(0).get("a_address").toString() : ""
+    );
+
+
+       
 switch (type) {
     case "ADMIN":
         users u = new users();
@@ -280,6 +314,10 @@ switch (type) {
 }
 
     this.dispose();
+       }   catch (Exception e) {
+    JOptionPane.showMessageDialog(this, "Server connection failed!");
+    e.printStackTrace();
+}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -7,19 +7,27 @@ package internal_admin;
 
 import config.config;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 
 /**
  *
  * @author James
  */
+
 public class users extends javax.swing.JInternalFrame {
 
 
     /**
      * Creates new form about
      */
+    
     public users() {
     initComponents(); 
     displayUsers();    
@@ -31,6 +39,12 @@ public class users extends javax.swing.JInternalFrame {
         config db = new config();
         String sql = "SELECT a_id, a_user, a_email, a_type, a_fname, a_lname, a_contact, a_address FROM account";
         db.displayData(sql, userTable);
+    }
+    public void searchTable(){
+       DefaultTableModel model =  (DefaultTableModel)userTable.getModel();
+       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+       userTable.setRowSorter(tr);
+       tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
 
 
@@ -50,13 +64,14 @@ public class users extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        search = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -86,19 +101,17 @@ public class users extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(190, 176, 112));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 82, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 26, Short.MAX_VALUE)
-        );
+        jLabel1.setText("UPDATE");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 58, -1, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 58, 82, 30));
 
         jPanel3.setBackground(new java.awt.Color(190, 176, 112));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -110,9 +123,9 @@ public class users extends javax.swing.JInternalFrame {
                 deleteMouseClicked(evt);
             }
         });
-        jPanel3.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 44, 20));
+        jPanel3.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 58, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 56, 30));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 60, 30));
 
         jPanel5.setBackground(new java.awt.Color(190, 176, 112));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -128,7 +141,7 @@ public class users extends javax.swing.JInternalFrame {
             .addGap(0, 26, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 58, -1, 30));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 58, -1, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -167,15 +180,20 @@ public class users extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jTextField1.setBackground(new java.awt.Color(248, 247, 219));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchKeyTyped(evt);
+            }
+        });
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -255,17 +273,96 @@ public class users extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-            
+        int rowIndex = userTable.getSelectedRow();
+
+            if(rowIndex < 0){
+                JOptionPane.showMessageDialog(null, "Please Select a User!");
+                return;
+            }
+
+        TableModel model = userTable.getModel();
+        int userId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this user?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION
+        );
+
+            if(confirm != JOptionPane.YES_OPTION){
+                return;
+            }
+
+            config db = new config();
+
+            boolean success = db.updateRecords(
+                    "DELETE FROM account WHERE a_id = ?",
+                    userId
+            );
+
+            if(success){
+                JOptionPane.showMessageDialog(null, "User Deleted Successfully!");
+
+        db.displayData(
+            "SELECT a_id, a_user, a_email, a_type, a_fname, a_lname, a_contact, a_address FROM account",
+            userTable
+        );
+        
+            }else{
+                JOptionPane.showMessageDialog(null, "Delete Failed!");
+            }
+
     }//GEN-LAST:event_deleteMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
 
 
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyTyped
+            searchTable();
+    }//GEN-LAST:event_searchKeyTyped
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       int rowIndex = userTable.getSelectedRow();
+
+if (rowIndex < 0) {
+    JOptionPane.showMessageDialog(this, "Please select a user to update.");
+    return;
+}
+
+TableModel model = userTable.getModel();
+
+// Get data from the selected row
+int userId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+String fname = model.getValueAt(rowIndex, 1).toString();
+String lname = model.getValueAt(rowIndex, 2).toString();
+String contact = model.getValueAt(rowIndex, 3).toString();
+String address = model.getValueAt(rowIndex, 4).toString();
+
+// Create update form using default constructor
+updateUser updateForm = new updateUser();
+
+// Set the fields and store userId
+updateForm.userId = userId;          // public int userId;
+updateForm.fname.setText(fname);     // JTextField fname
+updateForm.lname.setText(lname);     // JTextField lname
+updateForm.contact.setText(contact); // JTextField contact
+updateForm.address.setText(address); // JTextField address
+
+// Show the form
+updateForm.setVisible(true);
+
+// Close current frame if needed
+JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+mainFrame.dispose();
+
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -367,6 +464,7 @@ public class users extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel delete;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -381,7 +479,7 @@ public class users extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField search;
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }

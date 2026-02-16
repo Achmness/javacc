@@ -46,9 +46,11 @@ public class admin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         navbar = new javax.swing.JPanel();
         accpane = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         userpane = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -67,6 +69,9 @@ public class admin extends javax.swing.JFrame {
 
         accpane.setBackground(new java.awt.Color(190, 176, 112));
         accpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accpaneMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 accpaneMouseEntered(evt);
             }
@@ -76,10 +81,14 @@ public class admin extends javax.swing.JFrame {
         });
         accpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/acc.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        accpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 12, 24, -1));
+
         jLabel2.setBackground(new java.awt.Color(190, 176, 112));
-        jLabel2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("     Account");
+        jLabel2.setText("  Account");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel2.setPreferredSize(new java.awt.Dimension(25, 25));
@@ -94,9 +103,9 @@ public class admin extends javax.swing.JFrame {
                 jLabel2MouseExited(evt);
             }
         });
-        accpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
+        accpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 12, 148, 26));
 
-        navbar.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 150, 50));
+        navbar.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 136, 150, 50));
 
         userpane.setBackground(new java.awt.Color(190, 176, 112));
         userpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -112,7 +121,7 @@ public class admin extends javax.swing.JFrame {
         });
         userpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Users");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -131,7 +140,11 @@ public class admin extends javax.swing.JFrame {
         });
         userpane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 20));
 
-        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 204, 150, 50));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/users.png"))); // NOI18N
+        jLabel7.setText("jLabel7");
+        userpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 28, -1));
+
+        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 188, 150, 50));
 
         jPanel1.add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 480));
 
@@ -295,6 +308,11 @@ public class admin extends javax.swing.JFrame {
         maindesktop.add(users).setVisible(true);        
     }//GEN-LAST:event_userpaneMouseClicked
 
+    private void accpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseClicked
+        internal_admin.account profile = new internal_admin.account();
+        maindesktop.add(profile).setVisible(true);         
+    }//GEN-LAST:event_accpaneMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -334,11 +352,13 @@ public class admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accpane;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
