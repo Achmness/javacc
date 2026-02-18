@@ -61,6 +61,9 @@ public class client extends javax.swing.JFrame {
 
         appointpane.setBackground(new java.awt.Color(190, 176, 112));
         appointpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                appointpaneMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 appointpaneMouseEntered(evt);
             }
@@ -132,6 +135,9 @@ public class client extends javax.swing.JFrame {
 
         accpane.setBackground(new java.awt.Color(190, 176, 112));
         accpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accpaneMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 accpaneMouseEntered(evt);
             }
@@ -330,6 +336,16 @@ public class client extends javax.swing.JFrame {
         internal_client.pet pet = new internal_client.pet();
         maindesktop.add(pet).setVisible(true);                
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void appointpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointpaneMouseClicked
+        internal_client.appointment appointment = new internal_client.appointment();
+        maindesktop.add(appointment).setVisible(true);      
+    }//GEN-LAST:event_appointpaneMouseClicked
+
+    private void accpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseClicked
+        internal_client.account account = new internal_client.account();
+        maindesktop.add(account).setVisible(true);    
+    }//GEN-LAST:event_accpaneMouseClicked
 
     /**
      * @param args the command line arguments

@@ -34,10 +34,10 @@ public class vet extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        accpane = new javax.swing.JPanel();
+        apppane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        accpane1 = new javax.swing.JPanel();
+        accpane = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         maindesktop = new javax.swing.JDesktopPane();
@@ -55,22 +55,22 @@ public class vet extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(190, 176, 112));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        accpane.setBackground(new java.awt.Color(190, 176, 112));
-        accpane.addMouseListener(new java.awt.event.MouseAdapter() {
+        apppane.setBackground(new java.awt.Color(190, 176, 112));
+        apppane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                accpaneMouseClicked(evt);
+                apppaneMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                accpaneMouseEntered(evt);
+                apppaneMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                accpaneMouseExited(evt);
+                apppaneMouseExited(evt);
             }
         });
-        accpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        apppane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/appoint.png"))); // NOI18N
-        accpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
+        apppane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(190, 176, 112));
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
@@ -90,26 +90,26 @@ public class vet extends javax.swing.JFrame {
                 jLabel2MouseExited(evt);
             }
         });
-        accpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
+        apppane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
-        jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 150, 50));
+        jPanel2.add(apppane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 150, 50));
 
-        accpane1.setBackground(new java.awt.Color(190, 176, 112));
-        accpane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        accpane.setBackground(new java.awt.Color(190, 176, 112));
+        accpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                accpane1MouseClicked(evt);
+                accpaneMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                accpane1MouseEntered(evt);
+                accpaneMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                accpane1MouseExited(evt);
+                accpaneMouseExited(evt);
             }
         });
-        accpane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        accpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/acc.png"))); // NOI18N
-        accpane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
+        accpane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(190, 176, 112));
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
@@ -129,9 +129,9 @@ public class vet extends javax.swing.JFrame {
                 jLabel4MouseExited(evt);
             }
         });
-        accpane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
+        accpane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
-        jPanel2.add(accpane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 50));
+        jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 480));
 
@@ -236,25 +236,25 @@ public class vet extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        accpane.setBackground(bodycolor);
+        apppane.setBackground(bodycolor);
     }//GEN-LAST:event_jLabel2MouseEntered
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-        accpane.setBackground(navcolor);
+        apppane.setBackground(navcolor);
     }//GEN-LAST:event_jLabel2MouseExited
 
-    private void accpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseEntered
-        accpane.setBackground(bodycolor);
-    }//GEN-LAST:event_accpaneMouseEntered
+    private void apppaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apppaneMouseEntered
+        apppane.setBackground(bodycolor);
+    }//GEN-LAST:event_apppaneMouseEntered
 
-    private void accpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseExited
-        accpane.setBackground(navcolor);
-    }//GEN-LAST:event_accpaneMouseExited
+    private void apppaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apppaneMouseExited
+        apppane.setBackground(navcolor);
+    }//GEN-LAST:event_apppaneMouseExited
 
-    private void accpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseClicked
+    private void apppaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apppaneMouseClicked
         internal_vet.account profile = new internal_vet.account();
         maindesktop.add(profile).setVisible(true);       
-    }//GEN-LAST:event_accpaneMouseClicked
+    }//GEN-LAST:event_apppaneMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         internal_vet.account profile = new internal_vet.account();
@@ -262,24 +262,24 @@ public class vet extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
-        // TODO add your handling code here:
+        accpane.setBackground(bodycolor);        
     }//GEN-LAST:event_jLabel4MouseEntered
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
-        // TODO add your handling code here:
+        accpane.setBackground(navcolor);     
     }//GEN-LAST:event_jLabel4MouseExited
 
-    private void accpane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpane1MouseClicked
+    private void accpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_accpane1MouseClicked
+    }//GEN-LAST:event_accpaneMouseClicked
 
-    private void accpane1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpane1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accpane1MouseEntered
+    private void accpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseEntered
+        accpane.setBackground(bodycolor);        
+    }//GEN-LAST:event_accpaneMouseEntered
 
-    private void accpane1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpane1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accpane1MouseExited
+    private void accpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accpaneMouseExited
+        accpane.setBackground(navcolor);        
+    }//GEN-LAST:event_accpaneMouseExited
 
     /**
      * @param args the command line arguments
@@ -319,7 +319,7 @@ public class vet extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accpane;
-    private javax.swing.JPanel accpane1;
+    private javax.swing.JPanel apppane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

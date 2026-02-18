@@ -195,6 +195,10 @@ public class signup extends javax.swing.JFrame {
         String emailup = email.getText().trim();
         String usertypeup = "CLIENT";
         String passwordup = password.getText().trim();
+        String fname ="Unset";
+        String lname = "Unset";
+        String contact = "Unset";
+        String address = "Unset";
 
 
 if (userup.isEmpty() || emailup.isEmpty() || passwordup.isEmpty()) {
@@ -225,8 +229,8 @@ if (!config.isValidEmail(emailup)) {
             return;
         }
 
-        String insertSql = "INSERT INTO account(a_user, a_email, a_pass, a_type, a_status) VALUES (?, ?, ?, ?, ?)";
-        db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "Pending");
+        String insertSql = "INSERT INTO account(a_user, a_email, a_pass, a_type, a_status, a_fname, a_lname, a_contact, a_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "Pending", fname, lname, contact, address);
         JOptionPane.showMessageDialog(this, "Account Added Successfully!");
 
         signin signin = new signin();

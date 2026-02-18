@@ -26,9 +26,26 @@ public class updateUser extends javax.swing.JFrame {
     public int userId;
     public updateUser() {
         initComponents();
+        loadCurrentData();
 
     }
     
+    public void loadCurrentData() {
+
+    singleton sess = singleton.getInstance();
+
+    if (sess == null) {
+        return;
+    }
+
+    user.setText(sess.getFname() != null ? sess.getFname() : "");
+    fname.setText(sess.getLname() != null ? sess.getLname() : "");
+    lname.setText(sess.getContact() != null ? sess.getContact() : "");
+    
+    contact.setText(sess.getAddress() != null ? sess.getAddress() : "");
+    status.setText(sess.getStatus() != null ? sess.getStatus() : "");
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,12 +65,18 @@ public class updateUser extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lname = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        address = new javax.swing.JTextField();
         contact = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        userType = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        address = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        status = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -94,45 +117,45 @@ public class updateUser extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 40));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jLabel1.setText("First Name");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 86, -1, -1));
+        jLabel1.setText("User");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 46, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jLabel4.setText("Last Name ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 132, -1, -1));
+        jLabel4.setText("First Name");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 112, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jLabel5.setText("Contact Number");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 192, -1, -1));
+        jLabel5.setText("Last Name");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 178, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jLabel6.setText("Address");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 246, -1, -1));
-        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 132, 192, 28));
+        jLabel6.setText("Contact Number");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 238, -1, -1));
+        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 192, 28));
 
-        fname.addActionListener(new java.awt.event.ActionListener() {
+        user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fnameActionPerformed(evt);
+                userActionPerformed(evt);
             }
         });
-        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 84, 192, 28));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 74, 192, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +163,9 @@ public class updateUser extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 354, -1, -1));
-        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 242, 192, 28));
-        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 334, -1, -1));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 260, 192, 28));
+        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 202, 192, 28));
 
         jButton2.setText("Cancel");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -155,13 +178,46 @@ public class updateUser extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 356, 70, 22));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 338, 70, 22));
+
+        jLabel12.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel12.setText("User Type");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 52, -1, -1));
+
+        userType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userTypeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 74, 192, 28));
+
+        jLabel11.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel11.setText("Address");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 108, -1, -1));
+
+        address.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressActionPerformed(evt);
+            }
+        });
+        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 130, 192, 96));
+
+        jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel7.setText("Status");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 232, -1, -1));
+
+        status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusActionPerformed(evt);
+            }
+        });
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 254, 192, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,50 +235,58 @@ public class updateUser extends javax.swing.JFrame {
         admin.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fnameActionPerformed
+    }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    String un = user.getText().trim();   
+String fn = fname.getText().trim();        
+String ln = lname.getText().trim();        
+String cont = contact.getText().trim();  
+String ut = userType.getText().trim();
+String addr = address.getText().trim();  
+String st = status.getText().trim();
 
-    String fn = fname.getText().trim();
-        String ln = lname.getText().trim();
-        String cont = contact.getText().trim();
-        String addr = address.getText().trim();
+// Validate required fields
+if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty()){
+    JOptionPane.showMessageDialog(this, "Please fill in all fields");
+    return;
+}
 
-        if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please fill in all fields");
-            return;
-        }
+try (Connection conn = config.connectDB()) {
 
-        try (Connection conn = config.connectDB()) {
-            String sql = "UPDATE account SET a_fname=?, a_lname=?, a_contact=?, a_address=? WHERE a_id=?";
-            PreparedStatement pst = conn.prepareStatement(sql);
+    String sql = "UPDATE account SET a_user=?, a_fname=?, a_lname=?, a_contact=?, a_type=?, a_address=?, a_status=? WHERE a_id=?";
+    PreparedStatement pst = conn.prepareStatement(sql);
+    
+    pst.setString(1, un);
+    pst.setString(2, fn);
+    pst.setString(3, ln);
+    pst.setString(4, cont);
+    pst.setString(5, ut);
+    pst.setString(6, addr);
+    pst.setString(7, st);
+    pst.setInt(8, userId); 
 
-            pst.setString(1, fn);
-            pst.setString(2, ln);
-            pst.setString(3, cont);
-            pst.setString(4, addr);
-            pst.setInt(5, userId); // <-- important, updates selected row
+    int updated = pst.executeUpdate();
 
-            int updated = pst.executeUpdate();
+    if (updated > 0) {
+        JOptionPane.showMessageDialog(this, "User details updated successfully!");
+        this.dispose();
 
-            if (updated > 0) {
-                JOptionPane.showMessageDialog(this, "User details updated successfully!");
-                this.dispose();
+        // Go back to users list
+        users u = new users();
+        admin adminFrame = new admin(u);
+        adminFrame.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
+    }
 
-                // Refresh users table
-                users u = new users();
-                admin adminFrame = new admin(u);
-                adminFrame.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
-        }
+} catch (SQLException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -235,6 +299,18 @@ public class updateUser extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
        
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void userTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userTypeActionPerformed
+
+    private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressActionPerformed
+
+    private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,14 +354,20 @@ public class updateUser extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     public javax.swing.JTextField lname;
+    public javax.swing.JTextField status;
+    public javax.swing.JTextField user;
+    public javax.swing.JTextField userType;
     // End of variables declaration//GEN-END:variables
 }

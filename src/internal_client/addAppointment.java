@@ -18,6 +18,7 @@ public class addAppointment extends javax.swing.JFrame {
     /**
      * Creates new form addAppontment
      */
+
     public addAppointment() {
         initComponents();
     }
@@ -39,12 +40,12 @@ public class addAppointment extends javax.swing.JFrame {
         name = new javax.swing.JLabel();
         breed = new javax.swing.JLabel();
         dateBirth = new javax.swing.JLabel();
-        p_reasons = new javax.swing.JTextField();
+        ap_reasons = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        p_time = new javax.swing.JTextField();
-        p_date = new javax.swing.JTextField();
+        ap_time = new javax.swing.JTextField();
+        ap_date = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        p_notes = new javax.swing.JTextField();
+        ap_notes = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -68,7 +69,7 @@ public class addAppointment extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(214, 206, 160));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
-        jLabel2.setText("Pet Information");
+        jLabel2.setText("Appointment");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("X");
@@ -113,12 +114,12 @@ public class addAppointment extends javax.swing.JFrame {
         dateBirth.setText("Time");
         jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 174, 78, -1));
 
-        p_reasons.addActionListener(new java.awt.event.ActionListener() {
+        ap_reasons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p_reasonsActionPerformed(evt);
+                ap_reasonsActionPerformed(evt);
             }
         });
-        jPanel1.add(p_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 82, 204, 28));
+        jPanel1.add(ap_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 82, 204, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,13 +128,13 @@ public class addAppointment extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
-        jPanel1.add(p_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
-        jPanel1.add(p_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 126, 204, 28));
+        jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
+        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 126, 204, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("Notes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 222, 54, -1));
-        jPanel1.add(p_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
+        jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,24 +158,30 @@ public class addAppointment extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String apReasons = p_reasons.getText().trim();
-        String apDate = p_date.getText().trim();
-        String apTime = p_time.getText().trim();
-        String apNotes = p_notes.getText().trim();
+        String apReasons = ap_reasons.getText().trim();
+        String apDate = ap_date.getText().trim();
+        String apTime = ap_time.getText().trim();
+        String apNotes = ap_notes.getText().trim();
         
             if(apReasons.isEmpty() || apDate.isEmpty() || apTime.isEmpty() || apNotes.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please fill in all fields");
+                return;
             }
         config db = new config();  
-        String sql = "INSERT INTO appointment (ap_reason, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO appointment (ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?)";
         db.addRecord(sql, apReasons, apDate, apTime, apNotes, "Pending");
         JOptionPane.showMessageDialog(this, "Appointment Added Successfully!");
+        
+        this.dispose();
+        client client = new client();
+        client.setVisible(true);
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void p_reasonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_reasonsActionPerformed
+    private void ap_reasonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_reasonsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_p_reasonsActionPerformed
+    }//GEN-LAST:event_ap_reasonsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,6 +220,10 @@ public class addAppointment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ap_date;
+    private javax.swing.JTextField ap_notes;
+    private javax.swing.JTextField ap_reasons;
+    private javax.swing.JTextField ap_time;
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
     private javax.swing.JButton jButton1;
@@ -223,9 +234,5 @@ public class addAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel name;
-    private javax.swing.JTextField p_date;
-    private javax.swing.JTextField p_notes;
-    private javax.swing.JTextField p_reasons;
-    private javax.swing.JTextField p_time;
     // End of variables declaration//GEN-END:variables
 }

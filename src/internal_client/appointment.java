@@ -6,9 +6,15 @@
 package internal_client;
 
 import config.config;
+import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -19,6 +25,7 @@ public class appointment extends javax.swing.JInternalFrame {
     /**
      * Creates new form appointment
      */
+    public int apId;
     public appointment() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
@@ -26,11 +33,22 @@ public class appointment extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
         displayAppointment();
     }
+    
     public void displayAppointment() {
         config db = new config();
-        String sql = "SELECT ap_id, ap_reason, ap_date, ap_time, ap_notes, ap_status FROM appointment";
-        db.displayData(sql, userTable);
+        String sql = "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment";
+        db.displayData(sql, appointmentTable);
     }
+    
+    public void searchTable(){
+       DefaultTableModel model =  (DefaultTableModel)appointmentTable.getModel();
+       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+       appointmentTable.setRowSorter(tr);
+       tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
+    }
+    
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(214,206,160);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,17 +61,17 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        userTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        appointmentTable = new javax.swing.JTable();
+        a_updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        a_addpane = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        a_cancelpane = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        search = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -61,12 +79,12 @@ public class appointment extends javax.swing.JInternalFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 247, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userTable.setModel(new javax.swing.table.DefaultTableModel(
+        appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,41 +95,102 @@ public class appointment extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(userTable);
+        jScrollPane1.setViewportView(appointmentTable);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        jPanel2.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        a_updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                a_updatepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                a_updatepaneMouseExited(evt);
+            }
+        });
+        a_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Update");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, -1));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 8, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 58, 72, 30));
+        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 58, 72, 30));
 
-        jPanel3.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        a_addpane.setBackground(new java.awt.Color(190, 176, 112));
+        a_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        a_addpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                a_addpaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                a_addpaneMouseExited(evt);
+            }
+        });
+        a_addpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        delete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         delete.setText("Add");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
         });
-        jPanel3.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 44, 20));
+        a_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, 32, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 56, 30));
+        jPanel1.add(a_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 72, 30));
 
-        jPanel5.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        a_cancelpane.setBackground(new java.awt.Color(190, 176, 112));
+        a_cancelpane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        a_cancelpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                a_cancelpaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                a_cancelpaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                a_cancelpaneMouseExited(evt);
+            }
+        });
+        a_cancelpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setText("Delete");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 10, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Cancel");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
+        });
+        a_cancelpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, 48, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 58, 72, 30));
+        jPanel1.add(a_cancelpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 58, 72, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -150,15 +229,20 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jTextField1.setBackground(new java.awt.Color(248, 247, 219));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchKeyTyped(evt);
+            }
+        });
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -244,13 +328,130 @@ public class appointment extends javax.swing.JInternalFrame {
         mainFrame.dispose();
     }//GEN-LAST:event_deleteMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO addPet your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
 
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+        a_addpane.setBackground(bodycolor);        
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        a_updatepane.setBackground(bodycolor);        
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        a_cancelpane.setBackground(bodycolor);        
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+        a_addpane.setBackground(navcolor);      
+    }//GEN-LAST:event_deleteMouseExited
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        a_updatepane.setBackground(navcolor);      
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        a_cancelpane.setBackground(navcolor);    
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void a_updatepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_updatepaneMouseEntered
+        a_updatepane.setBackground(bodycolor);        
+    }//GEN-LAST:event_a_updatepaneMouseEntered
+
+    private void a_addpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_addpaneMouseEntered
+        a_addpane.setBackground(bodycolor);        
+    }//GEN-LAST:event_a_addpaneMouseEntered
+
+    private void a_cancelpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_cancelpaneMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_a_cancelpaneMouseClicked
+
+    private void a_cancelpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_cancelpaneMouseEntered
+        a_cancelpane.setBackground(bodycolor);       
+    }//GEN-LAST:event_a_cancelpaneMouseEntered
+
+    private void a_updatepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_updatepaneMouseExited
+        a_updatepane.setBackground(navcolor);       
+    }//GEN-LAST:event_a_updatepaneMouseExited
+
+    private void a_addpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_addpaneMouseExited
+        a_addpane.setBackground(navcolor);        
+    }//GEN-LAST:event_a_addpaneMouseExited
+
+    private void a_cancelpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_cancelpaneMouseExited
+        a_cancelpane.setBackground(navcolor);       
+    }//GEN-LAST:event_a_cancelpaneMouseExited
+
+    private void searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyTyped
+        searchTable();        
+    }//GEN-LAST:event_searchKeyTyped
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        int rowIndex = appointmentTable.getSelectedRow();
+
+if (rowIndex < 0) {
+    JOptionPane.showMessageDialog(this, "Please select a Appointment to update.");
+    return;
+}
+
+TableModel model = appointmentTable.getModel();
+
+int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+String apReasons = model.getValueAt(rowIndex, 1).toString();
+String apDate = model.getValueAt(rowIndex, 2).toString();
+String apTime = model.getValueAt(rowIndex, 3).toString();
+String apNotes = model.getValueAt(rowIndex, 4).toString();
+
+updateAppointment updateForm = new updateAppointment();
+
+updateForm.apId = apId;         
+updateForm.ap_reasons.setText(apReasons);     
+updateForm.ap_date.setText(apDate);     
+updateForm.ap_time.setText(apTime);
+updateForm.ap_notes.setText(apNotes); 
+
+updateForm.setVisible(true);
+
+JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+mainFrame.dispose();        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        int rowIndex = appointmentTable.getSelectedRow();
+
+if(rowIndex < 0){
+    JOptionPane.showMessageDialog(null, "Please Select an Appointment!");
+    return;
+}
+
+TableModel model = appointmentTable.getModel();
+int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+
+String status = "Cancelled";
+
+config db = new config();
+
+boolean success = db.updateRecords(
+        "UPDATE appointment SET ap_status=? WHERE ap_id=?",
+        status,
+        apId
+);
+
+if(success){
+    JOptionPane.showMessageDialog(null, "Appointment Cancel Successfully!");
+
+    db.displayData("SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment", appointmentTable);
+
+}else{
+    JOptionPane.showMessageDialog(null, "Cancelled Appointment Failed!");
+}      
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -288,6 +489,10 @@ public class appointment extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel a_addpane;
+    private javax.swing.JPanel a_cancelpane;
+    private javax.swing.JPanel a_updatepane;
+    private javax.swing.JTable appointmentTable;
     private javax.swing.JLabel delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -296,16 +501,12 @@ public class appointment extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable userTable;
+    private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }

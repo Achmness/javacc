@@ -6,11 +6,15 @@
 package internal_vet;
 
 import config.config;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -31,10 +35,19 @@ public class appointment extends javax.swing.JInternalFrame {
     
     public void displayAppointment() {
         config db = new config();
-        String sql = "SELECT ap_id, ap_reason, ap_date, ap_time, ap_notes, ap_status FROM appointment";
+        String sql = "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment";
         db.displayData(sql, appointmentTable);
     }
-
+    
+    public void searchTable(){
+       DefaultTableModel model =  (DefaultTableModel)appointmentTable.getModel();
+       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+       appointmentTable.setRowSorter(tr);
+       tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
+    }
+    
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(214,206,160);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,16 +60,14 @@ public class appointment extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        a_updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        a_approvepane = new javax.swing.JPanel();
         approve = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        search = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -64,7 +75,7 @@ public class appointment extends javax.swing.JInternalFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 247, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,18 +95,42 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        jPanel2.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        a_updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                a_updatepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                a_updatepaneMouseExited(evt);
+            }
+        });
+        a_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Update");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, -1));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 60, 72, 30));
+        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 60, 72, 30));
 
-        jPanel3.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        a_approvepane.setBackground(new java.awt.Color(190, 176, 112));
+        a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        a_approvepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                a_approvepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                a_approvepaneMouseExited(evt);
+            }
+        });
+        a_approvepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         approve.setText("Approve");
         approve.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,19 +140,13 @@ public class appointment extends javax.swing.JInternalFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 approveMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                approveMouseExited(evt);
+            }
         });
-        jPanel3.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 50, 20));
+        a_approvepane.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 50, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 62, 30));
-
-        jPanel5.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setText("Delete");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 10, -1, -1));
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 58, 72, 30));
+        jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 62, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -156,15 +185,20 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jTextField1.setBackground(new java.awt.Color(248, 247, 219));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchKeyTyped(evt);
+            }
+        });
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -254,6 +288,21 @@ if(rowIndex < 0){
 TableModel model = appointmentTable.getModel();
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 
+// Get current status from table (assuming ap_status is column 5)
+String currentStatus = model.getValueAt(rowIndex, 5).toString();
+
+if(currentStatus.equalsIgnoreCase("Cancelled")){
+    JOptionPane.showMessageDialog(null, 
+            "Cancelled appointment cannot be approved!");
+    return;
+}
+
+if(currentStatus.equalsIgnoreCase("Approved")){
+    JOptionPane.showMessageDialog(null, 
+            "Appointment is already approved!");
+    return;
+}
+
 String status = "Approved";
 
 config db = new config();
@@ -268,24 +317,59 @@ if(success){
     JOptionPane.showMessageDialog(null, "Appointment Approved Successfully!");
 
     // Refresh table
-    db.displayData("SELECT ap_id, ap_reason, ap_date, ap_time, ap_notes, ap_status FROM appointment", appointmentTable);
+    db.displayData(
+        "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment",
+        appointmentTable
+    );
 
 }else{
     JOptionPane.showMessageDialog(null, "Approval Failed!");
 }
     }//GEN-LAST:event_approveMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO addPet your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
 
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void approveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveMouseEntered
-        // TODO add your handling code here:
+        a_approvepane.setBackground(bodycolor);      
     }//GEN-LAST:event_approveMouseEntered
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        a_updatepane.setBackground(bodycolor);        
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void approveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveMouseExited
+        a_approvepane.setBackground(navcolor);       
+    }//GEN-LAST:event_approveMouseExited
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        a_updatepane.setBackground(navcolor);       
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void a_updatepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_updatepaneMouseExited
+        a_updatepane.setBackground(navcolor);        
+    }//GEN-LAST:event_a_updatepaneMouseExited
+
+    private void a_approvepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_approvepaneMouseEntered
+        a_approvepane.setBackground(bodycolor);     
+    }//GEN-LAST:event_a_approvepaneMouseEntered
+
+    private void a_updatepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_updatepaneMouseEntered
+        a_updatepane.setBackground(bodycolor);       
+    }//GEN-LAST:event_a_updatepaneMouseEntered
+
+    private void a_approvepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_approvepaneMouseExited
+        a_approvepane.setBackground(navcolor);      
+    }//GEN-LAST:event_a_approvepaneMouseExited
+
+    private void searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyTyped
+        searchTable();        
+    }//GEN-LAST:event_searchKeyTyped
 
     /**
      * @param args the command line arguments
@@ -323,6 +407,8 @@ if(success){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel a_approvepane;
+    private javax.swing.JPanel a_updatepane;
     private javax.swing.JTable appointmentTable;
     private javax.swing.JLabel approve;
     private javax.swing.JLabel jLabel1;
@@ -330,17 +416,13 @@ if(success){
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }

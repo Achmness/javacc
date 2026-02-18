@@ -23,6 +23,21 @@ public class setUp extends javax.swing.JFrame {
      */
     public setUp() {
         initComponents();
+        loadCurrentData();
+    }
+    
+    public void loadCurrentData() {
+
+    singleton sess = singleton.getInstance();
+
+    if (sess == null) {
+        return;
+    }
+
+    fname.setText(sess.getFname() != null ? sess.getFname() : "");
+    lname.setText(sess.getLname() != null ? sess.getLname() : "");
+    contact.setText(sess.getContact() != null ? sess.getContact() : "");
+    address.setText(sess.getAddress() != null ? sess.getAddress() : "");
     }
 
     /**
@@ -70,64 +85,49 @@ public class setUp extends javax.swing.JFrame {
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
         jLabel2.setText("Account");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 0, -1, 42));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel3.setText("X");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 0, 16, 42));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 40));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("First Name");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 86, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 48, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel4.setText("Last Name ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 132, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel5.setText("Contact Number");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 192, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 168, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel6.setText("Address");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 246, -1, -1));
-        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 132, 192, 28));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 46, -1, -1));
 
+        lname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 134, 192, 28));
+
+        fname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnameActionPerformed(evt);
             }
         });
-        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 84, 192, 28));
+        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 72, 192, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +135,14 @@ public class setUp extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 354, -1, -1));
-        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 242, 192, 28));
-        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 274, -1, -1));
+
+        address.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 194, 192, 28));
+
+        contact.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        contact.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 72, 238, 86));
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -145,17 +150,17 @@ public class setUp extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(574, 356, 70, 22));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 276, 70, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -173,45 +178,48 @@ public class setUp extends javax.swing.JFrame {
     }//GEN-LAST:event_fnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String fn = fname.getText().trim();
-    String ln = lname.getText().trim();
-    String cont = contact.getText().trim();
-    String addr = address.getText().trim();
 
+        String fn = fname.getText().trim();
+        String ln = lname.getText().trim();
+        String cont = contact.getText().trim();
+        String addr = address.getText().trim();
 
         if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
 
-    singleton sess = singleton.getInstance();  
-    int accId = sess.getId(); 
+        singleton sess = singleton.getInstance();
+        int accId = sess.getId();
 
-    config db = new config();
-    
-    String updateSql = "UPDATE account SET a_fname = ?, a_lname = ?, a_contact = ?, a_address = ? WHERE a_id = ?";
-    boolean success = db.updateRecords(updateSql, fn, ln, cont, addr, accId);
+        config db = new config();
+
+        String updateSql = "UPDATE account SET a_fname = ?, a_lname = ?, a_contact = ?, a_address = ? WHERE a_id = ?";
+        boolean success = db.updateRecords(updateSql, fn, ln, cont, addr, accId);
 
         if(success){
             sess.setFname(fn);
             sess.setLname(ln);
             sess.setContact(cont);
             sess.setAddress(addr);
-            
+
             JOptionPane.showMessageDialog(this, "Account details updated successfully!");
 
             this.dispose();
+
             vet vet = new vet();
             vet.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Failed to update account. Please try again.");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        client client = new client();
-        client.setVisible(true);
+
+        vet vet = new vet();
+        vet.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

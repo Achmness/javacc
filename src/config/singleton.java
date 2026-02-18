@@ -10,6 +10,7 @@ public class singleton {
     private String email;
     private String username;
     private String status;
+    private String type;
     private String contact;  // added
     private String address;  // added
     private int apId;
@@ -69,6 +70,9 @@ public class singleton {
 
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
+    
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
     
     public int getApId() { return id; }
     public void setApId(int id) { this.id = id; }

@@ -117,6 +117,7 @@ public class account extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         fullname = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -125,7 +126,6 @@ public class account extends javax.swing.JInternalFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         address = new javax.swing.JLabel();
@@ -207,6 +207,19 @@ public class account extends javax.swing.JInternalFrame {
         jLabel1.setText("Personal Information");
         jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, 20));
 
+        jLabel8.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Set up");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+        });
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 6, -1, -1));
+
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 378, 28));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/name.png"))); // NOI18N
@@ -245,20 +258,6 @@ public class account extends javax.swing.JInternalFrame {
 
         jPanel8.setBackground(new java.awt.Color(190, 176, 112));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Set up");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel8MouseEntered(evt);
-            }
-        });
-        jPanel8.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
-
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 324, 66, 32));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -382,10 +381,10 @@ public class account extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel address;
-    private javax.swing.JLabel contact;
-    private javax.swing.JLabel email;
-    private javax.swing.JLabel fullname;
+    public javax.swing.JLabel address;
+    public javax.swing.JLabel contact;
+    public javax.swing.JLabel email;
+    public javax.swing.JLabel fullname;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -411,6 +410,6 @@ public class account extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel user;
+    public javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }

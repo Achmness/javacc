@@ -6,6 +6,7 @@
 package internal_admin;
 
 import config.config;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -37,7 +38,7 @@ public class users extends javax.swing.JInternalFrame {
 }
     public void displayUsers() {
         config db = new config();
-        String sql = "SELECT a_id, a_user, a_email, a_type, a_fname, a_lname, a_contact, a_address FROM account";
+        String sql = "SELECT a_id, a_email, a_type, a_contact, a_address, a_status FROM account";
         db.displayData(sql, userTable);
     }
     public void searchTable(){
@@ -46,7 +47,9 @@ public class users extends javax.swing.JInternalFrame {
        userTable.setRowSorter(tr);
        tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
-
+    
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(214,206,160);
 
 
     
@@ -63,11 +66,12 @@ public class users extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        deletepane = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -99,49 +103,62 @@ public class users extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        jPanel2.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
         });
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 2, 60, 28));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 58, 82, 30));
+        jPanel1.add(updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 58, 74, 30));
 
-        jPanel3.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        deletepane.setBackground(new java.awt.Color(190, 176, 112));
+        deletepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        deletepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         delete.setText("DELETE");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
         });
-        jPanel3.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 58, 20));
+        deletepane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 64, 24));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 60, 30));
+        jPanel1.add(deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 72, 30));
 
         jPanel5.setBackground(new java.awt.Color(190, 176, 112));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 79, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 26, Short.MAX_VALUE)
-        );
+        jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel6.setText("ADD");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 10, 40, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 58, -1, 30));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 58, 76, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -305,7 +322,7 @@ public class users extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "User Deleted Successfully!");
 
         db.displayData(
-            "SELECT a_id, a_user, a_email, a_type, a_fname, a_lname, a_contact, a_address FROM account",
+            "SELECT a_id, a_email, a_type, a_contact, a_address, a_status FROM account",
             userTable
         );
         
@@ -329,7 +346,7 @@ public class users extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_searchKeyTyped
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       int rowIndex = userTable.getSelectedRow();
+      int rowIndex = userTable.getSelectedRow();
 
 if (rowIndex < 0) {
     JOptionPane.showMessageDialog(this, "Please select a user to update.");
@@ -338,31 +355,69 @@ if (rowIndex < 0) {
 
 TableModel model = userTable.getModel();
 
-// Get data from the selected row
 int userId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-String fname = model.getValueAt(rowIndex, 1).toString();
-String lname = model.getValueAt(rowIndex, 2).toString();
-String contact = model.getValueAt(rowIndex, 3).toString();
-String address = model.getValueAt(rowIndex, 4).toString();
+String username = model.getValueAt(rowIndex, 1).toString();
+String fname = model.getValueAt(rowIndex, 2).toString();
+String lname = model.getValueAt(rowIndex, 3).toString();
+String contact = model.getValueAt(rowIndex, 4).toString();
+String userType = model.getValueAt(rowIndex, 5).toString();
 
-// Create update form using default constructor
+// Optional fields if table has them
+String address = ""; 
+String status = "";
+
+// Only try to read if columns exist
+if(model.getColumnCount() > 6){
+    address = model.getValueAt(rowIndex, 6).toString();
+}
+if(model.getColumnCount() > 7){
+    status = model.getValueAt(rowIndex, 7).toString();
+}
+
+// Create the update form
 updateUser updateForm = new updateUser();
+updateForm.userId = userId;
 
-// Set the fields and store userId
-updateForm.userId = userId;          // public int userId;
-updateForm.fname.setText(fname);     // JTextField fname
-updateForm.lname.setText(lname);     // JTextField lname
-updateForm.contact.setText(contact); // JTextField contact
-updateForm.address.setText(address); // JTextField address
+// Set the fields properly
+updateForm.user.setText(username);  
+updateForm.fname.setText(fname);        
+updateForm.lname.setText(lname);        
+updateForm.contact.setText(contact); 
+updateForm.userType.setText(userType);
+updateForm.address.setText(address); 
+updateForm.status.setText(status);
 
-// Show the form
 updateForm.setVisible(true);
 
-// Close current frame if needed
+// Close current frame
 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 mainFrame.dispose();
 
+
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+            deletepane.setBackground(bodycolor);
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+            deletepane.setBackground(navcolor);
+    }//GEN-LAST:event_deleteMouseExited
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+            updatepane.setBackground(bodycolor);    
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+            updatepane.setBackground(navcolor);    
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        addUsers add = new addUsers();
+        add.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();      
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -464,14 +519,14 @@ mainFrame.dispose();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel delete;
+    private javax.swing.JPanel deletepane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -480,6 +535,7 @@ mainFrame.dispose();
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField search;
+    private javax.swing.JPanel updatepane;
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }

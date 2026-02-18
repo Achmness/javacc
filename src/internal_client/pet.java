@@ -6,9 +6,16 @@
 package internal_client;
 
 import config.config;
+import internal_admin.updateUser;
+import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -19,6 +26,7 @@ public class pet extends javax.swing.JInternalFrame {
     /**
      * Creates new form pet
      */
+    public int petId;
     public pet() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
@@ -29,8 +37,18 @@ public class pet extends javax.swing.JInternalFrame {
     public void displayPets() {
         config db = new config();
         String sql = "SELECT p_id, p_name, p_species, p_breed, p_dateBirth FROM pet";
-        db.displayData(sql, userTable);
+        db.displayData(sql, petTable);
     }
+    
+    public void searchTable(){
+       DefaultTableModel model =  (DefaultTableModel)petTable.getModel();
+       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+       petTable.setRowSorter(tr);
+       tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
+    }
+    
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(214,206,160);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,17 +61,17 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        userTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        petTable = new javax.swing.JTable();
+        p_updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        p_addpane = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        p_deletepane = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        search = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -61,12 +79,12 @@ public class pet extends javax.swing.JInternalFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 247, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userTable.setModel(new javax.swing.table.DefaultTableModel(
+        petTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,41 +95,99 @@ public class pet extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(userTable);
+        jScrollPane1.setViewportView(petTable);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        jPanel2.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        p_updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        p_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        p_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_updatepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_updatepaneMouseExited(evt);
+            }
+        });
+        p_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Update");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, -1));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        p_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, -1, 22));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 58, 72, 30));
+        jPanel1.add(p_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 58, 72, 30));
 
-        jPanel3.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        p_addpane.setBackground(new java.awt.Color(190, 176, 112));
+        p_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        p_addpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_addpaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_addpaneMouseExited(evt);
+            }
+        });
+        p_addpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        delete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         delete.setText("Add");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteMouseExited(evt);
+            }
         });
-        jPanel3.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 44, 20));
+        p_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, 48, 24));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 56, 30));
+        jPanel1.add(p_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 72, 30));
 
-        jPanel5.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        p_deletepane.setBackground(new java.awt.Color(190, 176, 112));
+        p_deletepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        p_deletepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_deletepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_deletepaneMouseExited(evt);
+            }
+        });
+        p_deletepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Delete");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 10, -1, -1));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
+        });
+        p_deletepane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 2, -1, 26));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 58, 72, 30));
+        jPanel1.add(p_deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 58, 72, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -150,15 +226,20 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jTextField1.setBackground(new java.awt.Color(248, 247, 219));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchKeyTyped(evt);
+            }
+        });
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -244,13 +325,137 @@ public class pet extends javax.swing.JInternalFrame {
             mainFrame.dispose();
     }//GEN-LAST:event_deleteMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO addPet your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
 
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+        p_addpane.setBackground(bodycolor);        
+    }//GEN-LAST:event_deleteMouseEntered
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        p_updatepane.setBackground(bodycolor);      
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        p_deletepane.setBackground(bodycolor);      
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+        p_addpane.setBackground(navcolor);     
+    }//GEN-LAST:event_deleteMouseExited
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        p_updatepane.setBackground(navcolor);       
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        p_deletepane.setBackground(navcolor);        
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void p_addpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addpaneMouseEntered
+        p_addpane.setBackground(bodycolor);      
+    }//GEN-LAST:event_p_addpaneMouseEntered
+
+    private void p_updatepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_updatepaneMouseEntered
+        p_updatepane.setBackground(bodycolor);         
+    }//GEN-LAST:event_p_updatepaneMouseEntered
+
+    private void p_deletepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_deletepaneMouseEntered
+        p_deletepane.setBackground(bodycolor);         
+    }//GEN-LAST:event_p_deletepaneMouseEntered
+
+    private void p_updatepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_updatepaneMouseExited
+        p_updatepane.setBackground(navcolor);       
+    }//GEN-LAST:event_p_updatepaneMouseExited
+
+    private void p_addpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addpaneMouseExited
+        p_addpane.setBackground(navcolor);      
+    }//GEN-LAST:event_p_addpaneMouseExited
+
+    private void p_deletepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_deletepaneMouseExited
+        p_deletepane.setBackground(navcolor);      
+    }//GEN-LAST:event_p_deletepaneMouseExited
+
+    private void searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyTyped
+        searchTable();        
+    }//GEN-LAST:event_searchKeyTyped
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+            int rowIndex = petTable.getSelectedRow();
+
+if (rowIndex < 0) {
+    JOptionPane.showMessageDialog(this, "Please select a user to update.");
+    return;
+}
+
+TableModel model = petTable.getModel();
+
+int petId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+String pName = model.getValueAt(rowIndex, 1).toString();
+String pScpecies = model.getValueAt(rowIndex, 2).toString();
+String pBreed = model.getValueAt(rowIndex, 3).toString();
+String pDateBirth = model.getValueAt(rowIndex, 4).toString();
+
+updatePet updateForm = new updatePet();
+
+updateForm.petId = petId;         
+updateForm.p_name.setText(pName);     
+updateForm.p_species.setText(pScpecies);     
+updateForm.p_breed.setText(pBreed);
+updateForm.p_dateBirth.setText(pDateBirth); 
+
+updateForm.setVisible(true);
+
+JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+mainFrame.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        int rowIndex = petTable.getSelectedRow();
+
+            if(rowIndex < 0){
+                JOptionPane.showMessageDialog(null, "Please Select a User!");
+                return;
+            }
+
+        TableModel model = petTable.getModel();
+        int pId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this pet?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION
+        );
+
+            if(confirm != JOptionPane.YES_OPTION){
+                return;
+            }
+
+            config db = new config();
+
+            boolean success = db.updateRecords(
+                    "DELETE FROM pet WHERE p_id = ?",
+                    pId
+            );
+
+            if(success){
+                JOptionPane.showMessageDialog(null, "Pet Deleted Successfully!");
+
+        db.displayData(
+            "SELECT p_id, p_name, p_species, p_breed, p_dateBirth FROM pet",
+            petTable
+        );
+        
+            }else{
+                JOptionPane.showMessageDialog(null, "Delete Failed!");
+            }        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -296,16 +501,16 @@ public class pet extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable userTable;
+    private javax.swing.JPanel p_addpane;
+    private javax.swing.JPanel p_deletepane;
+    private javax.swing.JPanel p_updatepane;
+    private javax.swing.JTable petTable;
+    private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }
