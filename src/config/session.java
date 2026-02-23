@@ -13,6 +13,7 @@ public class session {
     private String status;
 
     // Full account details
+    private String image;
     private String fname;
     private String lname;
     private String contact;
@@ -77,6 +78,10 @@ public class session {
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    public void setImage(String Image) {
+        this.image = image;
+    }
 
     // Optional: Set everything at once
     public void setFullDetails(int accId, String username, String email, String type,
@@ -112,6 +117,7 @@ public class session {
     public String getContact() { return contact; }
     public String getAddress() { return address; }
     public String getUsername() { return username; }
+    public String getImage() { return image; }
     public int getApId() { return apId; }
 
 

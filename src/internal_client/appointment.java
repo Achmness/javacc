@@ -7,6 +7,7 @@ package internal_client;
 
 import config.config;
 import java.awt.Color;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -33,6 +34,8 @@ public class appointment extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
         displayAppointment();
     }
+    
+    
     
     public void displayAppointment() {
         config db = new config();

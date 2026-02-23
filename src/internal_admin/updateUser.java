@@ -10,6 +10,7 @@ import config.singleton;
 import internal.admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -23,29 +24,49 @@ public class updateUser extends javax.swing.JFrame {
      * Creates new form updateUser
      */
     
-    public int userId;
+    public int userId;  
     public updateUser() {
         initComponents();
-        loadCurrentData();
-
+        loadUserData(userId);
     }
     
-    public void loadCurrentData() {
-
-    singleton sess = singleton.getInstance();
-
-    if (sess == null) {
-        return;
+    public updateUser(int userId) {
+        initComponents();          // Always first
+        loadUserData(userId);      // Then load data from database
     }
+    
+    private void loadUserData(int id) {
 
-    user.setText(sess.getFname() != null ? sess.getFname() : "");
-    fname.setText(sess.getLname() != null ? sess.getLname() : "");
-    lname.setText(sess.getContact() != null ? sess.getContact() : "");
-    
-    contact.setText(sess.getAddress() != null ? sess.getAddress() : "");
-    status.setText(sess.getStatus() != null ? sess.getStatus() : "");
-    
+    try {
+        Connection conn = config.connectDB();
+        PreparedStatement pst = conn.prepareStatement(
+                "SELECT * FROM account WHERE a_id = ?"
+        );
+        pst.setInt(1, id);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            fname.setText(rs.getString("a_fname"));
+            lname.setText(rs.getString("a_lname"));
+            email.setText(rs.getString("a_email"));
+            user.setText(rs.getString("a_user"));
+            contact.setText(rs.getString("a_contact"));
+            userType.setText(rs.getString("a_type"));
+            address.setText(rs.getString("a_address"));
+            status.setText(rs.getString("a_status"));
+        }
+
+        rs.close();
+        pst.close();
+        conn.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,9 +95,11 @@ public class updateUser extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         userType = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        address = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         status = new javax.swing.JTextField();
+        addressTA = new javax.swing.JScrollPane();
+        address = new javax.swing.JTextArea();
+        email = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -193,25 +216,35 @@ public class updateUser extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel11.setText("Address");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 108, -1, -1));
-
-        address.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressActionPerformed(evt);
-            }
-        });
-        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 130, 192, 96));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 110, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel7.setText("Status");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 232, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 238, -1, -1));
 
         status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusActionPerformed(evt);
             }
         });
-        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 254, 192, 28));
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 260, 192, 28));
+
+        addressTA.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        addressTA.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        address.setColumns(20);
+        address.setRows(5);
+        addressTA.setViewportView(address);
+
+        jPanel1.add(addressTA, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 138, 192, 90));
+
+        email.setText("jTextField1");
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 318, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,53 +273,54 @@ public class updateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    String un = user.getText().trim();   
-String fn = fname.getText().trim();        
-String ln = lname.getText().trim();        
-String cont = contact.getText().trim();  
-String ut = userType.getText().trim();
-String addr = address.getText().trim();  
-String st = status.getText().trim();
+    String em = email.getText().trim();    
+    String us = user.getText().trim();   
+    String fn = fname.getText().trim();        
+    String ln = lname.getText().trim();        
+    String cont = contact.getText().trim();  
+    String ut = userType.getText().trim();
+    String addr = address.getText();
+    String st = status.getText().trim();
 
-// Validate required fields
-if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty()){
-    JOptionPane.showMessageDialog(this, "Please fill in all fields");
-    return;
-}
+        if(us.isEmpty() ||fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || ut.isEmpty() || addr.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in all fields");
+            return;
+        }
 
-try (Connection conn = config.connectDB()) {
+        try (Connection conn = config.connectDB()) {
+            singleton sess = singleton.getInstance();
+            int userId = sess.getId(); 
+            String sql = "UPDATE account SET a_user=?, a_fname=?, a_lname=?, a_contact=?, a_email=?, a_type=?, a_address=?, a_status=? WHERE a_id=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            
+            System.out.println("Updating user with ID: " + userId);
+            pst.setString(1, us);
+            pst.setString(2, fn);
+            pst.setString(3, ln);
+            pst.setString(4, cont);
+            pst.setString(5, em);
+            pst.setString(6, ut);
+            pst.setString(7, addr);
+            pst.setString(8, st);
+            pst.setInt(9, userId); 
 
-    String sql = "UPDATE account SET a_user=?, a_fname=?, a_lname=?, a_contact=?, a_type=?, a_address=?, a_status=? WHERE a_id=?";
-    PreparedStatement pst = conn.prepareStatement(sql);
-    
-    pst.setString(1, un);
-    pst.setString(2, fn);
-    pst.setString(3, ln);
-    pst.setString(4, cont);
-    pst.setString(5, ut);
-    pst.setString(6, addr);
-    pst.setString(7, st);
-    pst.setInt(8, userId); 
+            int updated = pst.executeUpdate();
 
-    int updated = pst.executeUpdate();
+            if (updated > 0) {
+                JOptionPane.showMessageDialog(this, "User details updated successfully!");
+                this.dispose();
+                
+                users u = new users();
+                admin adminFrame = new admin(u);
+                adminFrame.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
+            }
 
-    if (updated > 0) {
-        JOptionPane.showMessageDialog(this, "User details updated successfully!");
-        this.dispose();
-
-        // Go back to users list
-        users u = new users();
-        admin adminFrame = new admin(u);
-        adminFrame.setVisible(true);
-    } else {
-        JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
-    }
-
-} catch (SQLException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
-}
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -304,13 +338,13 @@ try (Connection conn = config.connectDB()) {
         // TODO add your handling code here:
     }//GEN-LAST:event_userTypeActionPerformed
 
-    private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addressActionPerformed
-
     private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_statusActionPerformed
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,8 +382,10 @@ try (Connection conn = config.connectDB()) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField address;
+    public javax.swing.JTextArea address;
+    public javax.swing.JScrollPane addressTA;
     public javax.swing.JTextField contact;
+    public javax.swing.JTextField email;
     public javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

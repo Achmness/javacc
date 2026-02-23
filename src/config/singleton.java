@@ -13,6 +13,7 @@ public class singleton {
     private String type;
     private String contact;  // added
     private String address;  // added
+    private String image;
     private int apId;
     private singleton() {
         // Private constructor to prevent instantiation
@@ -73,6 +74,9 @@ public class singleton {
     
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
+    
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
     
     public int getApId() { return id; }
     public void setApId(int id) { this.id = id; }

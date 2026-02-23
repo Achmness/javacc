@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -14,6 +15,7 @@ import net.proteanit.sql.DbUtils;
 public class config {
     //Connectio n Method to SQLITE
 public static Connection connectDB() {
+    
     Connection con = null;
     try {
         Class.forName("org.sqlite.JDBC");
@@ -239,9 +241,24 @@ public boolean updateRecords(String sql, Object... params){
         return affectedRows > 0;
 
     } catch(SQLException e){
-        e.printStackTrace();
+        e.printStackTrace(); 
         return false;
     }
+}
+public ResultSet getData(String sql) throws SQLException {
+
+    Connection conn = connectDB();
+
+    if (conn == null) {
+        throw new SQLException("Database connection failed.");
+    }
+
+    Statement stmt = conn.createStatement(
+            ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_READ_ONLY
+    );
+
+    return stmt.executeQuery(sql);
 }
 
 

@@ -6,7 +6,12 @@
 package internal_admin;
 
 import config.config;
+import static config.config.connectDB;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -38,7 +43,7 @@ public class users extends javax.swing.JInternalFrame {
 }
     public void displayUsers() {
         config db = new config();
-        String sql = "SELECT a_id, a_email, a_type, a_contact, a_address, a_status FROM account";
+        String sql = "SELECT a_id, a_user, a_fname, a_lname, a_contact, a_email, a_type, a_address, a_status FROM account";
         db.displayData(sql, userTable);
     }
     public void searchTable(){
@@ -354,45 +359,15 @@ if (rowIndex < 0) {
 }
 
 TableModel model = userTable.getModel();
+int id = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 
-int userId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-String username = model.getValueAt(rowIndex, 1).toString();
-String fname = model.getValueAt(rowIndex, 2).toString();
-String lname = model.getValueAt(rowIndex, 3).toString();
-String contact = model.getValueAt(rowIndex, 4).toString();
-String userType = model.getValueAt(rowIndex, 5).toString();
 
-// Optional fields if table has them
-String address = ""; 
-String status = "";
+updateUser update = new updateUser(id);
+update.setVisible(true);
 
-// Only try to read if columns exist
-if(model.getColumnCount() > 6){
-    address = model.getValueAt(rowIndex, 6).toString();
-}
-if(model.getColumnCount() > 7){
-    status = model.getValueAt(rowIndex, 7).toString();
-}
-
-// Create the update form
-updateUser updateForm = new updateUser();
-updateForm.userId = userId;
-
-// Set the fields properly
-updateForm.user.setText(username);  
-updateForm.fname.setText(fname);        
-updateForm.lname.setText(lname);        
-updateForm.contact.setText(contact); 
-updateForm.userType.setText(userType);
-updateForm.address.setText(address); 
-updateForm.status.setText(status);
-
-updateForm.setVisible(true);
-
-// Close current frame
+// Close current frame (optional)
 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 mainFrame.dispose();
-
 
     }//GEN-LAST:event_jLabel1MouseClicked
 

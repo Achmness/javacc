@@ -9,11 +9,25 @@ import config.config;
 import config.session;
 import config.singleton;
 import gui.signin;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -33,7 +47,93 @@ public class account extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
         displayCurrentUser();
     }
-public void displayCurrentUser() {
+    
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(214,206,160);
+    
+    public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
+    
+        public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+    
+    
+    public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+        ImageIcon MyImage = null;
+            if(ImagePath !=null){
+                MyImage = new ImageIcon(ImagePath);
+            }else{
+                MyImage = new ImageIcon(pic);
+            }
+
+        int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+
+    public int FileExistenceChecker(String path){
+            File file = new File(path);
+            String fileName = file.getName();
+
+            Path filePath = Paths.get("src/images", fileName);
+            boolean fileExists = Files.exists(filePath);
+
+            if (fileExists) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        }
+
+    
+    public void displayCurrentUser() {
 
     singleton sess = singleton.getInstance();
 
@@ -114,6 +214,9 @@ public void displayCurrentUser() {
         jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        managepane = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         fullname = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -129,12 +232,11 @@ public void displayCurrentUser() {
         jLabel9 = new javax.swing.JLabel();
         contact = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
+        edit = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,6 +307,52 @@ public void displayCurrentUser() {
         jLabel1.setText("Personal Information");
         jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, 20));
 
+        managepane.setBackground(new java.awt.Color(190, 176, 112));
+        managepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                managepaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                managepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                managepaneMouseExited(evt);
+            }
+        });
+        managepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Manage");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel14MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel14MouseExited(evt);
+            }
+        });
+        managepane.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, -6, -1, 42));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel15MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel15MouseExited(evt);
+            }
+        });
+        managepane.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, -6, -1, 42));
+
+        jPanel9.add(managepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 0, 102, 28));
+
         jPanel4.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 378, 28));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/name.png"))); // NOI18N
@@ -272,41 +420,35 @@ public void displayCurrentUser() {
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel15.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Edit Profile");
-        jPanel15.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 8, -1, -1));
-
-        jPanel5.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 162, 162, 32));
-
-        jPanel16.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jLabel13.setText("Profile Picture ");
-        jPanel16.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
-
-        jPanel5.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 174, 28));
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 60, 176, 206));
-
         jPanel10.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Set up");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                jPanel10MouseClicked(evt);
             }
         });
-        jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 324, 66, 32));
+        edit.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        edit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        edit.setText(" Edit Profile");
+        jPanel10.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 8, -1, -1));
+
+        jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 208, 172, 32));
+
+        jPanel17.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("       Profile Picture ");
+        jPanel17.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+
+        jPanel5.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 192, 28));
+
+        image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 170, 170));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 60, 184, 246));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 499));
 
@@ -326,12 +468,74 @@ public void displayCurrentUser() {
         new signin().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        setUp add = new setUp();
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        manage add = new manage();
         add.setVisible(true);
         JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         mainFrame.dispose();
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseEntered
+        managepane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel14MouseEntered
+
+    private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
+        managepane.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel14MouseExited
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        manage add = new manage();
+        add.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseEntered
+        managepane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel15MouseEntered
+
+    private void jLabel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseExited
+        managepane.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel15MouseExited
+
+    private void managepaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseClicked
+        manage add = new manage();
+        add.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+    }//GEN-LAST:event_managepaneMouseClicked
+
+    private void managepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseEntered
+        managepane.setBackground(bodycolor);
+    }//GEN-LAST:event_managepaneMouseEntered
+
+    private void managepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseExited
+        managepane.setBackground(navcolor);
+    }//GEN-LAST:event_managepaneMouseExited
+
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/images/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1){
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+                    edit.setVisible(true);
+                    edit.setText("REMOVE");
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_jPanel10MouseClicked
 
     /**
      * @param args the command line arguments
@@ -371,13 +575,15 @@ public void displayCurrentUser() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel address;
     private javax.swing.JLabel contact;
+    private javax.swing.JLabel edit;
     private javax.swing.JLabel email;
     private javax.swing.JLabel fullname;
+    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -390,14 +596,14 @@ public void displayCurrentUser() {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel managepane;
     private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }

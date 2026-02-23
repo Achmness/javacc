@@ -40,6 +40,10 @@ public class vet extends javax.swing.JFrame {
         accpane = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        recordspane = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         maindesktop = new javax.swing.JDesktopPane();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -132,6 +136,57 @@ public class vet extends javax.swing.JFrame {
         accpane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
         jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 50));
+
+        recordspane.setBackground(new java.awt.Color(190, 176, 112));
+        recordspane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                recordspaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                recordspaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                recordspaneMouseExited(evt);
+            }
+        });
+        recordspane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Medical ");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
+        });
+        recordspane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 8, -1, 18));
+
+        jLabel9.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Records");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel9MouseExited(evt);
+            }
+        });
+        recordspane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 28, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/records.png"))); // NOI18N
+        recordspane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 12, -1, -1));
+
+        jPanel2.add(recordspane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 150, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 480));
 
@@ -281,6 +336,45 @@ public class vet extends javax.swing.JFrame {
         accpane.setBackground(navcolor);        
     }//GEN-LAST:event_accpaneMouseExited
 
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        recordspane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        recordspane.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+        recordspane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
+        recordspane.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel9MouseExited
+
+    private void recordspaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordspaneMouseEntered
+        recordspane.setBackground(bodycolor);
+    }//GEN-LAST:event_recordspaneMouseEntered
+
+    private void recordspaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordspaneMouseExited
+        recordspane.setBackground(navcolor);   
+    }//GEN-LAST:event_recordspaneMouseExited
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        internal_vet.records records = new internal_vet.records();        
+        maindesktop.add(records).setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        internal_vet.records records = new internal_vet.records();        
+        maindesktop.add(records).setVisible(true);      
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void recordspaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordspaneMouseClicked
+        internal_vet.records records = new internal_vet.records();        
+        maindesktop.add(records).setVisible(true);        
+    }//GEN-LAST:event_recordspaneMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -321,15 +415,19 @@ public class vet extends javax.swing.JFrame {
     private javax.swing.JPanel accpane;
     private javax.swing.JPanel apppane;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JDesktopPane maindesktop;
+    private javax.swing.JPanel recordspane;
     // End of variables declaration//GEN-END:variables
 }

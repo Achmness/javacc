@@ -10,13 +10,31 @@ import gui.signup.*;
 import internal.admin;
 import config.session;
 import config.singleton;
+import static internal_admin.manage.getHeightFromWidth;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.io.File;
 public class account extends javax.swing.JInternalFrame {
 
     /**
@@ -24,80 +42,94 @@ public class account extends javax.swing.JInternalFrame {
      */
     public account() {
         initComponents();
-        displayCurrentUser();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
-        BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
-        bi.setNorthPane(null);
+        SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+            displayCurrentUser();
+        }
+    });
+
+    this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+    BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
+    bi.setNorthPane(null);
 
       
     }
+    
+    
+    
+    Color navcolor = new Color(190,176,112);
+    Color bodycolor = new Color(214,206,160);
+    
     public void displayCurrentUser() {
-
     singleton sess = singleton.getInstance();
 
     if (sess == null) {
-        System.out.println("No user logged in.");
+        System.out.println("No session found.");
         return;
     }
 
-    user.setText("<html><b>User</b><br><span style='font-weight:normal;'>"
-        + (sess.getUsername() != null ? sess.getUsername() : "")
-        + "</span></html>");
+    // try-with-resources to automatically close the connection
+    try (Connection conn = config.connectDB()) {
+        String sql = "SELECT * FROM account WHERE a_id = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, sess.getId());
 
-    email.setText("<html><b>Email</b><br><span style='font-weight:normal;'>" 
-        + (sess.getEmail() != null ? sess.getEmail() : "")
-        + "</span></html>");
+        ResultSet rs = pst.executeQuery();
 
-    String fullName = 
-    (sess.getFname() != null ? sess.getFname() : "") + " " +
-    (sess.getLname() != null ? sess.getLname() : "");
+        if (rs.next()) {
+            String username = rs.getString("a_user");
+            String emailAdd = rs.getString("a_email");
+            String fname = rs.getString("a_fname");
+            String lname = rs.getString("a_lname");
+            String contactNo = rs.getString("a_contact");
+            String addr = rs.getString("a_address");
 
-    fullname.setText("<html><b>Full Name</b><br><span style='font-weight:normal;'>"
-        + fullName.trim()
-        + "</span></html>");
-
-
-    contact.setText("<html><b>Contact</b><br><span style='font-weight:normal; font-size: 12px; font-family:Arial;'>"
-            + (sess.getContact() != null ? sess.getContact().trim() : "")
+            user.setText("<html><b>User</b><br><span style='font-weight:normal;'>"
+            + (sess.getUsername() != null ? sess.getUsername() : "")
             + "</span></html>");
-    address.setText("<html><b>Address</b><br><span style='font-weight:normal;'>"
-            + (sess.getAddress() != null ? sess.getAddress() : "")
-            + "</span></html>"); 
+                email.setText("<html><b>Email</b><br><span style='font-weight:normal;'>" 
+            + (sess.getEmail() != null ? sess.getEmail() : "")
+            + "</span></html>");
 
-    if (sess.getEmail() == null || sess.getUsername() == null) {
-        config db = new config();
-        String sql = "SELECT a_user, a_email, a_fname, a_lname, a_contact, a_address FROM account WHERE a_id = ?";
+            String fullName = 
+            (sess.getFname() != null ? sess.getFname() : "") + " " +
+            (sess.getLname() != null ? sess.getLname() : "");
 
-        try (Connection conn = db.connectDB();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+            fullname.setText("<html><b>Full Name</b><br><span style='font-weight:normal;'>"
+                + fullName.trim()
+                + "</span></html>");
 
-            pst.setInt(1, sess.getId());
-            ResultSet rs = pst.executeQuery();
+            contact.setText("<html><b>Contact</b><br><span style='font-weight:normal; font-size: 12px; font-family:Arial;'>"
+                    + (sess.getContact() != null ? sess.getContact().trim() : "")
+                    + "</span></html>");
+            address.setText("<html><b>Address</b><br><span style='font-weight:normal;'>"
+                    + (sess.getAddress() != null ? sess.getAddress() : "")
+                    + "</span></html>");
 
-            if (rs.next()) {
-                user.setText("User: " + rs.getString("a_user"));
-                email.setText("Email: " + rs.getString("a_email"));
-                String fname = rs.getString("a_fname");
-                String lname = rs.getString("a_lname");
-                String fullNameDB = ((fname != null) ? fname : "") + " " + ((lname != null) ? lname : "");
-                fullname.setText("Full Name: " + fullNameDB.trim());
+            sess.setUsername(username);
+            sess.setEmail(emailAdd);
+            sess.setFname(fname);
+            sess.setLname(lname);
+            sess.setContact(contactNo);
+            sess.setAddress(addr);
 
-                String cont = rs.getString("a_contact");
-                String addr = rs.getString("a_address");
-                contact.setText("Contact: " + (cont != null ? cont.trim() : ""));
-                address.setText("Address: " + (addr != null ? addr.trim() : ""));
+            byte[] imgBytes = rs.getBytes("a_image");
+
+            if (imgBytes != null && imgBytes.length > 0) {
+                ImageIcon imageIcon = new ImageIcon(imgBytes);
+                Image img = imageIcon.getImage();
+                Image scaledImg = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
+                
+                image.setIcon(new ImageIcon(scaledImg));
+            } else {
+                image.setIcon(null);
             }
-
-        } catch (SQLException e) {
-            System.out.println("Error loading account: " + e.getMessage());
         }
+    } catch (SQLException e) {
+        System.out.println("Error loading account: " + e.getMessage());
     }
 }
-
-
-
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +140,7 @@ public class account extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -117,15 +150,15 @@ public class account extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        managepane = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         fullname = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        image = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         address = new javax.swing.JLabel();
@@ -138,6 +171,19 @@ public class account extends javax.swing.JInternalFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         contact = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        browse = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -207,9 +253,23 @@ public class account extends javax.swing.JInternalFrame {
         jLabel1.setText("Personal Information");
         jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, 20));
 
+        managepane.setBackground(new java.awt.Color(190, 176, 112));
+        managepane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                managepaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                managepaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                managepaneMouseExited(evt);
+            }
+        });
+        managepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Set up");
+        jLabel8.setText("Manage");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
@@ -217,8 +277,27 @@ public class account extends javax.swing.JInternalFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel8MouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel8MouseExited(evt);
+            }
         });
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 6, -1, -1));
+        managepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, -6, -1, 42));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel5MouseExited(evt);
+            }
+        });
+        managepane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, -6, -1, 42));
+
+        jPanel9.add(managepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 0, 102, 28));
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 378, 28));
 
@@ -229,36 +308,31 @@ public class account extends javax.swing.JInternalFrame {
         fullname.setText("Full Name");
         jPanel2.add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 328, 54));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 60, 380, 80));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel7.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Edit Profile");
-        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 8, -1, -1));
-
-        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 162, 162, 32));
+        image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        image.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageMouseClicked(evt);
+            }
+        });
+        jPanel5.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 34, 120, 120));
 
         jPanel10.setBackground(new java.awt.Color(190, 176, 112));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        jLabel7.setText("Profile Picture ");
-        jPanel10.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("       Profile Picture ");
+        jPanel10.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-18, 4, 158, -1));
 
-        jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 174, 28));
+        jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 156, 28));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 60, 176, 206));
-
-        jPanel8.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 324, 66, 32));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 60, 156, 166));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -271,7 +345,7 @@ public class account extends javax.swing.JInternalFrame {
         address.setText("Address");
         jPanel11.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 2, 328, 58));
 
-        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 144, 380, 52));
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 144, 380, 52));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -284,7 +358,7 @@ public class account extends javax.swing.JInternalFrame {
         email.setText("Email");
         jPanel13.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -8, 300, 76));
 
-        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 380, 52));
+        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 200, 380, 52));
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
         jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -297,7 +371,7 @@ public class account extends javax.swing.JInternalFrame {
         user.setText("User");
         jPanel14.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -8, 322, 74));
 
-        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 256, 380, 52));
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 256, 380, 52));
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -310,7 +384,18 @@ public class account extends javax.swing.JInternalFrame {
         contact.setText("Contact Number");
         jPanel12.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 0, 150, 58));
 
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, 380, 50));
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 312, 380, 50));
+
+        jPanel7.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.add(browse, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 8, -1, -1));
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 308, 156, 34));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,7 +405,7 @@ public class account extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
         );
 
         pack();
@@ -334,15 +419,60 @@ public class account extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-            setUp add = new setUp();
+
+        
+        
+        manage add = new manage();
             add.setVisible(true);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             mainFrame.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
-        // TODO add your handling code here:
+        managepane.setBackground(bodycolor);       
     }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+ 
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void managepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseEntered
+        managepane.setBackground(bodycolor);
+    }//GEN-LAST:event_managepaneMouseEntered
+
+    private void managepaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseExited
+        managepane.setBackground(navcolor);      
+    }//GEN-LAST:event_managepaneMouseExited
+
+    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+        managepane.setBackground(bodycolor);       
+    }//GEN-LAST:event_jLabel5MouseEntered
+
+    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
+        managepane.setBackground(navcolor);     
+    }//GEN-LAST:event_jLabel8MouseExited
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
+        managepane.setBackground(navcolor);       
+    }//GEN-LAST:event_jLabel5MouseExited
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        manage add = new manage();
+        add.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();       
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void managepaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseClicked
+        manage add = new manage();
+        add.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();      
+    }//GEN-LAST:event_managepaneMouseClicked
+
+    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
+   
+    }//GEN-LAST:event_imageMouseClicked
 
     /**
      * @param args the command line arguments
@@ -382,9 +512,11 @@ public class account extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel address;
+    private javax.swing.JLabel browse;
     public javax.swing.JLabel contact;
     public javax.swing.JLabel email;
     public javax.swing.JLabel fullname;
+    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -410,6 +542,7 @@ public class account extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel managepane;
     public javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }
