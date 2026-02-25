@@ -55,13 +55,12 @@ public class account extends javax.swing.JInternalFrame {
 
       
     }
-    
-    
-    
+
     Color navcolor = new Color(190,176,112);
     Color bodycolor = new Color(214,206,160);
     
-    public void displayCurrentUser() {
+   public void displayCurrentUser() {
+
     singleton sess = singleton.getInstance();
 
     if (sess == null) {
@@ -69,8 +68,10 @@ public class account extends javax.swing.JInternalFrame {
         return;
     }
 
-    // try-with-resources to automatically close the connection
-    try (Connection conn = config.connectDB()) {
+    config db = new config();
+
+    try (Connection conn = db.connectDB()) {
+
         String sql = "SELECT * FROM account WHERE a_id = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1, sess.getId());
@@ -78,54 +79,54 @@ public class account extends javax.swing.JInternalFrame {
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            String username = rs.getString("a_user");
-            String emailAdd = rs.getString("a_email");
-            String fname = rs.getString("a_fname");
-            String lname = rs.getString("a_lname");
-            String contactNo = rs.getString("a_contact");
-            String addr = rs.getString("a_address");
 
-            user.setText("<html><b>User</b><br><span style='font-weight:normal;'>"
-            + (sess.getUsername() != null ? sess.getUsername() : "")
-            + "</span></html>");
-                email.setText("<html><b>Email</b><br><span style='font-weight:normal;'>" 
-            + (sess.getEmail() != null ? sess.getEmail() : "")
-            + "</span></html>");
-
-            String fullName = 
-            (sess.getFname() != null ? sess.getFname() : "") + " " +
-            (sess.getLname() != null ? sess.getLname() : "");
-
-            fullname.setText("<html><b>Full Name</b><br><span style='font-weight:normal;'>"
-                + fullName.trim()
-                + "</span></html>");
-
-            contact.setText("<html><b>Contact</b><br><span style='font-weight:normal; font-size: 12px; font-family:Arial;'>"
-                    + (sess.getContact() != null ? sess.getContact().trim() : "")
-                    + "</span></html>");
-            address.setText("<html><b>Address</b><br><span style='font-weight:normal;'>"
-                    + (sess.getAddress() != null ? sess.getAddress() : "")
-                    + "</span></html>");
-
-            sess.setUsername(username);
-            sess.setEmail(emailAdd);
-            sess.setFname(fname);
-            sess.setLname(lname);
-            sess.setContact(contactNo);
-            sess.setAddress(addr);
+            sess.setUsername(rs.getString("a_user"));
+            sess.setEmail(rs.getString("a_email"));
+            sess.setFname(rs.getString("a_fname"));
+            sess.setLname(rs.getString("a_lname"));
+            sess.setContact(rs.getString("a_contact"));
+            sess.setAddress(rs.getString("a_address"));
 
             byte[] imgBytes = rs.getBytes("a_image");
 
             if (imgBytes != null && imgBytes.length > 0) {
                 ImageIcon imageIcon = new ImageIcon(imgBytes);
                 Image img = imageIcon.getImage();
-                Image scaledImg = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
-                
+                Image scaledImg = img.getScaledInstance(
+                        image.getWidth(),
+                        image.getHeight(),
+                        Image.SCALE_SMOOTH
+                );
                 image.setIcon(new ImageIcon(scaledImg));
             } else {
                 image.setIcon(null);
             }
         }
+
+        user.setText("<html><b>User</b><br><span style='font-weight:normal;'>"
+                + (sess.getUsername() != null ? sess.getUsername() : "")
+                + "</span></html>");
+
+        email.setText("<html><b>Email</b><br><span style='font-weight:normal;'>"
+                + (sess.getEmail() != null ? sess.getEmail() : "")
+                + "</span></html>");
+
+        String fullName =
+                (sess.getFname() != null ? sess.getFname() : "") + " " +
+                (sess.getLname() != null ? sess.getLname() : "");
+
+        fullname.setText("<html><b>Full Name</b><br><span style='font-weight:normal;'>"
+                + fullName.trim()
+                + "</span></html>");
+
+        contact.setText("<html><b>Contact</b><br><span style='font-weight:normal;'>"
+                + (sess.getContact() != null ? sess.getContact().trim() : "")
+                + "</span></html>");
+
+        address.setText("<html><b>Address</b><br><span style='font-weight:normal;'>"
+                + (sess.getAddress() != null ? sess.getAddress() : "")
+                + "</span></html>");
+
     } catch (SQLException e) {
         System.out.println("Error loading account: " + e.getMessage());
     }

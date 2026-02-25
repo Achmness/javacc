@@ -9,6 +9,7 @@ import internal.client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 /**
  *
@@ -22,7 +23,14 @@ public class updateAppointment extends javax.swing.JFrame {
     public int apId;
     public updateAppointment() {
         initComponents();
+        date();
     }
+    private void date(){
+        Date date = new Date();
+        ap_date.setDateFormatString("MMMM dd, yyyy");
+        ap_date.setDate(date);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,9 +52,9 @@ public class updateAppointment extends javax.swing.JFrame {
         ap_reasons = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         ap_time = new javax.swing.JTextField();
-        ap_date = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         ap_notes = new javax.swing.JTextField();
+        ap_date = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -62,7 +70,7 @@ public class updateAppointment extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
@@ -130,12 +138,12 @@ public class updateAppointment extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
         jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
-        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 126, 204, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("Notes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 222, 54, -1));
         jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
+        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 128, 202, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,11 +172,18 @@ public class updateAppointment extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String ar = ap_reasons.getText().trim();
-        String ad = ap_date.getText().trim();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String apDate = ""; 
+        if (ap_date.getDate() != null) {
+            apDate = sdf.format(ap_date.getDate());
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a date first!");
+            return; 
+        }
         String at = ap_time.getText().trim();
         String an = ap_notes.getText().trim();
 
-        if(ar.isEmpty() || ad.isEmpty() || at.isEmpty() || an.isEmpty()){
+        if(ar.isEmpty() || at.isEmpty() || an.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
@@ -178,7 +193,7 @@ public class updateAppointment extends javax.swing.JFrame {
             PreparedStatement pst = conn.prepareStatement(sql);
 
             pst.setString(1,ar);
-            pst.setString(2, ad);
+            pst.setString(2, apDate);
             pst.setString(3, at);
             pst.setString(4, an);
             pst.setInt(5, apId); 
@@ -237,7 +252,7 @@ public class updateAppointment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField ap_date;
+    public com.toedter.calendar.JDateChooser ap_date;
     public javax.swing.JTextField ap_notes;
     public javax.swing.JTextField ap_reasons;
     public javax.swing.JTextField ap_time;

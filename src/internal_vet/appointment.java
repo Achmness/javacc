@@ -62,8 +62,10 @@ public class appointment extends javax.swing.JInternalFrame {
         appointmentTable = new javax.swing.JTable();
         a_updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         a_approvepane = new javax.swing.JPanel();
         approve = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,6 +76,7 @@ public class appointment extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,7 +110,8 @@ public class appointment extends javax.swing.JInternalFrame {
         });
         a_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Update");
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel1MouseEntered(evt);
@@ -116,9 +120,12 @@ public class appointment extends javax.swing.JInternalFrame {
                 jLabel1MouseExited(evt);
             }
         });
-        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, -1));
+        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 8, -1, 16));
 
-        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 60, 72, 30));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        a_updatepane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
+
+        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 58, 94, 30));
 
         a_approvepane.setBackground(new java.awt.Color(190, 176, 112));
         a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -132,7 +139,8 @@ public class appointment extends javax.swing.JInternalFrame {
         });
         a_approvepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        approve.setText("Approve");
+        approve.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        approve.setText("APPROVE");
         approve.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 approveMouseClicked(evt);
@@ -144,9 +152,12 @@ public class appointment extends javax.swing.JInternalFrame {
                 approveMouseExited(evt);
             }
         });
-        a_approvepane.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 50, 20));
+        a_approvepane.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 6, 66, 20));
 
-        jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 62, 30));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/approve.png"))); // NOI18N
+        a_approvepane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
+
+        jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 102, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -198,7 +209,7 @@ public class appointment extends javax.swing.JInternalFrame {
                 searchKeyTyped(evt);
             }
         });
-        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -262,6 +273,9 @@ public class appointment extends javax.swing.JInternalFrame {
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, 30));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 58, -1, 32));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -416,6 +430,9 @@ if(success){
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

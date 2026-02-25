@@ -62,15 +62,19 @@ public class appointment extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
         a_updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         a_addpane = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         a_cancelpane = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -81,6 +85,9 @@ public class appointment extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+
+        jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -116,7 +123,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Update");
+        jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -128,9 +135,12 @@ public class appointment extends javax.swing.JInternalFrame {
                 jLabel1MouseExited(evt);
             }
         });
-        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 8, -1, -1));
+        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 6, 60, 18));
 
-        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 58, 72, 30));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        a_updatepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
+
+        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 60, 90, 30));
 
         a_addpane.setBackground(new java.awt.Color(190, 176, 112));
         a_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -146,7 +156,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         delete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        delete.setText("Add");
+        delete.setText("ADD");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteMouseClicked(evt);
@@ -158,9 +168,12 @@ public class appointment extends javax.swing.JInternalFrame {
                 deleteMouseExited(evt);
             }
         });
-        a_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, 32, 20));
+        a_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 4, 32, 26));
 
-        jPanel1.add(a_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 72, 30));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        a_addpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
+
+        jPanel1.add(a_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 92, 30));
 
         a_cancelpane.setBackground(new java.awt.Color(190, 176, 112));
         a_cancelpane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -179,7 +192,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Cancel");
+        jLabel6.setText("CANCEL");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -191,9 +204,12 @@ public class appointment extends javax.swing.JInternalFrame {
                 jLabel6MouseExited(evt);
             }
         });
-        a_cancelpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, 48, -1));
+        a_cancelpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, -1));
 
-        jPanel1.add(a_cancelpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 58, 72, 30));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
+        a_cancelpane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 2, -1, 26));
+
+        jPanel1.add(a_cancelpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 60, 90, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -245,7 +261,7 @@ public class appointment extends javax.swing.JInternalFrame {
                 searchKeyTyped(evt);
             }
         });
-        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -309,6 +325,9 @@ public class appointment extends javax.swing.JInternalFrame {
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, 30));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(548, 62, 28, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -415,7 +434,12 @@ updateAppointment updateForm = new updateAppointment();
 
 updateForm.apId = apId;         
 updateForm.ap_reasons.setText(apReasons);     
-updateForm.ap_date.setText(apDate);     
+try {
+    java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(apDate);
+    updateForm.ap_date.setDate(date); 
+} catch (java.text.ParseException e) {
+    System.err.println("Date parsing failed: " + e.getMessage());
+}    
 updateForm.ap_time.setText(apTime);
 updateForm.ap_notes.setText(apNotes); 
 
@@ -498,11 +522,16 @@ if(success){
     private javax.swing.JTable appointmentTable;
     private javax.swing.JLabel delete;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

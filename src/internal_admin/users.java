@@ -73,10 +73,13 @@ public class users extends javax.swing.JInternalFrame {
         userTable = new javax.swing.JTable();
         updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         deletepane = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        addpane = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -87,6 +90,7 @@ public class users extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -125,9 +129,12 @@ public class users extends javax.swing.JInternalFrame {
                 jLabel1MouseExited(evt);
             }
         });
-        updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 2, 60, 28));
+        updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 4, 60, 28));
 
-        jPanel1.add(updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 58, 74, 30));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        updatepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 6, -1, -1));
+
+        jPanel1.add(updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 58, 96, 30));
 
         deletepane.setBackground(new java.awt.Color(190, 176, 112));
         deletepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -146,13 +153,27 @@ public class users extends javax.swing.JInternalFrame {
                 deleteMouseExited(evt);
             }
         });
-        deletepane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 64, 24));
+        deletepane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 6, 64, 24));
 
-        jPanel1.add(deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 72, 30));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        deletepane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 6, 24, -1));
 
-        jPanel5.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 58, 96, -1));
+
+        addpane.setBackground(new java.awt.Color(190, 176, 112));
+        addpane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        addpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addpaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addpaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addpaneMouseExited(evt);
+            }
+        });
+        addpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel6.setText("ADD");
@@ -160,10 +181,19 @@ public class users extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
         });
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 10, 40, -1));
+        addpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 6, 42, 22));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 58, 76, 30));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        addpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
+
+        jPanel1.add(addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 94, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -215,7 +245,7 @@ public class users extends javax.swing.JInternalFrame {
                 searchKeyTyped(evt);
             }
         });
-        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 60, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -279,6 +309,9 @@ public class users extends javax.swing.JInternalFrame {
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, 30));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(548, 64, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,6 +395,7 @@ TableModel model = userTable.getModel();
 int id = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 
 
+
 updateUser update = new updateUser(id);
 update.setVisible(true);
 
@@ -393,6 +427,29 @@ mainFrame.dispose();
         JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         mainFrame.dispose();      
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void addpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpaneMouseClicked
+        addUsers add = new addUsers();
+        add.setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();          
+    }//GEN-LAST:event_addpaneMouseClicked
+
+    private void addpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpaneMouseEntered
+        addpane.setBackground(bodycolor);
+    }//GEN-LAST:event_addpaneMouseEntered
+
+    private void addpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpaneMouseExited
+        addpane.setBackground(navcolor);      
+    }//GEN-LAST:event_addpaneMouseExited
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        addpane.setBackground(bodycolor);     
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        addpane.setBackground(navcolor);        
+    }//GEN-LAST:event_jLabel6MouseExited
 
     /**
      * @param args the command line arguments
@@ -493,17 +550,21 @@ mainFrame.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel addpane;
     private javax.swing.JLabel delete;
     private javax.swing.JPanel deletepane;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;

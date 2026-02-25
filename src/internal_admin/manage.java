@@ -47,21 +47,20 @@ public class manage extends javax.swing.JFrame {
     public manage() {
         initComponents();
         singleton sess = singleton.getInstance();
-        if (sess != null) {
-            this.accId = sess.getId();  
-            loadUserData(this.accId);   
-        } else {
-            JOptionPane.showMessageDialog(this, "No user session found!");
+        if (sess == null) {
+               System.out.println("");
         }
+        loadUserData();
     }
     
-    private void loadUserData(int userId) {
+    private void loadUserData() {
         try {
             Connection conn = config.connectDB();
             PreparedStatement pst = conn.prepareStatement(
                     "SELECT * FROM account WHERE a_id = ?"
             );
-            pst.setInt(1, userId);
+            singleton sess = singleton.getInstance();
+            pst.setInt(1, sess.getId());
 
             ResultSet rs = pst.executeQuery();
 
@@ -85,7 +84,7 @@ public class manage extends javax.swing.JFrame {
                     image.setIcon(null);
                 }
             } else {
-                System.out.println("No user found with this ID: " + userId);
+                System.out.println("No user found with this ID: " + sess.getId());
             }
 
             rs.close();
@@ -332,8 +331,10 @@ public class manage extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         image.setText("Upload");
+        image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         image.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imageMouseClicked(evt);

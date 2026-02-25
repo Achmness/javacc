@@ -64,10 +64,13 @@ public class pet extends javax.swing.JInternalFrame {
         petTable = new javax.swing.JTable();
         p_updatepane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         p_addpane = new javax.swing.JPanel();
         delete = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         p_deletepane = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -78,6 +81,7 @@ public class pet extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,7 +117,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Update");
+        jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -125,9 +129,12 @@ public class pet extends javax.swing.JInternalFrame {
                 jLabel1MouseExited(evt);
             }
         });
-        p_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, -1, 22));
+        p_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 6, -1, 22));
 
-        jPanel1.add(p_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 58, 72, 30));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        p_updatepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
+
+        jPanel1.add(p_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 58, 88, 30));
 
         p_addpane.setBackground(new java.awt.Color(190, 176, 112));
         p_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -143,7 +150,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         delete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        delete.setText("Add");
+        delete.setText("ADD");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteMouseClicked(evt);
@@ -155,9 +162,12 @@ public class pet extends javax.swing.JInternalFrame {
                 deleteMouseExited(evt);
             }
         });
-        p_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, 48, 24));
+        p_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 4, 42, 24));
 
-        jPanel1.add(p_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 72, 30));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        p_addpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+
+        jPanel1.add(p_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 88, 30));
 
         p_deletepane.setBackground(new java.awt.Color(190, 176, 112));
         p_deletepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -173,7 +183,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Delete");
+        jLabel6.setText("DELETE");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -185,9 +195,12 @@ public class pet extends javax.swing.JInternalFrame {
                 jLabel6MouseExited(evt);
             }
         });
-        p_deletepane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 2, -1, 26));
+        p_deletepane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 2, -1, 28));
 
-        jPanel1.add(p_deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 58, 72, 30));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        p_deletepane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 4, -1, -1));
+
+        jPanel1.add(p_deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 58, 88, -1));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -239,7 +252,7 @@ public class pet extends javax.swing.JInternalFrame {
                 searchKeyTyped(evt);
             }
         });
-        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 58, 170, 30));
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 58, 170, 30));
 
         jPanel7.setBackground(new java.awt.Color(214, 206, 160));
 
@@ -303,6 +316,9 @@ public class pet extends javax.swing.JInternalFrame {
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, 30));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(548, 62, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -407,7 +423,12 @@ updateForm.petId = petId;
 updateForm.p_name.setText(pName);     
 updateForm.p_species.setText(pScpecies);     
 updateForm.p_breed.setText(pBreed);
-updateForm.p_dateBirth.setText(pDateBirth); 
+try {
+    java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(pDateBirth);
+    updateForm.p_dateBirth.setDate(date); 
+} catch (java.text.ParseException e) {
+    System.err.println("Date parsing failed: " + e.getMessage());
+}  
 
 updateForm.setVisible(true);
 
@@ -495,11 +516,15 @@ mainFrame.dispose();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel delete;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

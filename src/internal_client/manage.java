@@ -8,10 +8,31 @@ package internal_client;
 import config.config;
 import config.session;
 import config.singleton;
-import internal.admin;
 import internal.client;
-import internal_admin.users;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import static java.lang.Class.forName;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -20,27 +41,139 @@ import javax.swing.JOptionPane;
 public class manage extends javax.swing.JFrame {
 
     /**
-     * Creates new form setUp
+     * Creates new form manage
      */
     public manage() {
         initComponents();
-        loadCurrentData();
+        loadUserData();
     }
     
-    public void loadCurrentData() {
+    private void loadUserData() {
+        try {
+            Connection conn = config.connectDB();
+            PreparedStatement pst = conn.prepareStatement(
+                    "SELECT * FROM account WHERE a_id = ?"
+            );
+            singleton sess = singleton.getInstance();
+            pst.setInt(1, sess.getId());
 
-    singleton sess = singleton.getInstance();
+            ResultSet rs = pst.executeQuery();
 
-    if (sess == null) {
-        return;
+            if (rs.next()) {
+                
+                fname.setText(rs.getString("a_fname"));
+                lname.setText(rs.getString("a_lname"));
+                email.setText(rs.getString("a_email"));
+                user.setText(rs.getString("a_user"));
+                contact.setText(rs.getString("a_contact"));
+                address.setText(rs.getString("a_address"));
+
+                byte[] imgBytes = rs.getBytes("a_image");
+                if (imgBytes != null && image != null) {
+                    ImageIcon limage = new ImageIcon(imgBytes);
+                    Image scaledImage = limage.getImage().getScaledInstance(
+                            image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH
+                    );
+                    image.setIcon(new ImageIcon(scaledImage));
+                } else if (image != null) {
+                    image.setIcon(null);
+                }
+            } else {
+                System.out.println("No user found with this ID: " + sess.getId());
+            }
+
+            rs.close();
+            pst.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    fname.setText(sess.getFname() != null ? sess.getFname() : "");
-    lname.setText(sess.getLname() != null ? sess.getLname() : "");
-    contact.setText(sess.getContact() != null ? sess.getContact() : "");
-    address.setText(sess.getAddress() != null ? sess.getAddress() : "");
+
+    
+    public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    public String path2 = null;
+    
+    public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
+    
+        public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+    
+    
+    public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+        ImageIcon MyImage = null;
+            if(ImagePath !=null){
+                MyImage = new ImageIcon(ImagePath);
+            }else{
+                MyImage = new ImageIcon(pic);
+            }
+
+        int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
     }
 
+    public int FileExistenceChecker(String path){
+            File file = new File(path);
+            String fileName = file.getName();
+
+            Path filePath = Paths.get("src/images", fileName);
+            boolean fileExists = Files.exists(filePath);
+
+            if (fileExists) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,14 +195,23 @@ public class manage extends javax.swing.JFrame {
         lname = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        address = new javax.swing.JTextField();
         contact = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        email = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        address = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -86,6 +228,7 @@ public class manage extends javax.swing.JFrame {
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
@@ -101,26 +244,26 @@ public class manage extends javax.swing.JFrame {
         });
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 0, 16, 42));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 40));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("First Name");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 48, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 54, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel4.setText("Last Name ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 118, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel5.setText("Contact Number");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 168, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 308, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel6.setText("Address");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 46, -1, -1));
 
         lname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 134, 192, 28));
+        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 142, 192, 28));
 
         fname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         fname.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +271,7 @@ public class manage extends javax.swing.JFrame {
                 fnameActionPerformed(evt);
             }
         });
-        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 72, 192, 28));
+        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 78, 192, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -136,14 +279,10 @@ public class manage extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 274, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 368, -1, -1));
 
-        address.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 194, 192, 28));
-
-        contact.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         contact.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 72, 238, 86));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 334, 192, 28));
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -151,17 +290,63 @@ public class manage extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 276, 70, 22));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 374, 70, 22));
+
+        email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 202, 192, 26));
+
+        user.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 268, 194, 26));
+
+        jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel7.setText("User");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 242, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel8.setText("Email");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 178, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel9.setText("Profile");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 176, -1, -1));
+
+        address.setColumns(20);
+        address.setRows(5);
+        jScrollPane2.setViewportView(address);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 76, 208, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        image.setText("upload");
+        image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        image.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageMouseClicked(evt);
+            }
+        });
+        jPanel2.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 14, 174, 122));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 202, 210, 154));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -179,48 +364,98 @@ public class manage extends javax.swing.JFrame {
     }//GEN-LAST:event_fnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        String us = email.getText().trim();
+        String em = user.getText().trim();
         String fn = fname.getText().trim();
         String ln = lname.getText().trim();
         String cont = contact.getText().trim();
         String addr = address.getText().trim();
 
-        if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty()){
+        if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty() || em.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
 
-        singleton sess = singleton.getInstance();
-        int accId = sess.getId();
+        try {
 
-        config db = new config();
+            Connection conn = config.connectDB();
+            singleton sess = singleton.getInstance();
+            PreparedStatement pst;
 
-        String updateSql = "UPDATE account SET a_fname = ?, a_lname = ?, a_contact = ?, a_address = ? WHERE a_id = ?";
-        boolean success = db.updateRecords(updateSql, fn, ln, cont, addr, accId);
+            if (path != null && !path.isEmpty()) {
+                File imageFile = new File(path);
+                InputStream is = new FileInputStream(imageFile);
 
-        if(success){
-            sess.setFname(fn);
-            sess.setLname(ln);
-            sess.setContact(cont);
-            sess.setAddress(addr);
+                String sql = "UPDATE account SET a_email=?, a_user=?, a_fname=?, a_lname=?, a_contact=?, a_address=?, a_image=? WHERE a_id=?";
+                pst = conn.prepareStatement(sql);
 
-            JOptionPane.showMessageDialog(this, "Account details updated successfully!");
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
+                pst.setString(5, cont);
+                pst.setString(6, addr);
+                pst.setBinaryStream(7, is, (int) imageFile.length());
+                pst.setInt(8, sess.getId());
+            } else {
+                String sql = "UPDATE account SET a_email=?, a_user=?, a_fname=?, a_lname=?, a_contact=?, a_address=? WHERE a_id=?";
+                pst = conn.prepareStatement(sql);
 
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
+                pst.setString(5, cont);
+                pst.setString(6, addr);
+                pst.setInt(7, sess.getId());
+            }
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "User details updated successfully!");
             this.dispose();
 
             client client = new client();
             client.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Failed to update account. Please try again.");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-
         client client = new client();
         client.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/images/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1){
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_imageMouseClicked
 
     /**
      * @param args the command line arguments
@@ -248,7 +483,6 @@ public class manage extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(manage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -259,9 +493,11 @@ public class manage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField address;
+    private javax.swing.JTextArea address;
     private javax.swing.JTextField contact;
+    public javax.swing.JTextField email;
     private javax.swing.JTextField fname;
+    private javax.swing.JLabel image;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -270,9 +506,15 @@ public class manage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField lname;
+    public javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

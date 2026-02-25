@@ -7,6 +7,7 @@ package internal_client;
 
 import config.config;
 import internal.client;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,13 @@ public class addPet extends javax.swing.JFrame {
      */
     public addPet() {
         initComponents();
+        date();
+    }
+    
+    private void date(){
+    Date date = new Date();
+    p_dateBirth.setDateFormatString("MMMM dd, yyyy");
+    p_dateBirth.setDate(date);
     }
 
     /**
@@ -43,8 +51,8 @@ public class addPet extends javax.swing.JFrame {
         p_species = new javax.swing.JTextField();
         p_name = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        p_dateBirth = new javax.swing.JTextField();
         p_breed = new javax.swing.JTextField();
+        p_dateBirth = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -132,8 +140,8 @@ public class addPet extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
-        jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 250, 192, 28));
         jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
+        jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 250, 190, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,9 +172,16 @@ public class addPet extends javax.swing.JFrame {
         String pName = p_name.getText().trim();
         String pSpecies = p_species.getText().trim();
         String pBreed = p_breed.getText().trim();
-        String pDateBirth = p_dateBirth.getText().trim();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String pDateBirth = ""; 
+        if (p_dateBirth.getDate() != null) {
+            pDateBirth = sdf.format(p_dateBirth.getDate());
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a date first!");
+            return; 
+        }
             
-            if(pName.isEmpty() || pSpecies.isEmpty() || pBreed.isEmpty() || pDateBirth.isEmpty()){
+            if(pName.isEmpty() || pSpecies.isEmpty() || pBreed.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please fill in all fields");
                 return;
             }
@@ -228,7 +243,7 @@ public class addPet extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel name;
     private javax.swing.JTextField p_breed;
-    private javax.swing.JTextField p_dateBirth;
+    public com.toedter.calendar.JDateChooser p_dateBirth;
     private javax.swing.JTextField p_name;
     private javax.swing.JTextField p_species;
     private javax.swing.JLabel species;
