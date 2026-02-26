@@ -9,6 +9,7 @@ import config.config;
 import config.session;
 import config.singleton;
 import internal.client;
+import internal.vet;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -378,7 +379,7 @@ public class manage extends javax.swing.JFrame {
         try {
 
             Connection conn = config.connectDB();
-            singleton sess = singleton.getInstance();
+            session sess = session.getInstance();
             PreparedStatement pst;
 
             if (path != null && !path.isEmpty()) {
@@ -487,7 +488,14 @@ public class manage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manage().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                    new gui.signin().setVisible(true);
+                } else {
+
+                    internal_vet.account vet = new internal_vet.account();
+                    new vet().setVisible(true);
+                }
             }
         });
     }

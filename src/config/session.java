@@ -1,32 +1,25 @@
-// Session.java
 package config;
 
 public class session {
 
     private static session instance;
 
-    // Account basic info
-    private int accId;
-   
-    private String email;
-    private String type;
-    private String status;
-
-    // Full account details
-    private String image;
+    // Account details - matching your singleton structure
+    private int id;
     private String fname;
     private String lname;
+    private String email;
+    private String username;
+    private String status;
+    private String type;
     private String contact;
     private String address;
-    private String username;
-    
+    private String image;
     private int apId;
 
+    // Private constructor (Strict Singleton)
+    private session() {}
 
-    // Private constructor (Singleton)
-    public session() {}
-
-    // Get instance (thread safe like your prof)
     public static synchronized session getInstance() {
         if (instance == null) {
             instance = new session();
@@ -34,94 +27,58 @@ public class session {
         return instance;
     }
 
-    // Check if session exists
     public static boolean isInstanceEmpty() {
         return instance == null;
     }
 
-    // ======================
-    // SETTERS
-    // ======================
-
-    public void setAccId(int accId) {
-        this.accId = accId;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    public void setImage(String Image) {
-        this.image = image;
-    }
-
-    // Optional: Set everything at once
-    public void setFullDetails(int accId, String username, String email, String type,
-                               String status, String fname, String lname,
-                               String contact, String address) {
-
-        this.accId = accId;
+    // Fixed Setters to ensure no data overwriting
+    public void setFullDetails(int id, String username, String email, String status,
+                               String fname, String lname, String contact, String address) {
+        this.id = id;
         this.username = username;
         this.email = email;
-        this.type = type;
         this.status = status;
         this.fname = fname;
         this.lname = lname;
         this.contact = contact;
         this.address = address;
     }
-    
-    public void setApId(int apId) {
-    this.apId = apId;
-    }
 
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    // ======================
-    // GETTERS
-    // ======================
-
-    public int getAccId() { return accId; }
-    public String getEmail() { return email; }
-    public String getType() { return type; }
-    public String getStatus() { return status; }
     public String getFname() { return fname; }
+    public void setFname(String fname) { this.fname = fname; }
+
     public String getLname() { return lname; }
-    public String getContact() { return contact; }
-    public String getAddress() { return address; }
+    public void setLname(String lname) { this.lname = lname; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
     public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getContact() { return contact; }
+    public void setContact(String contact) { this.contact = contact; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    
     public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
+    
     public int getApId() { return apId; }
+    public void setApId(int apId) { this.apId = apId; }
 
-
-    // Clear session (logout)
+    // Clear session for logout
     public void clear() {
         instance = null;
     }

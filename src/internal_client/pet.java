@@ -6,6 +6,8 @@
 package internal_client;
 
 import config.config;
+import config.session;
+import internal.client;
 import internal_admin.updateUser;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -508,7 +510,14 @@ mainFrame.dispose();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new pet().setVisible(true);
+                                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+                } else {
+
+                    internal_client.account client = new internal_client.account();
+                    new client().setVisible(true);
+                }
             }
         });
     }

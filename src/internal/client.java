@@ -5,7 +5,9 @@
  */
 package internal;
 
+import config.session;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -378,7 +380,14 @@ public class client extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new client().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+                } else {
+
+                    internal_client.account client = new internal_client.account();
+                    new client().setVisible(true);
+                }
             }
         });
     }

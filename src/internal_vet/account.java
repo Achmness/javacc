@@ -9,6 +9,7 @@ import config.config;
 import config.session;
 import config.singleton;
 import gui.signin;
+import internal.vet;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -141,7 +142,7 @@ public class account extends javax.swing.JInternalFrame {
     
     public void displayCurrentUser() {
 
-    singleton sess = singleton.getInstance();
+    session sess = session.getInstance();
 
     if (sess == null) {
         System.out.println("No user logged in.");
@@ -541,7 +542,14 @@ public class account extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new account().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                    new gui.signin().setVisible(true);
+                } else {
+
+                    internal_vet.account vet = new internal_vet.account();
+                    new vet().setVisible(true);
+                }
             }
         });
     }

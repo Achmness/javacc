@@ -6,8 +6,10 @@
 package internal_client;
 
 import config.config;
+import config.session;
 import config.singleton;
 import gui.signin;
+import internal.client;
 import java.awt.Color;
 import java.awt.Image;
 import java.sql.Connection;
@@ -19,6 +21,7 @@ import java.util.logging.Logger;
 import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -46,7 +49,7 @@ public class account extends javax.swing.JInternalFrame {
     }
     
     private void displayCurrentUser(){
-        singleton sess = singleton.getInstance();
+        session sess = session.getInstance();
         
         if(sess == null){
             System.out.println("No session");
@@ -463,7 +466,14 @@ public class account extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new account().setVisible(true);
+                                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+                } else {
+
+                    internal_client.account client = new internal_client.account();
+                    new client().setVisible(true);
+                }
             }
         });
     }

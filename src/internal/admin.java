@@ -9,7 +9,10 @@ import internal_admin.users;
 
 import internal_admin.*;
 import config.config;
+import config.session;
+import gui.signin;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 /**
  *
  * @author James
@@ -23,10 +26,12 @@ public class admin extends javax.swing.JFrame {
     private users userFrame;
 
     public admin(users userFrame) {
-        initComponents();
-        this.userFrame = userFrame;
-        internal_admin.account profile = new internal_admin.account();
-        maindesktop.add(profile).setVisible(true);
+
+    initComponents();
+    this.userFrame = userFrame;
+
+    internal_admin.account profile = new internal_admin.account();
+    maindesktop.add(profile).setVisible(true);
 
     } 
     Color navcolor = new Color(190,176,112);
@@ -344,8 +349,14 @@ public class admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                users u = new users();
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
                 new admin(u).setVisible(true);
+            }
             }
         });
     }

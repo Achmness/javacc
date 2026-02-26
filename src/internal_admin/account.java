@@ -61,7 +61,7 @@ public class account extends javax.swing.JInternalFrame {
     
    public void displayCurrentUser() {
 
-    singleton sess = singleton.getInstance();
+    session sess = session.getInstance();
 
     if (sess == null) {
         System.out.println("No session found.");
@@ -506,7 +506,14 @@ public class account extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new account().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }

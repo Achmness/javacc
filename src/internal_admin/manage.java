@@ -385,7 +385,7 @@ public class manage extends javax.swing.JFrame {
         try {
 
         Connection conn = config.connectDB();
-        singleton sess = singleton.getInstance();
+        session sess = session.getInstance();
         PreparedStatement pst;
 
             if (path != null && !path.isEmpty()) {
@@ -503,7 +503,14 @@ public class manage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manage().setVisible(true);
+               if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }

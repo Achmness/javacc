@@ -6,6 +6,7 @@
 package internal_admin;
 
 import config.config;
+import config.session;
 import config.singleton;
 import internal.admin;
 import java.awt.Image;
@@ -271,15 +272,15 @@ public class updateUser extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("User");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 216, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 44, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel4.setText("First Name");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 44, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 156, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel5.setText("Last Name");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 212, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel6.setText("Contact Number");
@@ -290,14 +291,14 @@ public class updateUser extends javax.swing.JFrame {
                 fnameActionPerformed(evt);
             }
         });
-        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 68, 208, 28));
+        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 180, 208, 28));
 
         user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userActionPerformed(evt);
             }
         });
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 240, 208, 28));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 68, 208, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -307,7 +308,7 @@ public class updateUser extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 400, -1, -1));
         jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 304, 208, 28));
-        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 124, 208, 28));
+        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 236, 208, 28));
 
         jButton2.setText("Cancel");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -362,11 +363,11 @@ public class updateUser extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 180, 208, 28));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 124, 208, 28));
 
         jLabel8.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel8.setText("Email");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 154, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 98, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel9.setText("Profile");
@@ -430,7 +431,7 @@ public class updateUser extends javax.swing.JFrame {
         }
 
         try (Connection conn = config.connectDB()) {
-            singleton sess = singleton.getInstance();
+            session sess = session.getInstance();
 
             PreparedStatement pst;
             
@@ -438,13 +439,13 @@ public class updateUser extends javax.swing.JFrame {
                 File imageFile = new File(path);
                 InputStream is = new FileInputStream(imageFile); 
                 
-                String sql = "UPDATE account SET a_email=?, a_user=?, a_fname=?, a_lname=?, a_contact=?, a_type=?, a_image=?, a_address=?, a_status=? WHERE a_id=?";
+                String sql = "UPDATE account SET a_user=?, a_email=?, a_fname=?, a_lname=?, a_contact=?, a_type=?, a_image=?, a_address=?, a_status=? WHERE a_id=?";
                 pst = conn.prepareStatement(sql);
                 
-                pst.setString(1, fn);
-                pst.setString(2, ln);
-                pst.setString(3, em);
-                pst.setString(4, us);
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
                 pst.setString(5, cont);
                 pst.setString(6,ut);
                 pst.setBinaryStream(7, is, (int) imageFile.length());
@@ -452,12 +453,12 @@ public class updateUser extends javax.swing.JFrame {
                 pst.setString(9, st);  
                 pst.setInt(10, userId);
             }else{
-                String sql = "UPDATE account SET a_email=?, a_user=?, a_fname=?, a_lname=?, a_contact=?, a_type=?, a_address=?, a_status=? WHERE a_id=?";
+                String sql = "UPDATE account SET a_user=?, a_email=?, a_fname=?, a_lname=?, a_contact=?, a_type=?, a_address=?, a_status=? WHERE a_id=?";
                 pst = conn.prepareStatement(sql);
-                pst.setString(1, fn);
-                pst.setString(2, ln);
-                pst.setString(3, em);
-                pst.setString(4, us);
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
                 pst.setString(5, cont);
                 pst.setString(6,ut);
                 pst.setString(7, addr);
@@ -561,8 +562,18 @@ public class updateUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                int id = 0;
+                
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                                int id = 0;
                 new updateUser(id).setVisible(true);
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
+                
             }
         });
     }

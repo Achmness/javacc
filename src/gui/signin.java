@@ -283,7 +283,7 @@ public class signin extends javax.swing.JFrame {
     // ==========================
     // Populate Singleton (prof-style)
     // ==========================
-     singleton sess = singleton.getInstance();
+     session sess = session.getInstance();
     sess.setFullDetails(
         accId,
         result.get(0).get("a_user") != null ? result.get(0).get("a_user").toString() : "",

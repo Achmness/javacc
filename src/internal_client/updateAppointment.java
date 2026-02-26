@@ -5,6 +5,7 @@
  */
 package internal_client;
 import config.config;
+import config.session;
 import internal.client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -246,7 +247,14 @@ public class updateAppointment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateAppointment().setVisible(true);
+                                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+                } else {
+
+                    internal_client.account client = new internal_client.account();
+                    new client().setVisible(true);
+                }
             }
         });
     }
