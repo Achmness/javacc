@@ -113,8 +113,11 @@ public class appointment extends javax.swing.JInternalFrame {
         a_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
-        jLabel1.setText("UPDATE");
+        jLabel1.setText("COMPLETE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel1MouseEntered(evt);
             }
@@ -122,12 +125,12 @@ public class appointment extends javax.swing.JInternalFrame {
                 jLabel1MouseExited(evt);
             }
         });
-        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 8, -1, 16));
+        a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, 16));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/complete.png"))); // NOI18N
         a_updatepane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
-        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 58, 94, 30));
+        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 58, 112, 30));
 
         a_approvepane.setBackground(new java.awt.Color(190, 176, 112));
         a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -318,7 +321,11 @@ if(currentStatus.equalsIgnoreCase("Approved")){
             "Appointment is already approved!");
     return;
 }
-
+if(currentStatus.equalsIgnoreCase("Completed")){
+    JOptionPane.showMessageDialog(null, 
+            "Appointment is already completed!");
+    return;
+}
 String status = "Approved";
 
 config db = new config();
@@ -386,6 +393,56 @@ if(success){
     private void searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyTyped
         searchTable();        
     }//GEN-LAST:event_searchKeyTyped
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        int rowIndex = appointmentTable.getSelectedRow();
+
+if(rowIndex < 0){
+    JOptionPane.showMessageDialog(null, "Please Select an Appointment!");
+    return;
+}
+
+TableModel model = appointmentTable.getModel();
+int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+
+// Get current status from table (assuming ap_status is column 5)
+String currentStatus = model.getValueAt(rowIndex, 5).toString();
+
+if(currentStatus.equalsIgnoreCase("Cancelled")){
+    JOptionPane.showMessageDialog(null, 
+            "Cancelled appointment cannot be approved!");
+    return;
+}
+
+if(currentStatus.equalsIgnoreCase("Completed")){
+    JOptionPane.showMessageDialog(null, 
+            "Appointment is already completed!");
+    return;
+}
+
+String status = "Completed";
+
+config db = new config();
+
+boolean success = db.updateRecords(
+        "UPDATE appointment SET ap_status=? WHERE ap_id=?",
+        status,
+        apId
+);
+
+if(success){
+    JOptionPane.showMessageDialog(null, "Appointment Completed Successfully!");
+
+    // Refresh table
+    db.displayData(
+        "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment",
+        appointmentTable
+    );
+
+}else{
+    JOptionPane.showMessageDialog(null, "Completed Failed!");
+}
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments

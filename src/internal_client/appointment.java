@@ -9,6 +9,9 @@ import config.config;
 import config.session;
 import internal.client;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -39,11 +42,17 @@ public class appointment extends javax.swing.JInternalFrame {
     
     
     
-    public void displayAppointment() {
-        config db = new config();
-        String sql = "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment";
-        db.displayData(sql, appointmentTable);
-    }
+public void displayAppointment() {
+    config db = new config();
+    session sess = session.getInstance();
+
+    String sql = "SELECT a.ap_id, a.ap_petId, p.p_name, a.ap_reasons, a.ap_date, a.ap_time, a.ap_notes, a.ap_status " +
+                 "FROM appointment a " +
+                 "INNER JOIN pet p ON a.ap_petId = p.p_id " +
+                 "WHERE a.ap_clientId = " + sess.getId();
+    
+    db.displayData(sql, appointmentTable);
+}
     
     public void searchTable(){
        DefaultTableModel model =  (DefaultTableModel)appointmentTable.getModel();
@@ -346,10 +355,37 @@ public class appointment extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        addAppointment add = new addAppointment();
-        add.setVisible(true);
-        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        mainFrame.dispose();
+        config db = new config();
+session sess = session.getInstance();
+
+try (Connection conn = db.connectDB()) {
+
+    String sql = "SELECT COUNT(*) FROM pet WHERE owner_id = ?";
+    PreparedStatement pst = conn.prepareStatement(sql);
+    pst.setInt(1, sess.getId());
+    ResultSet rs = pst.executeQuery();
+
+    if (rs.next()) {
+        int petCount = rs.getInt(1);
+
+        if (petCount == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "You must register a pet first before adding an appointment.",
+                    "No Pet Found",
+                    JOptionPane.WARNING_MESSAGE);
+            return; // STOP here
+        }
+    }
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+addAppointment add = new addAppointment();
+add.setVisible(true);
+
+JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+mainFrame.dispose();
     }//GEN-LAST:event_deleteMouseClicked
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed

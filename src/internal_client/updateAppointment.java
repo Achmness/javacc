@@ -32,6 +32,7 @@ public class updateAppointment extends javax.swing.JFrame {
         ap_date.setDate(date);
     }
     
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +57,8 @@ public class updateAppointment extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ap_notes = new javax.swing.JTextField();
         ap_date = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        ap_pet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -146,6 +149,10 @@ public class updateAppointment extends javax.swing.JFrame {
         jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
         jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 128, 202, 28));
 
+        jLabel4.setText("pet");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 58, -1, -1));
+        jPanel1.add(ap_pet, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 48, 200, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,6 +179,15 @@ public class updateAppointment extends javax.swing.JFrame {
     }//GEN-LAST:event_ap_reasonsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ap_pet.setEditable(false); 
+        ap_pet.setFocusable(false);
+        int pid;
+try {
+    pid = Integer.parseInt(ap_pet.getText().trim());
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Invalid Pet ID. It must be a number.");
+    return; // stop further execution
+}
         String ar = ap_reasons.getText().trim();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String apDate = ""; 
@@ -190,14 +206,15 @@ public class updateAppointment extends javax.swing.JFrame {
         }
 
         try (Connection conn = config.connectDB()) {
-            String sql = "UPDATE appointment SET ap_reasons=?, ap_date=?, ap_time=?, ap_notes=? WHERE ap_id=?";
+            String sql = "UPDATE appointment SET ap_petId=?, ap_reasons=?, ap_date=?, ap_time=?, ap_notes=? WHERE ap_id=?";
             PreparedStatement pst = conn.prepareStatement(sql);
-
-            pst.setString(1,ar);
-            pst.setString(2, apDate);
-            pst.setString(3, at);
-            pst.setString(4, an);
-            pst.setInt(5, apId); 
+            
+            pst.setInt(1,pid);
+            pst.setString(2,ar);
+            pst.setString(3, apDate);
+            pst.setString(4, at);
+            pst.setString(5, an);
+            pst.setInt(6, apId); 
 
             int updated = pst.executeUpdate();
 
@@ -262,6 +279,7 @@ public class updateAppointment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.toedter.calendar.JDateChooser ap_date;
     public javax.swing.JTextField ap_notes;
+    private javax.swing.JTextField ap_pet;
     public javax.swing.JTextField ap_reasons;
     public javax.swing.JTextField ap_time;
     private javax.swing.JLabel breed;
@@ -270,6 +288,7 @@ public class updateAppointment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

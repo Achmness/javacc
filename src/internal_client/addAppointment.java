@@ -56,6 +56,8 @@ public class addAppointment extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ap_notes = new javax.swing.JTextField();
         ap_date = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        ap_pet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -137,7 +139,7 @@ public class addAppointment extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 334, 70, 40));
         jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
@@ -145,6 +147,10 @@ public class addAppointment extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 222, 54, -1));
         jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
         jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 126, 202, 28));
+
+        jLabel4.setText("pet");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 54, -1, -1));
+        jPanel1.add(ap_pet, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 50, 198, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +160,7 @@ public class addAppointment extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
         );
 
         pack();
@@ -168,7 +174,9 @@ public class addAppointment extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        session sess = session.getInstance();
         String apReasons = ap_reasons.getText().trim();
+        int apclientId = sess.getId();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
         String apDate = ""; 
@@ -180,14 +188,15 @@ public class addAppointment extends javax.swing.JFrame {
         }
         String apTime = ap_time.getText().trim();
         String apNotes = ap_notes.getText().trim();
+        String apPet = ap_pet.getText().trim();
         
             if(apReasons.isEmpty() ||apTime.isEmpty() || apNotes.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please fill in all fields");
                 return;
             }
         config db = new config();  
-        String sql = "INSERT INTO appointment (ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?)";
-        db.addRecord(sql, apReasons, apDate, apTime, apNotes, "Pending");
+        String sql = "INSERT INTO appointment (ap_petId, ap_clientId, ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        db.addRecord(sql, apPet, apclientId,apReasons, apDate, apTime, apNotes, "Pending");
         JOptionPane.showMessageDialog(this, "Appointment Added Successfully!");
         
         this.dispose();
@@ -247,6 +256,7 @@ public class addAppointment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser ap_date;
     private javax.swing.JTextField ap_notes;
+    public javax.swing.JTextField ap_pet;
     private javax.swing.JTextField ap_reasons;
     private javax.swing.JTextField ap_time;
     private javax.swing.JLabel breed;
@@ -255,6 +265,7 @@ public class addAppointment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

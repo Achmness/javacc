@@ -79,7 +79,7 @@ public class records extends javax.swing.JInternalFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 247, 219));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -136,7 +136,7 @@ public class records extends javax.swing.JInternalFrame {
         });
         a_approvepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        approve.setText("Approve");
+        approve.setText("ADD");
         approve.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 approveMouseClicked(evt);
@@ -148,7 +148,7 @@ public class records extends javax.swing.JInternalFrame {
                 approveMouseExited(evt);
             }
         });
-        a_approvepane.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 50, 20));
+        a_approvepane.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 50, 20));
 
         jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 62, 30));
 
@@ -168,7 +168,7 @@ public class records extends javax.swing.JInternalFrame {
         jPanel4.setBackground(new java.awt.Color(214, 206, 160));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
-        jLabel2.setText("Appointment");
+        jLabel2.setText("Medical Records");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -177,7 +177,7 @@ public class records extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,52 +298,7 @@ public class records extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_a_updatepaneMouseExited
 
     private void approveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveMouseClicked
-        int rowIndex = recordsTable.getSelectedRow();
-
-        if(rowIndex < 0){
-            JOptionPane.showMessageDialog(null, "Please Select an Appointment!");
-            return;
-        }
-
-        TableModel model = recordsTable.getModel();
-        int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-
-        // Get current status from table (assuming ap_status is column 5)
-        String currentStatus = model.getValueAt(rowIndex, 5).toString();
-
-        if(currentStatus.equalsIgnoreCase("Cancelled")){
-            JOptionPane.showMessageDialog(null,
-                "Cancelled appointment cannot be approved!");
-            return;
-        }
-
-        if(currentStatus.equalsIgnoreCase("Approved")){
-            JOptionPane.showMessageDialog(null,
-                "Appointment is already approved!");
-            return;
-        }
-
-        String status = "Approved";
-
-        config db = new config();
-
-        boolean success = db.updateRecords(
-            "UPDATE appointment SET ap_status=? WHERE ap_id=?",
-            status,
-            apId
-        );
-
-        if(success){
-            JOptionPane.showMessageDialog(null, "Appointment Approved Successfully!");
-
-            // Refresh table
-            db.displayData("SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment",
-                recordsTable
-            );
-
-        }else{
-            JOptionPane.showMessageDialog(null, "Approval Failed!");
-        }
+    
     }//GEN-LAST:event_approveMouseClicked
 
     private void approveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveMouseEntered

@@ -59,7 +59,7 @@ public class manage extends javax.swing.JFrame {
             PreparedStatement pst = conn.prepareStatement(
                     "SELECT * FROM account WHERE a_id = ?"
             );
-            singleton sess = singleton.getInstance();
+            session sess = session.getInstance();
             pst.setInt(1, sess.getId());
 
             ResultSet rs = pst.executeQuery();

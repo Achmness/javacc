@@ -130,7 +130,8 @@ public class account extends javax.swing.JInternalFrame {
     } catch (SQLException e) {
         System.out.println("Error loading account: " + e.getMessage());
     }
-}
+}   
+
 
     /**
      * This method is called from within the constructor to initialize the form.

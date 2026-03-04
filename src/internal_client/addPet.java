@@ -170,7 +170,9 @@ public class addPet extends javax.swing.JFrame {
     }//GEN-LAST:event_p_nameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        session sess = session.getInstance();
         String pName = p_name.getText().trim();
+        int pOwner = sess.getId();
         String pSpecies = p_species.getText().trim();
         String pBreed = p_breed.getText().trim();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -187,8 +189,8 @@ public class addPet extends javax.swing.JFrame {
                 return;
             }
         config db = new config();    
-        String sql = "INSERT INTO pet (p_name, p_species, p_breed, p_dateBirth) VALUES (?, ?, ?, ?)";
-        db.addRecord(sql, pName, pSpecies, pBreed, pDateBirth);
+        String sql = "INSERT INTO pet (owner_id, p_name, p_species, p_breed, p_dateBirth) VALUES (?, ?, ?, ?, ?)";
+        db.addRecord(sql, pOwner, pName, pSpecies, pBreed, pDateBirth);
         JOptionPane.showMessageDialog(this, "Pet Information Added Successfully!");
         this.dispose();
         client client = new client();

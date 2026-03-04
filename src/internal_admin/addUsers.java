@@ -171,6 +171,8 @@ public class addUsers extends javax.swing.JFrame {
             }
 
         }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -384,65 +386,66 @@ public class addUsers extends javax.swing.JFrame {
         String pass = "qwe123";
         String st = "Active";
         String hashedPassword = config.hashPassword(pass);
-        
 
-        if(fn.isEmpty() || ln.isEmpty() || em.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty() || em.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please fill in all fields");
-            return;
-        }
+            if(fn.isEmpty() || ln.isEmpty() || em.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please fill in all fields");
+                return;
+            }
 
-        try {
+        String sql = "INSERT INTO account (a_fname, a_lname, a_email, a_user, a_contact, a_address, a_image, a_pass, a_type, a_status) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            Connection conn = config.connectDB();
-            session sess = session.getInstance();
-            PreparedStatement pst;
+        try (Connection conn = config.connectDB();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            if (path != null && !path.isEmpty()) {
-                File imageFile = new File(path);
-                InputStream is = new FileInputStream(imageFile);
+            pst.setString(1, fn);
+            pst.setString(2, ln);
+            pst.setString(3, em);
+            pst.setString(4, us);
+            pst.setString(5, cont);
+            pst.setString(6, addr);
 
-                String sql = "INSERT INTO account (a_fname, a_lname, a_email, a_user, a_contact, a_address, a_image, a_pass, a_type, a_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-                pst = conn.prepareStatement(sql);
+            FileInputStream fis = null;
+            try {
+                if (path != null && !path.isEmpty()) {
+                    File imageFile = new File(path);
+                    fis = new FileInputStream(imageFile);
+                    pst.setBinaryStream(7, fis, (int) imageFile.length());
+                } else {
 
-                pst.setString(1, us);
-                pst.setString(2, em);
-                pst.setString(3, fn);
-                pst.setString(4, ln);
-                pst.setString(5, cont);
-                pst.setString(6, addr);
-                pst.setBinaryStream(7, is, (int) imageFile.length());
+                    pst.setNull(7, java.sql.Types.BLOB);
+                }
+
                 pst.setString(8, hashedPassword);
                 pst.setString(9, ut);
                 pst.setString(10, st);
-                
-            } else {
-                String sql = "INSERT INTO account (a_fname, a_lname, a_email, a_user, a_contact, a_address, a_image, a_pass, a_type, a_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-                pst = conn.prepareStatement(sql);
 
-                pst.setString(1, us);
-                pst.setString(2, em);
-                pst.setString(3, fn);
-                pst.setString(4, ln);
-                pst.setString(5, cont);
-                pst.setString(6, addr);
-                pst.setString(7, hashedPassword);
-                pst.setString(8, ut);
-                pst.setString(9, st);
 
+                int rowsInserted = pst.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(this, "User details added successfully!");
+                    this.dispose();
+
+                    users u = new users();
+                    admin adminFrame = new admin(u);
+                    adminFrame.setVisible(true);
+                }
+            } finally {
+                if (fis != null) {
+                    fis.close();
+                }
             }
 
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "User details Added successfully!");
-            this.dispose();
-
-            users u = new users();
-            admin adminFrame = new admin(u);
-            adminFrame.setVisible(true);
-
         } catch (SQLException ex) {
-            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "Database error", ex);
+            JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "File not found", ex);
+            JOptionPane.showMessageDialog(this, "Image Error: File not found.");
+        } catch (IOException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "I/O error", ex);
+            JOptionPane.showMessageDialog(this, "Error closing file stream: " + ex.getMessage());
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
