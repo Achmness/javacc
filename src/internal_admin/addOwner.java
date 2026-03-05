@@ -389,7 +389,7 @@ public class addOwner extends javax.swing.JFrame {
         String us = user.getText().trim();
         String fn = fname.getText().trim();
         String ln = lname.getText().trim();
-        String ut = "Clients";
+        String ut = "CLIENT";
         String cont = contact.getText().trim();
         String addr = address.getText().trim();
         String pass = "qwe123";

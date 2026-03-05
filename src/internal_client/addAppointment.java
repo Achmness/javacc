@@ -8,6 +8,10 @@ package internal_client;
 import config.config;
 import config.session;
 import internal.client;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -25,6 +29,7 @@ public class addAppointment extends javax.swing.JFrame {
     public addAppointment() {
         initComponents();
         date();
+        displayPets();
     }
     
     private void date(){
@@ -32,6 +37,40 @@ public class addAppointment extends javax.swing.JFrame {
         ap_date.setDateFormatString("MMMM dd, yyyy");
         ap_date.setDate(date);
     }
+    
+    public void displayPets() {
+        config db = new config();
+        session sess = session.getInstance();
+        int userId = sess.getId();
+
+        String sql = "SELECT p_id, p_name, p_species, p_breed, p_dateBirth " +
+                     "FROM pet " +
+                     "WHERE owner_id = " + userId;
+
+        db.displayData(sql, petTable);
+    }
+    public boolean petExists(String petId) {
+    try {
+        Integer.parseInt(petId);
+    } catch (NumberFormatException e) {
+        return false; 
+    }
+
+    String query = "SELECT COUNT(*) FROM pet WHERE p_id = ?";
+    try (Connection conn = config.connectDB();
+         PreparedStatement pst = conn.prepareStatement(query)) {
+        
+        pst.setString(1, petId);
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()) {
+            return rs.getInt(1) > 0; 
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,12 +91,14 @@ public class addAppointment extends javax.swing.JFrame {
         dateBirth = new javax.swing.JLabel();
         ap_reasons = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        ap_time = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         ap_notes = new javax.swing.JTextField();
         ap_date = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         ap_pet = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        petTable = new javax.swing.JTable();
+        ap_time = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -98,7 +139,7 @@ public class addAppointment extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -112,26 +153,26 @@ public class addAppointment extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 394, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 40));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         name.setText("Reasons");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 88, 74, -1));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 86, 74, -1));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         breed.setText("Date ");
-        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 132, 48, -1));
+        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 124, 48, -1));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         dateBirth.setText("Time");
-        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 174, 78, -1));
+        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 156, 78, -1));
 
         ap_reasons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ap_reasonsActionPerformed(evt);
             }
         });
-        jPanel1.add(ap_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 82, 204, 28));
+        jPanel1.add(ap_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 80, 198, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -139,28 +180,44 @@ public class addAppointment extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 334, 70, 40));
-        jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 152, 118, 32));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("Notes");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 222, 54, -1));
-        jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
-        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 126, 202, 28));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 52, 54, -1));
+        jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 50, 202, 96));
+        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 118, 202, 28));
 
-        jLabel4.setText("pet");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 54, -1, -1));
-        jPanel1.add(ap_pet, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 50, 198, -1));
+        jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel4.setText("Pet");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 52, -1, -1));
+        jPanel1.add(ap_pet, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 50, 198, -1));
+
+        petTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(petTable);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 190, 552, 272));
+        jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 152, 200, 26));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -173,42 +230,101 @@ public class addAppointment extends javax.swing.JFrame {
         client.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        session sess = session.getInstance();
-        String apReasons = ap_reasons.getText().trim();
-        int apclientId = sess.getId();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-
-        String apDate = ""; 
-        if (ap_date.getDate() != null) {
-            apDate = sdf.format(ap_date.getDate());
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a date first!");
-            return; 
-        }
-        String apTime = ap_time.getText().trim();
-        String apNotes = ap_notes.getText().trim();
-        String apPet = ap_pet.getText().trim();
-        
-            if(apReasons.isEmpty() ||apTime.isEmpty() || apNotes.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Please fill in all fields");
-                return;
-            }
-        config db = new config();  
-        String sql = "INSERT INTO appointment (ap_petId, ap_clientId, ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.addRecord(sql, apPet, apclientId,apReasons, apDate, apTime, apNotes, "Pending");
-        JOptionPane.showMessageDialog(this, "Appointment Added Successfully!");
-        
-        this.dispose();
-        client client = new client();
-        client.setVisible(true);
-        
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void ap_reasonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_reasonsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ap_reasonsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       session sess = session.getInstance();
+String apReasons = ap_reasons.getText().trim();
+int apclientId = sess.getId(); // currently logged-in user ID
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+// --- Date validation ---
+String apDate = "";
+if (ap_date.getDate() != null) {
+    apDate = sdf.format(ap_date.getDate());
+} else {
+    JOptionPane.showMessageDialog(this, "Please select a date first!");
+    return;
+}
+
+// --- Time validation ---
+// If using JTextField:
+String apTime = ap_time.getText().trim();
+// Or, if using JTimeChooser, get the time correctly (see notes below)
+
+String apNotes = ap_notes.getText().trim();
+String apPet = ap_pet.getText().trim();
+
+// --- Pet ID validation ---
+if(apPet.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Pet ID is required.");
+    return;
+}
+
+// --- Validate pet exists AND belongs to current user ---
+boolean petValid = false;
+String checkSql = "SELECT * FROM pet WHERE p_id = ? AND owner_id = ?"; // p_ownerId = client/user ID
+
+try (Connection conn = config.connectDB();
+     PreparedStatement pst = conn.prepareStatement(checkSql)) {
+
+    pst.setString(1, apPet);
+    pst.setInt(2, apclientId);
+
+    ResultSet rs = pst.executeQuery();
+    if(rs.next()){
+        petValid = true; // pet exists and belongs to user
+    }
+
+} catch(SQLException e){
+    e.printStackTrace();
+}
+
+if(!petValid){
+    JOptionPane.showMessageDialog(this,
+        "Pet ID [" + apPet + "] does not exist or does not belong to your account.\n" +
+        "Please input a valid ID.",
+        "Validation Error",
+        JOptionPane.ERROR_MESSAGE);
+
+    ap_pet.setText("");
+    ap_pet.requestFocus();
+    return;
+}
+
+// --- Other fields validation ---
+if(apReasons.isEmpty() || apTime.isEmpty() || apNotes.isEmpty()){
+    JOptionPane.showMessageDialog(this, "Please fill in all fields");
+    return;
+}
+
+// --- Insert appointment ---
+String sql = "INSERT INTO appointment (ap_petId, ap_clientId, ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+try (Connection conn = config.connectDB();
+     PreparedStatement pst = conn.prepareStatement(sql)) {
+
+    pst.setString(1, apPet);
+    pst.setInt(2, apclientId);
+    pst.setString(3, apReasons);
+    pst.setString(4, apDate);
+    pst.setString(5, apTime);
+    pst.setString(6, apNotes);
+    pst.setString(7, "Pending");
+
+    pst.executeUpdate();
+    JOptionPane.showMessageDialog(this, "Appointment Added Successfully!");
+
+} catch(SQLException e){
+    e.printStackTrace();
+}
+
+// Close form and go back to client dashboard
+this.dispose();
+client clientForm = new client();
+clientForm.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,7 +374,7 @@ public class addAppointment extends javax.swing.JFrame {
     private javax.swing.JTextField ap_notes;
     public javax.swing.JTextField ap_pet;
     private javax.swing.JTextField ap_reasons;
-    private javax.swing.JTextField ap_time;
+    public javax.swing.JTextField ap_time;
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
     private javax.swing.JButton jButton1;
@@ -269,6 +385,8 @@ public class addAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
+    private javax.swing.JTable petTable;
     // End of variables declaration//GEN-END:variables
 }

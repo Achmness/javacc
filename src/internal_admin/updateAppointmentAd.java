@@ -24,6 +24,8 @@ public class updateAppointmentAd extends javax.swing.JFrame {
      * Creates new form updateAppointmentAd
      */
     public int apId;
+public int pet_id_value;
+
     public updateAppointmentAd() {
         initComponents();
         date();
@@ -62,6 +64,8 @@ public class updateAppointmentAd extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ap_notes = new javax.swing.JTextField();
         ap_date = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        petId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -152,6 +156,14 @@ public class updateAppointmentAd extends javax.swing.JFrame {
         jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
         jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 128, 202, 28));
 
+        jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel4.setText("Pet Id");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 58, -1, -1));
+
+        petId.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        petId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(petId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 46, 102, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,12 +198,14 @@ public class updateAppointmentAd extends javax.swing.JFrame {
 String ar = ap_reasons.getText().trim();
 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 String apDate = "";
+
 if (ap_date.getDate() != null) {
     apDate = sdf.format(ap_date.getDate());
 } else {
     JOptionPane.showMessageDialog(this, "Please select a date first!");
     return;
 }
+
 String at = ap_time.getText().trim();
 String an = ap_notes.getText().trim();
 
@@ -201,8 +215,8 @@ if (ar.isEmpty() || at.isEmpty() || an.isEmpty()) {
     return;
 }
 
-// Update DB
 try (Connection conn = config.connectDB()) {
+
     String sql = "UPDATE appointment SET ap_reasons=?, ap_date=?, ap_time=?, ap_notes=? WHERE ap_id=?";
     PreparedStatement pst = conn.prepareStatement(sql);
 
@@ -211,15 +225,19 @@ try (Connection conn = config.connectDB()) {
     pst.setString(3, at);
     pst.setString(4, an);
 
+    // ✅ THIS WAS MISSING
+    pst.setInt(5, apId);
 
     int updated = pst.executeUpdate();
 
     if (updated > 0) {
         JOptionPane.showMessageDialog(this, "Appointment details updated successfully!");
         this.dispose();
+
         users u = new users();
         admin admin = new admin(u);
         admin.setVisible(true);
+
     } else {
         JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
     }
@@ -277,9 +295,11 @@ try (Connection conn = config.connectDB()) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel name;
+    public javax.swing.JLabel petId;
     // End of variables declaration//GEN-END:variables
 }

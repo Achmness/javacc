@@ -47,7 +47,7 @@ public class pet extends javax.swing.JInternalFrame {
     
     public void displayPets() {
         config db = new config();
-        String sql = "SELECT p_id, p_name, p_species, p_breed, p_dateBirth FROM pet";
+        String sql = "SELECT p_id, owner_id, p_name, p_species, p_breed, p_dateBirth FROM pet";
         db.displayData(sql, petTable);
     }
 

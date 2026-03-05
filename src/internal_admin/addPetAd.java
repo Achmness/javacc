@@ -8,6 +8,10 @@ package internal_admin;
 import config.config;
 import config.session;
 import internal.admin;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -23,6 +27,7 @@ public class addPetAd extends javax.swing.JFrame {
     public addPetAd() {
         initComponents();
         date();
+        displayOwners();
     }
     
     private void date(){
@@ -30,6 +35,14 @@ public class addPetAd extends javax.swing.JFrame {
         p_dateBirth.setDateFormatString("MMMM dd, yyyy");
         p_dateBirth.setDate(date);
     }
+    
+    public void displayOwners() {
+    config db = new config();
+    String sql = "SELECT a_id, a_user, a_fname, a_lname, a_contact, a_email, a_type, a_address, a_status " +
+                 "FROM account " +
+                 "WHERE a_type = 'CLIENT'";
+    db.displayData(sql, ownerTable);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +67,10 @@ public class addPetAd extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         p_breed = new javax.swing.JTextField();
         p_dateBirth = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        p_owner = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ownerTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -94,7 +111,7 @@ public class addPetAd extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -108,31 +125,37 @@ public class addPetAd extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 394, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 40));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         name.setText("Name");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 86, -1, -1));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 84, -1, 26));
 
         species.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         species.setText("Species");
-        jPanel1.add(species, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 132, 66, -1));
+        jPanel1.add(species, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 118, 66, 22));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         breed.setText("Breed");
-        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 190, -1, -1));
+        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 48, -1, 26));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         dateBirth.setText("Date Of Birth");
-        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 256, 110, -1));
-        jPanel1.add(p_species, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 132, 192, 28));
+        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 86, 110, -1));
+
+        p_species.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                p_speciesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(p_species, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 116, 192, 28));
 
         p_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 p_nameActionPerformed(evt);
             }
         });
-        jPanel1.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 84, 192, 28));
+        jPanel1.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 82, 192, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -140,15 +163,35 @@ public class addPetAd extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
-        jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
-        jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 250, 190, 28));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 116, 70, 30));
+        jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 48, 192, 28));
+        jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 84, 192, 28));
+
+        jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel1.setText("Owner");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, -1, -1));
+        jPanel1.add(p_owner, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 48, 192, 26));
+
+        ownerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(ownerTable);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 184, 578, 278));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,34 +214,80 @@ public class addPetAd extends javax.swing.JFrame {
     }//GEN-LAST:event_p_nameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        session sess = session.getInstance();
-        String pName = p_name.getText().trim();
-        int pOwner = sess.getId();
-        String pSpecies = p_species.getText().trim();
-        String pBreed = p_breed.getText().trim();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        String pDateBirth = "";
-        if (p_dateBirth.getDate() != null) {
-            pDateBirth = sdf.format(p_dateBirth.getDate());
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a date first!");
-            return;
-        }
+       String pName = p_name.getText().trim();
+String ownerIdStr = p_owner.getText().trim(); // Get owner ID from text field
+String pSpecies = p_species.getText().trim();
+String pBreed = p_breed.getText().trim();
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+String pDateBirth = "";
 
-        if(pName.isEmpty() || pSpecies.isEmpty() || pBreed.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please fill in all fields");
+// Validate date
+if (p_dateBirth.getDate() != null) {
+    pDateBirth = sdf.format(p_dateBirth.getDate());
+} else {
+    JOptionPane.showMessageDialog(this, "Please select a date first!");
+    return;
+}
+
+// Validate required fields
+if (pName.isEmpty() || pSpecies.isEmpty() || pBreed.isEmpty() || ownerIdStr.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please fill in all fields including Owner ID!");
+    return;
+}
+
+// Convert owner ID to integer
+int pOwner;
+try {
+    pOwner = Integer.parseInt(ownerIdStr);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Owner ID must be a number!");
+    return;
+}
+
+// Validate owner exists and is of type Client
+config db = new config();
+try {
+    String sqlCheck = "SELECT a_type FROM account WHERE a_id = ?";
+    Connection conn = config.connectDB();
+    PreparedStatement pst = conn.prepareStatement(sqlCheck);
+    pst.setInt(1, pOwner);
+    ResultSet rs = pst.executeQuery();
+
+    if (rs.next()) {
+        String type = rs.getString("a_type");
+        if (!type.equalsIgnoreCase("Client")) {
+            JOptionPane.showMessageDialog(this, "Owner ID [" + pOwner + "] is not a Client type!");
+            p_owner.setText("");
+            p_owner.requestFocus();
             return;
         }
-        config db = new config();
-        String sql = "INSERT INTO pet (owner_id, p_name, p_species, p_breed, p_dateBirth) VALUES (?, ?, ?, ?, ?)";
-        db.addRecord(sql, pOwner, pName, pSpecies, pBreed, pDateBirth);
-        JOptionPane.showMessageDialog(this, "Pet Information Added Successfully!");
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Owner ID [" + pOwner + "] does not exist!");
+        p_owner.setText("");
+        p_owner.requestFocus();
+        return;
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+    return;
+}
+
+// Insert the pet
+String sqlInsert = "INSERT INTO pet (owner_id, p_name, p_species, p_breed, p_dateBirth) VALUES (?, ?, ?, ?, ?)";
+db.addRecord(sqlInsert, pOwner, pName, pSpecies, pBreed, pDateBirth);
+
+JOptionPane.showMessageDialog(this, "Pet Information Added Successfully!");
+this.dispose();
+users u = new users();
+admin admin = new admin(u);
+admin.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void p_speciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_speciesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_speciesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,15 +329,19 @@ public class addPetAd extends javax.swing.JFrame {
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
+    private javax.swing.JTable ownerTable;
     private javax.swing.JTextField p_breed;
     public com.toedter.calendar.JDateChooser p_dateBirth;
     private javax.swing.JTextField p_name;
+    private javax.swing.JTextField p_owner;
     private javax.swing.JTextField p_species;
     private javax.swing.JLabel species;
     // End of variables declaration//GEN-END:variables

@@ -39,7 +39,7 @@ public class addAppointmentAd extends javax.swing.JFrame {
     
     public void displayPets() {
         config db = new config();
-        String sql = "SELECT p_id, p_name, p_species, p_breed, p_dateBirth FROM pet";
+        String sql = "SELECT p_id, owner_id, p_name, p_species, p_breed, p_dateBirth FROM pet";
         db.displayData(sql, petTable);
     }
     public boolean petExists(String petId) {
@@ -54,6 +54,29 @@ public class addAppointmentAd extends javax.swing.JFrame {
          PreparedStatement pst = conn.prepareStatement(query)) {
         
         pst.setString(1, petId);
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()) {
+            return rs.getInt(1) > 0; 
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
+    
+     public boolean ownerExists(String ownerId) {
+    try {
+        Integer.parseInt(ownerId);
+    } catch (NumberFormatException e) {
+        return false; 
+    }
+
+    String query = "SELECT COUNT(*) FROM pet WHERE owner_id = ?";
+    try (Connection conn = config.connectDB();
+         PreparedStatement pst = conn.prepareStatement(query)) {
+        
+        pst.setString(1, ownerId);
         ResultSet rs = pst.executeQuery();
         
         if (rs.next()) {
@@ -87,14 +110,16 @@ public class addAppointmentAd extends javax.swing.JFrame {
         dateBirth = new javax.swing.JLabel();
         ap_reasons = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        ap_time = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        ap_notes = new javax.swing.JTextField();
         ap_date = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         ap_pet = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         petTable = new javax.swing.JTable();
+        ap_time = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ap_notes = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -110,7 +135,7 @@ public class addAppointmentAd extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
@@ -153,22 +178,22 @@ public class addAppointmentAd extends javax.swing.JFrame {
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         name.setText("Reasons");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 86, 74, -1));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 88, 78, 24));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         breed.setText("Date ");
-        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 124, 48, -1));
+        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 128, 50, 22));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         dateBirth.setText("Time");
-        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 156, 78, -1));
+        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 154, 80, 22));
 
         ap_reasons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ap_reasonsActionPerformed(evt);
             }
         });
-        jPanel1.add(ap_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 80, 198, 28));
+        jPanel1.add(ap_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 86, 198, 28));
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -176,19 +201,23 @@ public class addAppointmentAd extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 152, 118, 32));
-        jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 152, 202, 28));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 158, 118, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setText("Notes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 52, 54, -1));
-        jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 50, 202, 96));
-        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 118, 202, 28));
+        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 122, 198, 28));
 
-        jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel4.setText("Pet");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 52, -1, -1));
-        jPanel1.add(ap_pet, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 50, 198, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 56, 32, -1));
+
+        ap_pet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ap_petActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ap_pet, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 50, 198, 28));
 
         petTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -203,7 +232,18 @@ public class addAppointmentAd extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(petTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 190, 552, 272));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 218, 576, 244));
+        jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 154, 198, 26));
+
+        jLabel6.setFont(new java.awt.Font("Georgia", 1, 20)); // NOI18N
+        jLabel6.setText("PETS & OWNER");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 186, 192, -1));
+
+        ap_notes.setColumns(20);
+        ap_notes.setRows(5);
+        jScrollPane3.setViewportView(ap_notes);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 52, 198, 98));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,52 +271,87 @@ public class addAppointmentAd extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ap_reasonsActionPerformed
 
+    private void ap_petActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_petActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ap_petActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         session sess = session.getInstance();
-        String apReasons = ap_reasons.getText().trim();
-        int apclientId = sess.getId();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-        String apDate = "";
-        if (ap_date.getDate() != null) {
-            apDate = sdf.format(ap_date.getDate());
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a date first!");
-            return;
-        }
-        String apTime = ap_time.getText().trim();
-        String apNotes = ap_notes.getText().trim();
-        String apPet = ap_pet.getText().trim();
-            if(apPet.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Pet ID is required.");
-                return;
-            }
-            if (!petExists(apPet)) {
-                JOptionPane.showMessageDialog(this, 
-                    "Pet ID [" + apPet + "] does not exist in the database.\n" +
-                    "Please input a valid ID or register the pet first.", 
-                    "Authentication Error", 
-                    JOptionPane.ERROR_MESSAGE);
+String apReasons = ap_reasons.getText().trim();
+String apPet = ap_pet.getText().trim();
+String apTime = ap_time.getText().trim();
+String apNotes = ap_notes.getText().trim();
 
-                ap_pet.setText(""); 
-                ap_pet.requestFocus();
-                return; 
-            }
+if(apPet.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Pet ID is required.");
+    return;
+}
 
-        if(apReasons.isEmpty() ||apTime.isEmpty() || apNotes.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please fill in all fields");
-            return;
-        }
-        config db = new config();
-        String sql = "INSERT INTO appointment (ap_petId, ap_clientId, ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.addRecord(sql, apPet, apclientId,apReasons, apDate, apTime, apNotes, "Pending");
-        JOptionPane.showMessageDialog(this, "Appointment Added Successfully!");
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
+String apDate = "";
+if (ap_date.getDate() != null) {
+    apDate = sdf.format(ap_date.getDate());
+} else {
+    JOptionPane.showMessageDialog(this, "Please select a date first!");
+    return;
+}
 
+if(apReasons.isEmpty() || apTime.isEmpty() || apNotes.isEmpty()){
+    JOptionPane.showMessageDialog(this, "Please fill in all fields");
+    return;
+}
+
+config db = new config();
+
+try (Connection conn = db.connectDB()) {
+
+    // 🔹 Get owner automatically from pet table
+    String owner = "";
+    String getOwner = "SELECT owner_id FROM pet WHERE p_id = ?";
+    PreparedStatement pst = conn.prepareStatement(getOwner);
+    pst.setString(1, apPet);
+
+    ResultSet rs = pst.executeQuery();
+
+    if(rs.next()){
+        owner = rs.getString("owner_id");
+
+        // optional: display owner in textbox
+
+
+    }else{
+        JOptionPane.showMessageDialog(this,
+            "Pet ID [" + apPet + "] does not exist.\nRegister the pet first.");
+        ap_pet.requestFocus();
+        return;
+    }
+
+    // 🔹 Insert appointment
+    String sql = "INSERT INTO appointment (ap_petId, ap_clientId, ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    PreparedStatement insert = conn.prepareStatement(sql);
+    insert.setString(1, apPet);
+    insert.setString(2, owner);
+    insert.setString(3, apReasons);
+    insert.setString(4, apDate);
+    insert.setString(5, apTime);
+    insert.setString(6, apNotes);
+    insert.setString(7, "Pending");
+
+    insert.executeUpdate();
+
+    JOptionPane.showMessageDialog(this, "Appointment Added Successfully!");
+
+    this.dispose();
+    users u = new users();
+    admin admin = new admin(u);
+    admin.setVisible(true);
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -317,10 +392,10 @@ public class addAppointmentAd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser ap_date;
-    private javax.swing.JTextField ap_notes;
+    private javax.swing.JTextArea ap_notes;
     public javax.swing.JTextField ap_pet;
     private javax.swing.JTextField ap_reasons;
-    private javax.swing.JTextField ap_time;
+    public javax.swing.JTextField ap_time;
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
     private javax.swing.JButton jButton1;
@@ -328,10 +403,12 @@ public class addAppointmentAd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel name;
     private javax.swing.JTable petTable;
     // End of variables declaration//GEN-END:variables

@@ -93,16 +93,17 @@ public class info extends javax.swing.JInternalFrame {
     int total = 0;
 
     config db = new config();
-    Connection conn = db.connectDB();
+    try (Connection conn = db.connectDB()) {
 
-    try {
         // Get today's date in yyyy-MM-dd format
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(new java.util.Date());
 
-        String sql = "SELECT COUNT(*) FROM appointment WHERE ap_date = ?";
+        // ✅ Only count appointments with status 'Accepted'
+        String sql = "SELECT COUNT(*) FROM appointment WHERE ap_date = ? AND ap_status = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1, today);
+        pst.setString(2, "Approve");
 
         ResultSet rs = pst.executeQuery();
 

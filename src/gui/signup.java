@@ -240,7 +240,16 @@ if (!config.isValidEmail(emailup)) {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        System.exit(0);
+                int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to exit the application?",
+        "Confirm Exit",
+        JOptionPane.YES_NO_OPTION
+);
+
+if (confirm == JOptionPane.YES_OPTION) {
+    System.exit(0);
+}       
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked

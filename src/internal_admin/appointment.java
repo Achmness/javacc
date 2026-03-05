@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -31,6 +32,8 @@ public class appointment extends javax.swing.JInternalFrame {
     /**
      * Creates new form appointment
      */
+    public int apId;
+public int petId;
     public appointment() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
@@ -46,7 +49,8 @@ public void displayAppointment() {
     config db = new config();
     session sess = session.getInstance();
 
-    String sql = "SELECT a.ap_id, a.ap_petId, a.ap_reasons, a.ap_date, a.ap_time, a.ap_notes, a.ap_status " +
+    String sql = "SELECT a.ap_id, a.ap_petId, a.ap_clientId, " +
+                 "a.ap_reasons, a.ap_date, a.ap_time, a.ap_status " +
                  "FROM appointment a " +
                  "INNER JOIN pet p ON a.ap_petId = p.p_id ";
     
@@ -348,38 +352,66 @@ public void displayAppointment() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        int rowIndex = appointmentTable.getSelectedRow();
+      int rowIndex = appointmentTable.getSelectedRow();
 
-        if (rowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a Appointment to update.");
-            return;
-        }
+if (rowIndex < 0) {
+    JOptionPane.showMessageDialog(this, "Please select an Appointment to update.");
+    return;
+}
 
-        TableModel model = appointmentTable.getModel();
+TableModel model = appointmentTable.getModel();
+updateAppointmentAd app = new updateAppointmentAd();
 
-        int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-        String apReasons = model.getValueAt(rowIndex, 1).toString();
-        String apDate = model.getValueAt(rowIndex, 2).toString();
-        String apTime = model.getValueAt(rowIndex, 3).toString();
-        String apNotes = model.getValueAt(rowIndex, 4).toString();
+try {
 
-        updateAppointmentAd app = new updateAppointmentAd();
+    int apID = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 
-        app.apId = apId;
-        app.ap_reasons.setText(apReasons);
+    String sql = "SELECT * FROM appointment WHERE ap_id = ?";
+    
+    config dbc = new config();
+    java.util.List<java.util.Map<String, Object>> records =
+            dbc.fetchRecords(sql, apID);
+
+    if (!records.isEmpty()) {
+
+        java.util.Map<String, Object> row = records.get(0);
+
+        // ✅ Store IDs
+        app.apId = (int) row.get("ap_id");
+      Object petObj = row.get("ap_petId");
+
+if (petObj != null) {
+    app.pet_id_value = ((Number) petObj).intValue();
+    app.petId.setText(petObj.toString());
+} else {
+    app.pet_id_value = 0;
+    app.petId.setText("No Pet");
+}
+
+
+        // ✅ Set fields
+        app.ap_reasons.setText(row.get("ap_reasons").toString());
+
         try {
-            java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(apDate);
+            java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd")
+                    .parse(row.get("ap_date").toString());
             app.ap_date.setDate(date);
         } catch (java.text.ParseException e) {
-            System.err.println("Date parsing failed: " + e.getMessage());
+            System.out.println("Date parsing error!");
         }
-        app.ap_time.setText(apTime);
-        app.ap_notes.setText(apNotes);
+
+        app.ap_time.setText(row.get("ap_time").toString());
+        app.ap_notes.setText(row.get("ap_notes").toString());
 
         app.setVisible(true);
 
         JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         mainFrame.dispose();
+    }
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
