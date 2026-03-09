@@ -53,29 +53,58 @@ public class addPetAd extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ownerTable = new javax.swing.JTable();
+        dateBirth1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         species = new javax.swing.JLabel();
         breed = new javax.swing.JLabel();
         dateBirth = new javax.swing.JLabel();
         p_species = new javax.swing.JTextField();
         p_name = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         p_breed = new javax.swing.JTextField();
         p_dateBirth = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         p_owner = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ownerTable = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        species1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(241, 243, 246));
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel2.setBackground(new java.awt.Color(241, 243, 246));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ownerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(ownerTable);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 32, 578, 266));
+
+        dateBirth1.setFont(new java.awt.Font("Georgia", 1, 20)); // NOI18N
+        dateBirth1.setText("Owners");
+        jPanel2.add(dateBirth1, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 6, 110, 28));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 600, 302));
+
+        jPanel1.setBackground(new java.awt.Color(45, 85, 125));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -91,55 +120,41 @@ public class addPetAd extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Pet Information");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 13, 163, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel3.setText("X");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                jLabel4MouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, 20, 30));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 40));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        name.setForeground(new java.awt.Color(210, 217, 226));
         name.setText("Name");
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 84, -1, 26));
 
         species.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        species.setForeground(new java.awt.Color(210, 217, 226));
         species.setText("Species");
         jPanel1.add(species, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 118, 66, 22));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        breed.setForeground(new java.awt.Color(210, 217, 226));
         breed.setText("Breed");
         jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 48, -1, 26));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        dateBirth.setForeground(new java.awt.Color(210, 217, 226));
         dateBirth.setText("Date Of Birth");
         jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 86, 110, -1));
 
@@ -156,65 +171,46 @@ public class addPetAd extends javax.swing.JFrame {
             }
         });
         jPanel1.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 82, 192, 28));
-
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 116, 70, 30));
         jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 48, 192, 28));
         jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 84, 192, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Owner");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, -1, -1));
         jPanel1.add(p_owner, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 48, 192, 26));
 
-        ownerTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(ownerTable);
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 184, 578, 278));
+        species1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        species1.setForeground(new java.awt.Color(210, 217, 226));
+        species1.setText("Add");
+        jPanel3.add(species1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 50, 22));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 120, 82, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 160));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
-    }//GEN-LAST:event_jLabel3MouseClicked
-
     private void p_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_nameActionPerformed
         // TODO addPet your handling code here:
     }//GEN-LAST:event_p_nameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       String pName = p_name.getText().trim();
+    private void p_speciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_speciesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_speciesActionPerformed
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+         String pName = p_name.getText().trim();
 String ownerIdStr = p_owner.getText().trim(); // Get owner ID from text field
 String pSpecies = p_species.getText().trim();
 String pBreed = p_breed.getText().trim();
@@ -281,13 +277,15 @@ JOptionPane.showMessageDialog(this, "Pet Information Added Successfully!");
 this.dispose();
 users u = new users();
 admin admin = new admin(u);
-admin.setVisible(true);
+admin.setVisible(true);        
+    }//GEN-LAST:event_jPanel3MouseClicked
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void p_speciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_speciesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_speciesActionPerformed
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        this.dispose();
+        users u = new users();
+        admin admin = new admin(u);
+        admin.setVisible(true);       
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,11 +326,13 @@ admin.setVisible(true);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel dateBirth1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
@@ -344,5 +344,6 @@ admin.setVisible(true);
     private javax.swing.JTextField p_owner;
     private javax.swing.JTextField p_species;
     private javax.swing.JLabel species;
+    private javax.swing.JLabel species1;
     // End of variables declaration//GEN-END:variables
 }

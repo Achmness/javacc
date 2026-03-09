@@ -8,6 +8,7 @@ package internal_admin;
 import config.config;
 import internal_client.addAppointment;
 import internal_client.addPet;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,10 +37,10 @@ public class info extends javax.swing.JInternalFrame {
         
         int todaysAppointmentsTotal = getTotalTodayAppointments();
         todayAppointments.setText(""+todaysAppointmentsTotal);
-        
-         
-
     }
+    
+    Color navcolor = new Color(79,105,131);
+    Color bodycolor = new Color(21,41,62);
     
        public int getTotalPets() {
     int total = 0;
@@ -128,15 +129,15 @@ public class info extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        totpetpanel = new javax.swing.JPanel();
         petsRegistered = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        pendpanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         totalPending = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        todappointpanel = new javax.swing.JPanel();
         jlabl7 = new javax.swing.JLabel();
         todayAppointments = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -144,73 +145,103 @@ public class info extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
+        addownerpanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        addappointpanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
+        addpetpanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(241, 243, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(251, 251, 249));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(214, 206, 160));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        totpetpanel.setBackground(new java.awt.Color(79, 105, 131));
+        totpetpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                totpetpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                totpetpanelMouseExited(evt);
+            }
+        });
+        totpetpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         petsRegistered.setFont(new java.awt.Font("Arial", 1, 35)); // NOI18N
-        jPanel5.add(petsRegistered, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 2, 84, 56));
+        petsRegistered.setForeground(new java.awt.Color(210, 217, 226));
+        totpetpanel.add(petsRegistered, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 2, 84, 56));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Total Pets Registered");
-        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 64, -1, -1));
+        totpetpanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 64, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tpets.png"))); // NOI18N
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-pets-50 (2).png"))); // NOI18N
+        totpetpanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 22, 168, 90));
+        jPanel2.add(totpetpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 22, 168, 90));
 
-        jPanel6.setBackground(new java.awt.Color(214, 206, 160));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pendpanel.setBackground(new java.awt.Color(79, 105, 131));
+        pendpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pendpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pendpanelMouseExited(evt);
+            }
+        });
+        pendpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pending.png"))); // NOI18N
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 52, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-pending-50 (1).png"))); // NOI18N
+        pendpanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 52, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(210, 217, 226));
         jLabel5.setText("Pending Appointments");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, -1, -1));
+        pendpanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, -1, -1));
 
         totalPending.setFont(new java.awt.Font("Arial", 1, 35)); // NOI18N
-        jPanel6.add(totalPending, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 6, 72, 52));
+        totalPending.setForeground(new java.awt.Color(210, 217, 226));
+        pendpanel.add(totalPending, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 6, 72, 52));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 20, 168, 90));
+        jPanel2.add(pendpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 20, 168, 90));
 
-        jPanel7.setBackground(new java.awt.Color(214, 206, 160));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        todappointpanel.setBackground(new java.awt.Color(79, 105, 131));
+        todappointpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                todappointpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                todappointpanelMouseExited(evt);
+            }
+        });
+        todappointpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlabl7.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jlabl7.setForeground(new java.awt.Color(210, 217, 226));
         jlabl7.setText("Today's Appointments");
-        jPanel7.add(jlabl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, -1, -1));
+        todappointpanel.add(jlabl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, -1, -1));
 
         todayAppointments.setFont(new java.awt.Font("Arial", 1, 35)); // NOI18N
-        jPanel7.add(todayAppointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 10, 68, 50));
+        todayAppointments.setForeground(new java.awt.Color(210, 217, 226));
+        todappointpanel.add(todayAppointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 10, 68, 50));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tappoint.png"))); // NOI18N
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-today-50 (1).png"))); // NOI18N
+        todappointpanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 20, 168, 90));
+        jPanel2.add(todappointpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 20, 168, 90));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 66, 560, 132));
 
@@ -219,10 +250,11 @@ public class info extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 210, 276, 204));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Info");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 26, -1, -1));
 
@@ -232,84 +264,106 @@ public class info extends javax.swing.JInternalFrame {
         jPanel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel9.setBackground(new java.awt.Color(214, 206, 160));
-        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        addownerpanel.setBackground(new java.awt.Color(79, 105, 131));
+        addownerpanel.setToolTipText("");
+        addownerpanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel9MouseClicked(evt);
+                addownerpanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addownerpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addownerpanelMouseExited(evt);
             }
         });
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addownerpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(210, 217, 226));
         jLabel10.setText("Add Owner");
-        jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 12, -1, 22));
+        addownerpanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 12, -1, 22));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/acc.png"))); // NOI18N
-        jPanel9.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, -1, -1));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wh.png"))); // NOI18N
+        addownerpanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, -1, -1));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whright.png"))); // NOI18N
         jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel16MouseClicked(evt);
             }
         });
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 6, 28, -1));
+        addownerpanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 6, 28, -1));
 
-        jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 142, 246, 38));
+        jPanel8.add(addownerpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 142, 246, 38));
 
         jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel7.setText("Quick Actions");
         jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 8, -1, -1));
 
-        jPanel10.setBackground(new java.awt.Color(214, 206, 160));
-        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        addappointpanel.setBackground(new java.awt.Color(79, 105, 131));
+        addappointpanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel10MouseClicked(evt);
+                addappointpanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addappointpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addappointpanelMouseExited(evt);
             }
         });
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addappointpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(210, 217, 226));
         jLabel8.setText("Add Appointment");
-        jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 14, -1, -1));
+        addappointpanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 14, -1, -1));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/appoint.png"))); // NOI18N
-        jPanel10.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, -1, -1));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whappoint.png"))); // NOI18N
+        addappointpanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, -1, -1));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whright.png"))); // NOI18N
         jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel14MouseClicked(evt);
             }
         });
-        jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 8, 26, -1));
+        addappointpanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 8, 26, -1));
 
-        jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 32, 250, 38));
+        jPanel8.add(addappointpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 32, 250, 38));
 
-        jPanel11.setBackground(new java.awt.Color(214, 206, 160));
-        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        addpetpanel.setBackground(new java.awt.Color(79, 105, 131));
+        addpetpanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel11MouseClicked(evt);
+                addpetpanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addpetpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addpetpanelMouseExited(evt);
             }
         });
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addpetpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(210, 217, 226));
         jLabel9.setText("Add Pet");
-        jPanel11.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 12, -1, 20));
+        addpetpanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 12, -1, 20));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pet.png"))); // NOI18N
-        jPanel11.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, -1, -1));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whpet.png"))); // NOI18N
+        addpetpanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, -1, -1));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whright.png"))); // NOI18N
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel15MouseClicked(evt);
             }
         });
-        jPanel11.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 6, 26, -1));
+        addpetpanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 6, 26, -1));
 
-        jPanel8.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 86, 250, 38));
+        jPanel8.add(addpetpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 86, 250, 38));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 210, 276, 204));
 
@@ -339,25 +393,73 @@ public class info extends javax.swing.JInternalFrame {
         add.setVisible(true);       
     }//GEN-LAST:event_jLabel15MouseClicked
 
-    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+    private void addappointpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addappointpanelMouseClicked
           addAppointmentAd add = new addAppointmentAd();
         add.setVisible(true);         
-    }//GEN-LAST:event_jPanel10MouseClicked
+    }//GEN-LAST:event_addappointpanelMouseClicked
 
-    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+    private void addpetpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpetpanelMouseClicked
         addPetAd add = new addPetAd();
         add.setVisible(true);         
-    }//GEN-LAST:event_jPanel11MouseClicked
+    }//GEN-LAST:event_addpetpanelMouseClicked
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         addOwner add = new addOwner();
         add.setVisible(true);       
     }//GEN-LAST:event_jLabel16MouseClicked
 
-    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+    private void addownerpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addownerpanelMouseClicked
         addOwner add = new addOwner();
         add.setVisible(true);  
-    }//GEN-LAST:event_jPanel9MouseClicked
+    }//GEN-LAST:event_addownerpanelMouseClicked
+
+    private void pendpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pendpanelMouseEntered
+        pendpanel.setBackground(bodycolor);       
+    }//GEN-LAST:event_pendpanelMouseEntered
+
+    private void pendpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pendpanelMouseExited
+        pendpanel.setBackground(navcolor);       
+    }//GEN-LAST:event_pendpanelMouseExited
+
+    private void totpetpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totpetpanelMouseEntered
+        totpetpanel.setBackground(bodycolor);
+    }//GEN-LAST:event_totpetpanelMouseEntered
+
+    private void totpetpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totpetpanelMouseExited
+        totpetpanel.setBackground(navcolor);      
+    }//GEN-LAST:event_totpetpanelMouseExited
+
+    private void todappointpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todappointpanelMouseEntered
+        todappointpanel.setBackground(bodycolor);
+    }//GEN-LAST:event_todappointpanelMouseEntered
+
+    private void todappointpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todappointpanelMouseExited
+        todappointpanel.setBackground(navcolor);        
+    }//GEN-LAST:event_todappointpanelMouseExited
+
+    private void addappointpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addappointpanelMouseEntered
+        addappointpanel.setBackground(bodycolor);
+    }//GEN-LAST:event_addappointpanelMouseEntered
+
+    private void addappointpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addappointpanelMouseExited
+        addappointpanel.setBackground(navcolor);  
+    }//GEN-LAST:event_addappointpanelMouseExited
+
+    private void addpetpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpetpanelMouseEntered
+        addpetpanel.setBackground(bodycolor);
+    }//GEN-LAST:event_addpetpanelMouseEntered
+
+    private void addpetpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpetpanelMouseExited
+        addpetpanel.setBackground(navcolor);       
+    }//GEN-LAST:event_addpetpanelMouseExited
+
+    private void addownerpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addownerpanelMouseEntered
+        addownerpanel.setBackground(bodycolor);
+    }//GEN-LAST:event_addownerpanelMouseEntered
+
+    private void addownerpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addownerpanelMouseExited
+        addownerpanel.setBackground(navcolor);   
+    }//GEN-LAST:event_addownerpanelMouseExited
 
     /**
      * @param args the command line arguments
@@ -395,6 +497,9 @@ public class info extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel addappointpanel;
+    private javax.swing.JPanel addownerpanel;
+    private javax.swing.JPanel addpetpanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -412,19 +517,16 @@ public class info extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel jlabl7;
+    private javax.swing.JPanel pendpanel;
     private javax.swing.JLabel petsRegistered;
+    private javax.swing.JPanel todappointpanel;
     private javax.swing.JLabel todayAppointments;
     private javax.swing.JLabel totalPending;
+    private javax.swing.JPanel totpetpanel;
     // End of variables declaration//GEN-END:variables
 }

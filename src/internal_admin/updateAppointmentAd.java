@@ -54,7 +54,7 @@ public int pet_id_value;
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         breed = new javax.swing.JLabel();
         dateBirth = new javax.swing.JLabel();
@@ -70,7 +70,7 @@ public int pet_id_value;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(45, 85, 125));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -86,51 +86,36 @@ public int pet_id_value;
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Appointment");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 13, 163, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel3.setText("X");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                jLabel5MouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, 22, 28));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 394, 40));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        name.setForeground(new java.awt.Color(210, 217, 226));
         name.setText("Reasons");
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 88, 74, -1));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        breed.setForeground(new java.awt.Color(210, 217, 226));
         breed.setText("Date ");
         jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 132, 48, -1));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        dateBirth.setForeground(new java.awt.Color(210, 217, 226));
         dateBirth.setText("Time");
         jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 174, 78, -1));
 
@@ -147,16 +132,18 @@ public int pet_id_value;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 32));
         jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Notes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 222, 54, -1));
         jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
         jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 128, 202, 28));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(210, 217, 226));
         jLabel4.setText("Pet Id");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 58, -1, -1));
 
@@ -178,13 +165,6 @@ public int pet_id_value;
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
-    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void ap_reasonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_reasonsActionPerformed
         // TODO add your handling code here:
@@ -248,6 +228,13 @@ try (Connection conn = config.connectDB()) {
 }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        this.dispose();
+        users u = new users();
+        admin admin = new admin(u);
+        admin.setVisible(true);      
+    }//GEN-LAST:event_jLabel5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -294,8 +281,8 @@ try (Connection conn = config.connectDB()) {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

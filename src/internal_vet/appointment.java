@@ -37,7 +37,7 @@ public class appointment extends javax.swing.JInternalFrame {
     
     public void displayAppointment() {
         config db = new config();
-        String sql = "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment";
+        String sql = "SELECT ap_id, ap_petId,ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment";
         db.displayData(sql, appointmentTable);
     }
     
@@ -48,8 +48,8 @@ public class appointment extends javax.swing.JInternalFrame {
        tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
     
-    Color navcolor = new Color(190,176,112);
-    Color bodycolor = new Color(214,206,160);
+    Color navcolor = new Color(45, 85, 125);
+    Color bodycolor = new Color(21,41,62);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +82,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(241, 243, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -100,7 +100,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        a_updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        a_updatepane.setBackground(new java.awt.Color(21, 41, 62));
         a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -113,6 +113,7 @@ public class appointment extends javax.swing.JInternalFrame {
         a_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("COMPLETE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -127,12 +128,12 @@ public class appointment extends javax.swing.JInternalFrame {
         });
         a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, 16));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/complete.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/com.png"))); // NOI18N
         a_updatepane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
         jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 58, 112, 30));
 
-        a_approvepane.setBackground(new java.awt.Color(190, 176, 112));
+        a_approvepane.setBackground(new java.awt.Color(21, 41, 62));
         a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         a_approvepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -145,6 +146,7 @@ public class appointment extends javax.swing.JInternalFrame {
         a_approvepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         approve.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        approve.setForeground(new java.awt.Color(210, 217, 226));
         approve.setText("APPROVE");
         approve.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,7 +161,7 @@ public class appointment extends javax.swing.JInternalFrame {
         });
         a_approvepane.add(approve, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 6, 66, 20));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/approve.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/appr.png"))); // NOI18N
         a_approvepane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
         jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 102, 30));
@@ -177,9 +179,10 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Appointment");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -201,7 +204,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setBackground(new java.awt.Color(241, 243, 246));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         search.addActionListener(new java.awt.event.ActionListener() {
@@ -327,12 +330,15 @@ if(currentStatus.equalsIgnoreCase("Completed")){
     return;
 }
 String status = "Approved";
+session sess = session.getInstance();
+
+
 
 config db = new config();
 
 boolean success = db.updateRecords(
-        "UPDATE appointment SET ap_status=? WHERE ap_id=?",
-        status,
+        "UPDATE appointment SET ap_status=?, ap_vetId=? WHERE ap_id=?",
+        status, sess.getId(),
         apId
 );
 

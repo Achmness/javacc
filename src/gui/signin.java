@@ -58,12 +58,12 @@ public class signin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(79, 105, 131));
 
-        jPanel2.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel2.setBackground(new java.awt.Color(241, 243, 246));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(214, 206, 160));
+        jButton1.setBackground(new java.awt.Color(79, 105, 131));
         jButton1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton1.setText("SIGN UP");
         jButton1.setPreferredSize(new java.awt.Dimension(101, 27));
@@ -109,29 +109,32 @@ public class signin extends javax.swing.JFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, 50));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Sign in");
 
-        email.setBackground(new java.awt.Color(248, 247, 219));
+        email.setBackground(new java.awt.Color(79, 105, 131));
         email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        email.setForeground(new java.awt.Color(210, 217, 226));
         email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
+        email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16), new java.awt.Color(210, 217, 226))); // NOI18N
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailActionPerformed(evt);
             }
         });
 
-        pass.setBackground(new java.awt.Color(248, 247, 219));
+        pass.setBackground(new java.awt.Color(79, 105, 131));
         pass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pass.setForeground(new java.awt.Color(210, 217, 226));
         pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
+        pass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16), new java.awt.Color(210, 217, 226))); // NOI18N
         pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(190, 176, 112));
+        jButton2.setBackground(new java.awt.Color(241, 243, 246));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton2.setText("SIGN IN");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,8 +151,9 @@ public class signin extends javax.swing.JFrame {
             }
         });
 
-        showpass.setBackground(new java.awt.Color(248, 247, 219));
+        showpass.setBackground(new java.awt.Color(79, 105, 131));
         showpass.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        showpass.setForeground(new java.awt.Color(210, 217, 226));
         showpass.setText("Show password");
         showpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +162,7 @@ public class signin extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(210, 217, 226));
         jLabel8.setText("Forgot password?");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

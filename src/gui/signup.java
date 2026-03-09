@@ -51,23 +51,26 @@ public class signup extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(79, 105, 131));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Sign up");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 68, -1, -1));
 
-        password.setBackground(new java.awt.Color(248, 247, 219));
+        password.setBackground(new java.awt.Color(79, 105, 131));
         password.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        password.setForeground(new java.awt.Color(210, 217, 226));
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        password.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16))); // NOI18N
+        password.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 16), new java.awt.Color(210, 217, 226))); // NOI18N
         jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 254, 274, 52));
 
-        email.setBackground(new java.awt.Color(248, 247, 219));
+        email.setBackground(new java.awt.Color(79, 105, 131));
         email.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        email.setForeground(new java.awt.Color(210, 217, 226));
         email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        email.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14), new java.awt.Color(210, 217, 226))); // NOI18N
         email.setPreferredSize(new java.awt.Dimension(84, 42));
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +79,7 @@ public class signup extends javax.swing.JFrame {
         });
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 192, 272, 52));
 
-        jButton2.setBackground(new java.awt.Color(190, 176, 112));
+        jButton2.setBackground(new java.awt.Color(241, 243, 246));
         jButton2.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton2.setText("SIGN UP");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +107,7 @@ public class signup extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, 30));
 
-        jPanel4.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel4.setBackground(new java.awt.Color(241, 243, 246));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 32)); // NOI18N
         jLabel2.setText("Welcome Back!");
@@ -112,7 +115,7 @@ public class signup extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel7.setText("Log in to manage your pet’s health ");
 
-        jButton3.setBackground(new java.awt.Color(214, 206, 160));
+        jButton3.setBackground(new java.awt.Color(79, 105, 131));
         jButton3.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jButton3.setText("SIGN IN");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -167,10 +170,11 @@ public class signup extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 430));
 
-        user.setBackground(new java.awt.Color(248, 247, 219));
+        user.setBackground(new java.awt.Color(79, 105, 131));
         user.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        user.setForeground(new java.awt.Color(210, 217, 226));
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        user.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        user.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14), new java.awt.Color(210, 217, 226))); // NOI18N
         user.setPreferredSize(new java.awt.Dimension(84, 42));
         jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 132, 270, 52));
 

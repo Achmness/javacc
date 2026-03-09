@@ -246,6 +246,16 @@ public boolean updateRecords(String sql, Object... params) {
         return false;
     }
 }
+public ResultSet getData(String sql) throws SQLException {
+    // We call your static method here
+    Connection con = connectDB(); 
+    if (con != null) {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        return rs;
+    }
+    return null;
+}
 
 
 

@@ -50,7 +50,7 @@ public class updatePet extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         species = new javax.swing.JLabel();
         breed = new javax.swing.JLabel();
@@ -64,7 +64,7 @@ public class updatePet extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(45, 85, 125));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -80,55 +80,41 @@ public class updatePet extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Pet Information");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 13, 163, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel3.setText("X");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                jLabel1MouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 10, 22, 28));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 394, 40));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        name.setForeground(new java.awt.Color(210, 217, 226));
         name.setText("Name");
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 86, -1, -1));
 
         species.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        species.setForeground(new java.awt.Color(210, 217, 226));
         species.setText("Species");
         jPanel1.add(species, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 132, 66, -1));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        breed.setForeground(new java.awt.Color(210, 217, 226));
         breed.setText("Breed");
         jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 190, -1, -1));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        dateBirth.setForeground(new java.awt.Color(210, 217, 226));
         dateBirth.setText("Date Of Birth");
         jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 256, 110, -1));
         jPanel1.add(p_species, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 132, 192, 28));
@@ -164,12 +150,6 @@ public class updatePet extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.dispose();
-        client client = new client();
-        client.setVisible(true);
-    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void p_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_nameActionPerformed
         // TODO addPet your handling code here:
@@ -221,6 +201,12 @@ public class updatePet extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.dispose();
+        client client = new client();
+        client.setVisible(true);             
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -267,8 +253,8 @@ public class updatePet extends javax.swing.JFrame {
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

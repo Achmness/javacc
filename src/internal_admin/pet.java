@@ -35,8 +35,8 @@ public class pet extends javax.swing.JInternalFrame {
         displayPets();
     }
     
-    Color navcolor = new Color(190,176,112);
-    Color bodycolor = new Color(214,206,160);
+    Color navcolor = new Color(45, 85, 125);
+    Color bodycolor = new Color(21,41,62);
     
     public void searchTable(){
        DefaultTableModel model =  (DefaultTableModel)petTable.getModel();
@@ -84,9 +84,9 @@ public class pet extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(241, 243, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         petTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,7 +104,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        p_updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        p_updatepane.setBackground(new java.awt.Color(79, 105, 131));
         p_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         p_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -117,6 +117,7 @@ public class pet extends javax.swing.JInternalFrame {
         p_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,12 +133,12 @@ public class pet extends javax.swing.JInternalFrame {
         });
         p_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 6, -1, 22));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wup.png"))); // NOI18N
         p_updatepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
         jPanel1.add(p_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 58, 88, 30));
 
-        p_addpane.setBackground(new java.awt.Color(190, 176, 112));
+        p_addpane.setBackground(new java.awt.Color(79, 105, 131));
         p_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         p_addpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -150,6 +151,7 @@ public class pet extends javax.swing.JInternalFrame {
         p_addpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        delete.setForeground(new java.awt.Color(210, 217, 226));
         delete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         delete.setText("ADD");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,12 +167,12 @@ public class pet extends javax.swing.JInternalFrame {
         });
         p_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 4, 42, 24));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wadds.png"))); // NOI18N
         p_addpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
         jPanel1.add(p_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 88, 30));
 
-        p_deletepane.setBackground(new java.awt.Color(190, 176, 112));
+        p_deletepane.setBackground(new java.awt.Color(79, 105, 131));
         p_deletepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         p_deletepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -183,6 +185,7 @@ public class pet extends javax.swing.JInternalFrame {
         p_deletepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(210, 217, 226));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("DELETE");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,7 +201,7 @@ public class pet extends javax.swing.JInternalFrame {
         });
         p_deletepane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 2, -1, 28));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wdel.png"))); // NOI18N
         p_deletepane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 4, -1, -1));
 
         jPanel1.add(p_deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 58, 88, -1));
@@ -216,9 +219,10 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Pets");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -240,7 +244,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setBackground(new java.awt.Color(241, 243, 246));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         search.addActionListener(new java.awt.event.ActionListener() {
@@ -346,17 +350,17 @@ public class pet extends javax.swing.JInternalFrame {
         TableModel model = petTable.getModel();
 
         int petId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-        String pName = model.getValueAt(rowIndex, 1).toString();
-        String pScpecies = model.getValueAt(rowIndex, 2).toString();
-        String pBreed = model.getValueAt(rowIndex, 3).toString();
-        String pDateBirth = model.getValueAt(rowIndex, 4).toString();
+String pName = model.getValueAt(rowIndex, 2).toString();
+String pScpecies = model.getValueAt(rowIndex, 3).toString();
+String pBreed = model.getValueAt(rowIndex, 4).toString();
+String pDateBirth = model.getValueAt(rowIndex, 5).toString();
 
-        updatePetAd updateForm = new updatePetAd();
+updatePet updateForm = new updatePet();
 
-        updateForm.petId = petId;
-        updateForm.p_name.setText(pName);
-        updateForm.p_species.setText(pScpecies);
-        updateForm.p_breed.setText(pBreed);
+updateForm.petId = petId;         
+updateForm.p_name.setText(pName);     
+updateForm.p_species.setText(pScpecies);     
+updateForm.p_breed.setText(pBreed);
         try {
             java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(pDateBirth);
             updateForm.p_dateBirth.setDate(date);

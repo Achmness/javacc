@@ -46,7 +46,7 @@ public void displayAppointment() {
     config db = new config();
     session sess = session.getInstance();
 
-    String sql = "SELECT a.ap_id, a.ap_petId, p.p_name, a.ap_reasons, a.ap_date, a.ap_time, a.ap_notes, a.ap_status " +
+    String sql = "SELECT a.ap_id, p.p_id, a.ap_reasons, a.ap_date, a.ap_time, a.ap_notes, a.ap_status " +
                  "FROM appointment a " +
                  "INNER JOIN pet p ON a.ap_petId = p.p_id " +
                  "WHERE a.ap_clientId = " + sess.getId();
@@ -61,8 +61,8 @@ public void displayAppointment() {
        tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
     
-    Color navcolor = new Color(190,176,112);
-    Color bodycolor = new Color(214,206,160);
+    Color navcolor = new Color(45, 85, 125);
+    Color bodycolor = new Color(21,41,62);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +102,7 @@ public void displayAppointment() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(241, 243, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -120,7 +120,7 @@ public void displayAppointment() {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        a_updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        a_updatepane.setBackground(new java.awt.Color(21, 41, 62));
         a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -133,6 +133,7 @@ public void displayAppointment() {
         a_updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,12 +149,12 @@ public void displayAppointment() {
         });
         a_updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 6, 60, 18));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wup.png"))); // NOI18N
         a_updatepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
         jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 60, 90, 30));
 
-        a_addpane.setBackground(new java.awt.Color(190, 176, 112));
+        a_addpane.setBackground(new java.awt.Color(21, 41, 62));
         a_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         a_addpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -166,6 +167,7 @@ public void displayAppointment() {
         a_addpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        delete.setForeground(new java.awt.Color(210, 217, 226));
         delete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         delete.setText("ADD");
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -181,12 +183,12 @@ public void displayAppointment() {
         });
         a_addpane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 4, 32, 26));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wadds.png"))); // NOI18N
         a_addpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
 
         jPanel1.add(a_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 92, 30));
 
-        a_cancelpane.setBackground(new java.awt.Color(190, 176, 112));
+        a_cancelpane.setBackground(new java.awt.Color(21, 41, 62));
         a_cancelpane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_cancelpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -202,6 +204,7 @@ public void displayAppointment() {
         a_cancelpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(210, 217, 226));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("CANCEL");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,7 +220,7 @@ public void displayAppointment() {
         });
         a_cancelpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wcan.png"))); // NOI18N
         a_cancelpane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 2, -1, 26));
 
         jPanel1.add(a_cancelpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 60, 90, 30));
@@ -235,9 +238,10 @@ public void displayAppointment() {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Appointment");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -259,7 +263,7 @@ public void displayAppointment() {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setBackground(new java.awt.Color(241, 243, 246));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         search.addActionListener(new java.awt.event.ActionListener() {
@@ -462,15 +466,39 @@ if (rowIndex < 0) {
 
 TableModel model = appointmentTable.getModel();
 
+String status = model.getValueAt(rowIndex, 6).toString(); 
+
+if ("Completed".equalsIgnoreCase(status)) {
+    JOptionPane.showMessageDialog(this, 
+        "This appointment is already Completed and cannot be modified.", 
+        "Update Restricted", 
+        JOptionPane.WARNING_MESSAGE);
+    return; // Stops the code from opening the updateForm
+}else if("Approved".equalsIgnoreCase(status)){
+    JOptionPane.showMessageDialog(this, 
+        "This appointment is already Approved and cannot be modified.", 
+        "Update Restricted", 
+        JOptionPane.WARNING_MESSAGE);
+    return;
+}else if("Cancelled".equalsIgnoreCase(status)){
+    JOptionPane.showMessageDialog(this, 
+        "This appointment is already Approved and cannot be modified.", 
+        "Update Restricted", 
+        JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-String apReasons = model.getValueAt(rowIndex, 1).toString();
-String apDate = model.getValueAt(rowIndex, 2).toString();
-String apTime = model.getValueAt(rowIndex, 3).toString();
-String apNotes = model.getValueAt(rowIndex, 4).toString();
+int petId = Integer.parseInt(model.getValueAt(rowIndex, 1).toString());
+String apReasons = model.getValueAt(rowIndex, 2).toString();
+String apDate = model.getValueAt(rowIndex, 3).toString();
+String apTime = model.getValueAt(rowIndex, 4).toString();
+String apNotes = model.getValueAt(rowIndex, 5).toString();
 
 updateAppointment updateForm = new updateAppointment();
 
-updateForm.apId = apId;         
+updateForm.apId = apId;  
+updateForm.ap_pet.setText(String.valueOf(petId));
 updateForm.ap_reasons.setText(apReasons);     
 try {
     java.util.Date date = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(apDate);
@@ -507,12 +535,16 @@ boolean success = db.updateRecords(
         status,
         apId
 );
-
-if(success){
-    JOptionPane.showMessageDialog(null, "Appointment Cancel Successfully!");
-
-    db.displayData("SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment", appointmentTable);
-
+session sess = session.getInstance();
+if (success) {
+    JOptionPane.showMessageDialog(null, "Appointment Cancelled Successfully!");
+    String sql = "SELECT a.ap_id, a.ap_petId, p.p_name, a.ap_reasons, " +
+                 "       a.ap_date, a.ap_time, a.ap_notes, a.ap_status " +
+                 "FROM appointment a " +
+                 "INNER JOIN pet p ON a.ap_petId = p.p_id " +
+                 "WHERE a.ap_clientId = " + sess.getId();
+    
+    db.displayData(sql, appointmentTable);
 }else{
     JOptionPane.showMessageDialog(null, "Cancelled Appointment Failed!");
 }      

@@ -20,6 +20,8 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import config.profileImage;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author James
@@ -43,8 +45,8 @@ public class admin extends javax.swing.JFrame {
     maindesktop.add(info).setVisible(true);
 
     } 
-    Color navcolor = new Color(190,176,112);
-    Color bodycolor = new Color(248,247,219);
+    Color navcolor = new Color(21,41,62);
+    Color bodycolor = new Color(45, 85, 125);
 
     public admin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -131,14 +133,18 @@ public class admin extends javax.swing.JFrame {
         userpane = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        images = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
         appointpane = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        petpane = new javax.swing.JPanel();
+        outpane = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        petpane = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        images = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -151,11 +157,12 @@ public class admin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        navbar.setBackground(new java.awt.Color(190, 176, 112));
+        navbar.setBackground(new java.awt.Color(21, 41, 62));
         navbar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        navbar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         navbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        accpane.setBackground(new java.awt.Color(190, 176, 112));
+        accpane.setBackground(new java.awt.Color(21, 41, 62));
         accpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 accpaneMouseClicked(evt);
@@ -169,12 +176,13 @@ public class admin extends javax.swing.JFrame {
         });
         accpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/acc.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wh.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         accpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 12, 24, -1));
 
-        jLabel2.setBackground(new java.awt.Color(190, 176, 112));
+        jLabel2.setBackground(new java.awt.Color(21, 41, 62));
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("  Account");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -195,7 +203,7 @@ public class admin extends javax.swing.JFrame {
 
         navbar.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 146, 146, 50));
 
-        userpane.setBackground(new java.awt.Color(190, 176, 112));
+        userpane.setBackground(new java.awt.Color(21, 41, 62));
         userpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userpaneMouseClicked(evt);
@@ -210,6 +218,7 @@ public class admin extends javax.swing.JFrame {
         userpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(210, 217, 226));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Users");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -228,17 +237,17 @@ public class admin extends javax.swing.JFrame {
         });
         userpane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, 16, 146, 20));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/users.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whusers.png"))); // NOI18N
         jLabel7.setText("jLabel7");
         userpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 28, -1));
 
         navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 196, 146, 50));
-        navbar.add(images, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 108, 98));
 
         username.setBackground(new java.awt.Color(0, 0, 0));
+        username.setForeground(new java.awt.Color(210, 217, 226));
         navbar.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 120, 136, 22));
 
-        appointpane.setBackground(new java.awt.Color(190, 176, 112));
+        appointpane.setBackground(new java.awt.Color(21, 41, 62));
         appointpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 appointpaneMouseClicked(evt);
@@ -252,11 +261,12 @@ public class admin extends javax.swing.JFrame {
         });
         appointpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/appoint.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whappoint.png"))); // NOI18N
         appointpane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, -1));
 
         jLabel9.setBackground(new java.awt.Color(190, 176, 112));
         jLabel9.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(210, 217, 226));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("           Appointment");
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -277,7 +287,43 @@ public class admin extends javax.swing.JFrame {
 
         navbar.add(appointpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 246, 146, 50));
 
-        petpane.setBackground(new java.awt.Color(190, 176, 112));
+        outpane.setBackground(new java.awt.Color(21, 41, 62));
+        outpane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                outpaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                outpaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                outpaneMouseExited(evt);
+            }
+        });
+        outpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/out.png"))); // NOI18N
+        outpane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 14, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Sign out ");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel11MouseExited(evt);
+            }
+        });
+        outpane.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 20, 124, -1));
+
+        navbar.add(outpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 428, 146, 52));
+
+        petpane.setBackground(new java.awt.Color(21, 41, 62));
         petpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 petpaneMouseClicked(evt);
@@ -291,34 +337,42 @@ public class admin extends javax.swing.JFrame {
         });
         petpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pet.png"))); // NOI18N
-        petpane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 14, -1, -1));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whpet.png"))); // NOI18N
+        petpane.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 14, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Pets");
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel13.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Pets");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                jLabel13MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel11MouseEntered(evt);
+                jLabel13MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel11MouseExited(evt);
+                jLabel13MouseExited(evt);
             }
         });
-        petpane.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 124, -1));
+        petpane.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 124, -1));
 
         navbar.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 296, 146, 52));
 
+        jPanel2.setBackground(new java.awt.Color(241, 243, 246));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(images, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 114, 98));
+
+        navbar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 126, 110));
+
         jPanel1.add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 480));
 
-        jPanel3.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel3.setBackground(new java.awt.Color(45, 85, 125));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(210, 217, 226));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Admininstrator");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -329,26 +383,26 @@ public class admin extends javax.swing.JFrame {
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 1, 191, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel6.setText("—");
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/miin.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
         });
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 7, -1, 30));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 6, 22, 32));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel3.setText("X");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 10, -1, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 8, 26, 28));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 0, 594, 40));
 
-        maindesktop.setBackground(new java.awt.Color(248, 247, 219));
+        maindesktop.setBackground(new java.awt.Color(241, 243, 246));
 
         javax.swing.GroupLayout maindesktopLayout = new javax.swing.GroupLayout(maindesktop);
         maindesktop.setLayout(maindesktopLayout);
@@ -479,29 +533,57 @@ if (confirm == JOptionPane.YES_OPTION) {
     }//GEN-LAST:event_appointpaneMouseExited
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        internal_admin.pet pet = new internal_admin.pet();
-        maindesktop.add(pet).setVisible(true);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        this.dispose();
+        new signin().setVisible(true);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseEntered
-        petpane.setBackground(bodycolor);
+        outpane.setBackground(bodycolor);
     }//GEN-LAST:event_jLabel11MouseEntered
 
     private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
-        petpane.setBackground(navcolor);
+        outpane.setBackground(navcolor);
     }//GEN-LAST:event_jLabel11MouseExited
+
+    private void outpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outpaneMouseClicked
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        this.dispose();
+        new signin().setVisible(true);
+    }//GEN-LAST:event_outpaneMouseClicked
+
+    private void outpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outpaneMouseEntered
+        outpane.setBackground(bodycolor);
+    }//GEN-LAST:event_outpaneMouseEntered
+
+    private void outpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outpaneMouseExited
+        outpane.setBackground(navcolor);
+    }//GEN-LAST:event_outpaneMouseExited
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        internal_admin.pet pet = new internal_admin.pet();
+        maindesktop.add(pet).setVisible(true);      
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseEntered
+        petpane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel13MouseEntered
+
+    private void jLabel13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseExited
+        petpane.setBackground(navcolor);        
+    }//GEN-LAST:event_jLabel13MouseExited
 
     private void petpaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_petpaneMouseClicked
         internal_admin.pet pet = new internal_admin.pet();
-        maindesktop.add(pet).setVisible(true);
+        maindesktop.add(pet).setVisible(true);         
     }//GEN-LAST:event_petpaneMouseClicked
 
     private void petpaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_petpaneMouseEntered
-        petpane.setBackground(bodycolor);
+        petpane.setBackground(bodycolor);     
     }//GEN-LAST:event_petpaneMouseEntered
 
     private void petpaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_petpaneMouseExited
-        petpane.setBackground(navcolor);
+        petpane.setBackground(navcolor);       
     }//GEN-LAST:event_petpaneMouseExited
 
     /**
@@ -554,6 +636,8 @@ if (confirm == JOptionPane.YES_OPTION) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -563,9 +647,11 @@ if (confirm == JOptionPane.YES_OPTION) {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JDesktopPane maindesktop;
     private javax.swing.JPanel navbar;
+    private javax.swing.JPanel outpane;
     private javax.swing.JPanel petpane;
     private javax.swing.JLabel username;
     private javax.swing.JPanel userpane;

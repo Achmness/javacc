@@ -216,7 +216,7 @@ public class manage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(45, 85, 125));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -233,38 +233,43 @@ public class manage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Account");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 0, -1, 42));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 0, 16, 42));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 0, 22, 42));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 40));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("First Name");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 54, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(210, 217, 226));
         jLabel4.setText("Last Name ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 118, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(210, 217, 226));
         jLabel5.setText("Contact Number");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 308, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(210, 217, 226));
         jLabel6.setText("Address");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 46, -1, -1));
 
@@ -310,14 +315,17 @@ public class manage extends javax.swing.JFrame {
         jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 268, 194, 26));
 
         jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(210, 217, 226));
         jLabel7.setText("User");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 242, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(210, 217, 226));
         jLabel8.setText("Email");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 178, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(210, 217, 226));
         jLabel9.setText("Profile");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 176, -1, -1));
 

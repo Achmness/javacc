@@ -56,8 +56,8 @@ public class account extends javax.swing.JInternalFrame {
       
     }
 
-    Color navcolor = new Color(190,176,112);
-    Color bodycolor = new Color(214,206,160);
+    Color navcolor = new Color(21,41,62);
+    Color bodycolor = new Color(45, 85, 125);
     
    public void displayCurrentUser() {
 
@@ -147,8 +147,6 @@ public class account extends javax.swing.JInternalFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -173,8 +171,6 @@ public class account extends javax.swing.JInternalFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         contact = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        browse = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -189,7 +185,8 @@ public class account extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(241, 243, 246));
+        jPanel1.setToolTipText("");
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -205,57 +202,29 @@ public class account extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Account");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 20, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(190, 176, 112));
-
-        jLabel3.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Sign out");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, 30));
-
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(79, 105, 131));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel9.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel9.setBackground(new java.awt.Color(21, 41, 62));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Personal Information");
         jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, 20));
 
-        managepane.setBackground(new java.awt.Color(190, 176, 112));
+        managepane.setBackground(new java.awt.Color(21, 41, 62));
         managepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 managepaneMouseClicked(evt);
@@ -270,6 +239,7 @@ public class account extends javax.swing.JInternalFrame {
         managepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(210, 217, 226));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Manage");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,22 +267,23 @@ public class account extends javax.swing.JInternalFrame {
                 jLabel5MouseExited(evt);
             }
         });
-        managepane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, -6, -1, 42));
+        managepane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, -6, 26, 42));
 
         jPanel9.add(managepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 0, 102, 28));
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 378, 28));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/name.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wname.png"))); // NOI18N
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 34, 40, -1));
 
         fullname.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        fullname.setForeground(new java.awt.Color(210, 217, 226));
         fullname.setText("Full Name");
         jPanel2.add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 328, 54));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 60, 380, 80));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(79, 105, 131));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -324,10 +295,11 @@ public class account extends javax.swing.JInternalFrame {
         });
         jPanel5.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 34, 120, 120));
 
-        jPanel10.setBackground(new java.awt.Color(190, 176, 112));
+        jPanel10.setBackground(new java.awt.Color(21, 41, 62));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(210, 217, 226));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("       Profile Picture ");
         jPanel10.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-18, 4, 158, -1));
@@ -336,68 +308,61 @@ public class account extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 60, 156, 166));
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setBackground(new java.awt.Color(79, 105, 131));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/address.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wadd.png"))); // NOI18N
         jPanel11.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 28, 32));
 
         address.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        address.setForeground(new java.awt.Color(210, 217, 226));
         address.setText("Address");
         jPanel11.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 2, 328, 58));
 
         jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 144, 380, 52));
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setBackground(new java.awt.Color(79, 105, 131));
         jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wemail.png"))); // NOI18N
         jPanel13.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 30, 34));
 
         email.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        email.setForeground(new java.awt.Color(210, 217, 226));
         email.setText("Email");
         jPanel13.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -8, 300, 76));
 
         jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 200, 380, 52));
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setBackground(new java.awt.Color(79, 105, 131));
         jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wh.png"))); // NOI18N
         jPanel14.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 4, 30, -1));
 
         user.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        user.setForeground(new java.awt.Color(210, 217, 226));
         user.setText("User");
         jPanel14.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -8, 322, 74));
 
         jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 256, 380, 52));
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBackground(new java.awt.Color(79, 105, 131));
         jPanel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/contact.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wcon.png"))); // NOI18N
         jPanel12.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 6, -1, -1));
 
         contact.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        contact.setForeground(new java.awt.Color(210, 217, 226));
         contact.setText("Contact Number");
         jPanel12.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 0, 150, 58));
 
         jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 312, 380, 50));
-
-        jPanel7.setBackground(new java.awt.Color(190, 176, 112));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
-            }
-        });
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel7.add(browse, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 8, -1, -1));
-
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 308, 156, 34));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,13 +378,6 @@ public class account extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        mainFrame.dispose();
-        new signin().setVisible(true);
-                
-    }//GEN-LAST:event_jLabel3MouseClicked
-
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
 
         
@@ -433,10 +391,6 @@ public class account extends javax.swing.JInternalFrame {
     private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
         managepane.setBackground(bodycolor);       
     }//GEN-LAST:event_jLabel8MouseEntered
-
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
- 
-    }//GEN-LAST:event_jPanel7MouseClicked
 
     private void managepaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managepaneMouseEntered
         managepane.setBackground(bodycolor);
@@ -521,7 +475,6 @@ public class account extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel address;
-    private javax.swing.JLabel browse;
     public javax.swing.JLabel contact;
     public javax.swing.JLabel email;
     public javax.swing.JLabel fullname;
@@ -530,7 +483,6 @@ public class account extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -544,11 +496,9 @@ public class account extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel managepane;

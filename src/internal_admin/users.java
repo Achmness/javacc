@@ -55,8 +55,8 @@ public class users extends javax.swing.JInternalFrame {
        tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
     
-    Color navcolor = new Color(190,176,112);
-    Color bodycolor = new Color(214,206,160);
+    Color navcolor = new Color(45, 85, 125);
+    Color bodycolor = new Color(21,41,62);
 
 
     
@@ -96,7 +96,7 @@ public class users extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(248, 247, 219));
+        jPanel1.setBackground(new java.awt.Color(241, 243, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,12 +114,14 @@ public class users extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        updatepane.setBackground(new java.awt.Color(190, 176, 112));
+        updatepane.setBackground(new java.awt.Color(79, 105, 131));
         updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         updatepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("UPDATE");
+        jLabel1.setAutoscrolls(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -133,17 +135,19 @@ public class users extends javax.swing.JInternalFrame {
         });
         updatepane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 4, 60, 28));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wup.png"))); // NOI18N
         updatepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 6, -1, -1));
 
         jPanel1.add(updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 58, 96, 30));
 
-        deletepane.setBackground(new java.awt.Color(190, 176, 112));
+        deletepane.setBackground(new java.awt.Color(79, 105, 131));
         deletepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         deletepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         delete.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        delete.setForeground(new java.awt.Color(210, 217, 226));
         delete.setText("DELETE");
+        delete.setAutoscrolls(true);
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteMouseClicked(evt);
@@ -157,12 +161,12 @@ public class users extends javax.swing.JInternalFrame {
         });
         deletepane.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 6, 64, 24));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wdel.png"))); // NOI18N
         deletepane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 6, 24, -1));
 
         jPanel1.add(deletepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 58, 96, -1));
 
-        addpane.setBackground(new java.awt.Color(190, 176, 112));
+        addpane.setBackground(new java.awt.Color(79, 105, 131));
         addpane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         addpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -178,7 +182,9 @@ public class users extends javax.swing.JInternalFrame {
         addpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(210, 217, 226));
         jLabel6.setText("ADD");
+        jLabel6.setAutoscrolls(true);
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -192,7 +198,7 @@ public class users extends javax.swing.JInternalFrame {
         });
         addpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 6, 42, 22));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wadds.png"))); // NOI18N
         addpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
 
         jPanel1.add(addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 94, 30));
@@ -210,10 +216,12 @@ public class users extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 219, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(214, 206, 160));
+        jPanel4.setBackground(new java.awt.Color(47, 62, 80));
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(210, 217, 226));
         jLabel2.setText("Users");
+        jLabel2.setToolTipText("");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -234,7 +242,7 @@ public class users extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        search.setBackground(new java.awt.Color(248, 247, 219));
+        search.setBackground(new java.awt.Color(241, 243, 246));
         search.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         search.addActionListener(new java.awt.event.ActionListener() {
