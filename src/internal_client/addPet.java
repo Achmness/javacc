@@ -51,9 +51,10 @@ public class addPet extends javax.swing.JFrame {
         dateBirth = new javax.swing.JLabel();
         p_species = new javax.swing.JTextField();
         p_name = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         p_breed = new javax.swing.JTextField();
         p_dateBirth = new com.toedter.calendar.JDateChooser();
+        jPanel3 = new javax.swing.JPanel();
+        species1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -120,16 +121,23 @@ public class addPet extends javax.swing.JFrame {
             }
         });
         jPanel1.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 84, 192, 28));
-
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
         jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
         jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 250, 190, 28));
+
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        species1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        species1.setForeground(new java.awt.Color(210, 217, 226));
+        species1.setText("Add");
+        jPanel3.add(species1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 32));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 298, 72, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,7 +158,13 @@ public class addPet extends javax.swing.JFrame {
         // TODO addPet your handling code here:
     }//GEN-LAST:event_p_nameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.dispose();
+        client client = new client();
+        client.setVisible(true);            
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         session sess = session.getInstance();
         String pName = p_name.getText().trim();
         int pOwner = sess.getId();
@@ -176,15 +190,7 @@ public class addPet extends javax.swing.JFrame {
         this.dispose();
         client client = new client();
         client.setVisible(true);
-        
-            
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        this.dispose();
-        client client = new client();
-        client.setVisible(true);            
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,10 +238,10 @@ public class addPet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel name;
@@ -244,5 +250,6 @@ public class addPet extends javax.swing.JFrame {
     private javax.swing.JTextField p_name;
     private javax.swing.JTextField p_species;
     private javax.swing.JLabel species;
+    private javax.swing.JLabel species1;
     // End of variables declaration//GEN-END:variables
 }

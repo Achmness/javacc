@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 
@@ -282,6 +284,11 @@ public class info extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(210, 217, 226));
         jLabel10.setText("Add Owner");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
         addownerpanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 12, -1, 22));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wh.png"))); // NOI18N
@@ -394,11 +401,15 @@ public class info extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void addappointpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addappointpanelMouseClicked
-          addAppointmentAd add = new addAppointmentAd();
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose(); 
+        addAppointmentAd add = new addAppointmentAd();
         add.setVisible(true);         
     }//GEN-LAST:event_addappointpanelMouseClicked
 
     private void addpetpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpetpanelMouseClicked
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose(); 
         addPetAd add = new addPetAd();
         add.setVisible(true);         
     }//GEN-LAST:event_addpetpanelMouseClicked
@@ -409,6 +420,8 @@ public class info extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void addownerpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addownerpanelMouseClicked
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose(); 
         addOwner add = new addOwner();
         add.setVisible(true);  
     }//GEN-LAST:event_addownerpanelMouseClicked
@@ -460,6 +473,10 @@ public class info extends javax.swing.JInternalFrame {
     private void addownerpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addownerpanelMouseExited
         addownerpanel.setBackground(navcolor);   
     }//GEN-LAST:event_addownerpanelMouseExited
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
      * @param args the command line arguments

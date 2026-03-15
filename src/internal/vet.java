@@ -26,10 +26,11 @@ public class vet extends javax.swing.JFrame {
     /**
      * Creates new form 
      */
+    
     public vet() {
         initComponents();
-        internal_vet.account profile = new internal_vet.account();
-        maindesktop.add(profile).setVisible(true);
+        internal_vet.info info = new internal_vet.info();
+        maindesktop.add(info).setVisible(true);
         displayCurrentUser();
     }
     Color navcolor = new Color(21,41,62);
@@ -185,7 +186,7 @@ public class vet extends javax.swing.JFrame {
         });
         apppane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
-        jPanel2.add(apppane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 142, 150, 50));
+        jPanel2.add(apppane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 164, 150, 50));
 
         accpane.setBackground(new java.awt.Color(21, 41, 62));
         accpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -225,7 +226,7 @@ public class vet extends javax.swing.JFrame {
         });
         accpane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
-        jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 192, 150, 50));
+        jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 214, 150, 50));
 
         recordspane.setBackground(new java.awt.Color(21, 41, 62));
         recordspane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,7 +279,7 @@ public class vet extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/medi.png"))); // NOI18N
         recordspane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 12, -1, -1));
 
-        jPanel2.add(recordspane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 242, 150, 50));
+        jPanel2.add(recordspane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 264, 150, 50));
 
         outpane.setBackground(new java.awt.Color(21, 41, 62));
         outpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -361,7 +362,7 @@ public class vet extends javax.swing.JFrame {
         });
         petpane.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 124, -1));
 
-        jPanel2.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 292, 152, 52));
+        jPanel2.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 314, 152, 52));
 
         userpane.setBackground(new java.awt.Color(21, 41, 62));
         userpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -401,7 +402,7 @@ public class vet extends javax.swing.JFrame {
         jLabel16.setText("jLabel7");
         userpane.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 8, 28, -1));
 
-        jPanel2.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 346, 146, 50));
+        jPanel2.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 368, 146, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 480));
 
@@ -470,7 +471,8 @@ public class vet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-
+        internal_vet.info info = new internal_vet.info();
+        maindesktop.add(info).setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

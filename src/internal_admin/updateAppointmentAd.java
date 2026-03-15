@@ -23,20 +23,32 @@ public class updateAppointmentAd extends javax.swing.JFrame {
     /**
      * Creates new form updateAppointmentAd
      */
-    public int apId;
-public int pet_id_value;
 
+public int pet_id_value;
+public int appId;
     public updateAppointmentAd() {
         initComponents();
-        date();
-
-    }
-    private void date(){
-        Date date = new Date();
-        ap_date.setDateFormatString("MMMM dd, yyyy");
-        ap_date.setDate(date);
+            ap_status.addItem("Approved");
+            ap_status.addItem("Completed");
+            ap_status.addItem("Cancelled");
+            ap_status.addItem("Pending");
+            ap_id.setText(String.valueOf(appId));
+        displayVet();
     }
     
+    public void displayVet() {
+    config db = new config();
+    String sql = "SELECT a_id, a_fname, a_lname, a_contact, a_email, a_type " +
+                 "FROM account " +
+                 "WHERE a_type = 'VETERINARIAN'";
+    db.displayData(sql, vetTable);
+}
+// Change your existing loadData to this:
+public void loadData(int id) {
+    this.appId = id; // Update the local variable
+    this.ap_id.setText(String.valueOf(id)); // Display it in the JLabel
+    
+}
 
     
     
@@ -56,19 +68,21 @@ public int pet_id_value;
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
-        breed = new javax.swing.JLabel();
         dateBirth = new javax.swing.JLabel();
-        ap_reasons = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        ap_time = new javax.swing.JTextField();
+        ap_vetId = new javax.swing.JTextField();
+        ap_status = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        ap_notes = new javax.swing.JTextField();
-        ap_date = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
-        petId = new javax.swing.JLabel();
+        ap_id = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        vetTable = new javax.swing.JTable();
+        dateBirth1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(45, 85, 125));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,131 +116,94 @@ public int pet_id_value;
         });
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, 22, 28));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 394, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 554, 40));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         name.setForeground(new java.awt.Color(210, 217, 226));
-        name.setText("Reasons");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 88, 74, -1));
-
-        breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
-        breed.setForeground(new java.awt.Color(210, 217, 226));
-        breed.setText("Date ");
-        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 132, 48, -1));
+        name.setText("Veterinarian");
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 88, 132, -1));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         dateBirth.setForeground(new java.awt.Color(210, 217, 226));
-        dateBirth.setText("Time");
-        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 174, 78, -1));
+        dateBirth.setText("Status");
+        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 122, 96, -1));
 
-        ap_reasons.addActionListener(new java.awt.event.ActionListener() {
+        ap_vetId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ap_reasonsActionPerformed(evt);
+                ap_vetIdActionPerformed(evt);
             }
         });
-        jPanel1.add(ap_reasons, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 82, 204, 28));
+        jPanel1.add(ap_vetId, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 82, 204, 28));
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ap_status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ap_statusActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 32));
-        jPanel1.add(ap_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 174, 202, 28));
+        jPanel1.add(ap_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 120, 204, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(210, 217, 226));
-        jLabel1.setText("Notes");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 222, 54, -1));
-        jPanel1.add(ap_notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 202, 74));
-        jPanel1.add(ap_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 128, 202, 28));
+        jLabel1.setText("Appointment Id");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 52, 138, -1));
 
-        jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(210, 217, 226));
-        jLabel4.setText("Pet Id");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 58, -1, -1));
+        ap_id.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        ap_id.setForeground(new java.awt.Color(210, 217, 226));
+        jPanel1.add(ap_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 44, 88, 32));
 
-        petId.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        petId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(petId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 46, 102, 30));
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel12.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel12.setText("Save");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 6, 46, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 120, 82, 28));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 482, 167));
+
+        jPanel2.setBackground(new java.awt.Color(241, 243, 246));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        vetTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(vetTable);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 43, 458, 205));
+
+        dateBirth1.setFont(new java.awt.Font("Georgia", 1, 20)); // NOI18N
+        dateBirth1.setText("Veterinarian");
+        jPanel2.add(dateBirth1, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 8, 184, 28));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 168, 482, 250));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ap_reasonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_reasonsActionPerformed
+    private void ap_vetIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_vetIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ap_reasonsActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-
-
-
-String ar = ap_reasons.getText().trim();
-java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-String apDate = "";
-
-if (ap_date.getDate() != null) {
-    apDate = sdf.format(ap_date.getDate());
-} else {
-    JOptionPane.showMessageDialog(this, "Please select a date first!");
-    return;
-}
-
-String at = ap_time.getText().trim();
-String an = ap_notes.getText().trim();
-
-// Validate fields
-if (ar.isEmpty() || at.isEmpty() || an.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Please fill in all fields");
-    return;
-}
-
-try (Connection conn = config.connectDB()) {
-
-    String sql = "UPDATE appointment SET ap_reasons=?, ap_date=?, ap_time=?, ap_notes=? WHERE ap_id=?";
-    PreparedStatement pst = conn.prepareStatement(sql);
-
-    pst.setString(1, ar);
-    pst.setString(2, apDate);
-    pst.setString(3, at);
-    pst.setString(4, an);
-
-    // ✅ THIS WAS MISSING
-    pst.setInt(5, apId);
-
-    int updated = pst.executeUpdate();
-
-    if (updated > 0) {
-        JOptionPane.showMessageDialog(this, "Appointment details updated successfully!");
-        this.dispose();
-
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
-
-    } else {
-        JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
-    }
-
-} catch (SQLException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
-}
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ap_vetIdActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         this.dispose();
@@ -234,6 +211,158 @@ try (Connection conn = config.connectDB()) {
         admin admin = new admin(u);
         admin.setVisible(true);      
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void ap_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ap_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ap_statusActionPerformed
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        String st = ap_status.getSelectedItem().toString();
+String vidStr = ap_vetId.getText().trim();
+
+
+// 1. Validate required field
+if (vidStr.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please enter Vet ID!");
+    return;
+}
+
+int vID;
+try {
+    vID = Integer.parseInt(vidStr);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Vet ID must be a number!");
+    return;
+}
+
+// 2. Validate Vet exists and is of type 'VETERINARIAN'
+config db = new config();
+try (Connection conn = config.connectDB()) {
+
+    String sqlCheck = "SELECT a_type FROM account WHERE a_id = ?";
+    PreparedStatement pstCheck = conn.prepareStatement(sqlCheck);
+    pstCheck.setInt(1, vID);
+    ResultSet rs = pstCheck.executeQuery();
+
+    if (rs.next()) {
+        String type = rs.getString("a_type");
+
+        if (!type.equalsIgnoreCase("VETERINARIAN")) {
+            JOptionPane.showMessageDialog(this, "ID [" + vID + "] is a " + type + ", not a Vet!");
+            ap_vetId.setText("");
+            ap_vetId.requestFocus();
+            return;
+        }
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Vet ID [" + vID + "] does not exist!");
+        ap_vetId.setText("");
+        ap_vetId.requestFocus();
+        return;
+    }
+
+    // 3. Perform Update
+    String sqlUpdate = "UPDATE appointment SET ap_vetId = ?, ap_status = ? WHERE ap_id = ?";
+    PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdate);
+
+    pstUpdate.setInt(1, vID);
+    pstUpdate.setString(2, st);
+    pstUpdate.setInt(3, appId);
+  
+
+    int updated = pstUpdate.executeUpdate();
+
+    if (updated > 0) {
+        JOptionPane.showMessageDialog(this, "Appointment updated successfully!");
+        this.dispose();
+
+        users u = new users();
+        admin adm = new admin(u);
+        adm.setVisible(true);
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Update failed! Appointment ID not found.");
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+}
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        String st = ap_status.getSelectedItem().toString();
+String vidStr = ap_vetId.getText().trim();
+
+
+// 1. Validate required field
+if (vidStr.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please enter Vet ID!");
+    return;
+}
+
+int vID;
+try {
+    vID = Integer.parseInt(vidStr);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Vet ID must be a number!");
+    return;
+}
+
+// 2. Validate Vet exists and is of type 'VETERINARIAN'
+config db = new config();
+try (Connection conn = config.connectDB()) {
+
+    String sqlCheck = "SELECT a_type FROM account WHERE a_id = ?";
+    PreparedStatement pstCheck = conn.prepareStatement(sqlCheck);
+    pstCheck.setInt(1, vID);
+    ResultSet rs = pstCheck.executeQuery();
+
+    if (rs.next()) {
+        String type = rs.getString("a_type");
+
+        if (!type.equalsIgnoreCase("VETERINARIAN")) {
+            JOptionPane.showMessageDialog(this, "ID [" + vID + "] is a " + type + ", not a Vet!");
+            ap_vetId.setText("");
+            ap_vetId.requestFocus();
+            return;
+        }
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Vet ID [" + vID + "] does not exist!");
+        ap_vetId.setText("");
+        ap_vetId.requestFocus();
+        return;
+    }
+
+    // 3. Perform Update
+    String sqlUpdate = "UPDATE appointment SET ap_vetId = ?, ap_status = ? WHERE ap_id = ?";
+    PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdate);
+
+    pstUpdate.setInt(1, vID);
+    pstUpdate.setString(2, st);
+    pstUpdate.setInt(3, appId);
+  
+
+    int updated = pstUpdate.executeUpdate();
+
+    if (updated > 0) {
+        JOptionPane.showMessageDialog(this, "Appointment updated successfully!");
+        this.dispose();
+
+        users u = new users();
+        admin adm = new admin(u);
+        adm.setVisible(true);
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Update failed! Appointment ID not found.");
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+}
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -272,21 +401,22 @@ try (Connection conn = config.connectDB()) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public com.toedter.calendar.JDateChooser ap_date;
-    public javax.swing.JTextField ap_notes;
-    public javax.swing.JTextField ap_reasons;
-    public javax.swing.JTextField ap_time;
-    private javax.swing.JLabel breed;
+    public javax.swing.JLabel ap_id;
+    public javax.swing.JComboBox<String> ap_status;
+    public javax.swing.JTextField ap_vetId;
     private javax.swing.JLabel dateBirth;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel dateBirth1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
-    public javax.swing.JLabel petId;
+    private javax.swing.JTable vetTable;
     // End of variables declaration//GEN-END:variables
 }

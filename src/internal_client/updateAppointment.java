@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 /**
@@ -41,6 +44,103 @@ public class updateAppointment extends javax.swing.JFrame {
                 "FROM pet WHERE owner_id =" + sess.getId();
         db.displayData(sql, petTable);
     }
+        
+        public boolean validateTime(String apTime) {
+    if (apTime == null || apTime.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Time cannot be empty");
+        return false;
+    }
+    
+    // Regex pattern for HH:MM AM/PM format (supports 1 or 2 digit hours)
+    String timePattern = "^(0?[1-9]|1[0-2]):[0-5][0-9] (?i)(AM|PM)$";
+    
+    if (!apTime.matches(timePattern)) {
+        JOptionPane.showMessageDialog(this, "Invalid format. Use HH:MM AM/PM (e.g., 9:30 AM)");
+        return false;
+    }
+    
+    try {
+        // "h:mm a" handles "9:00 AM" and "11:00 AM"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        LocalTime time = LocalTime.parse(apTime.toUpperCase(), formatter);
+        
+        // Define Veterinary Clinic boundaries (8:00 AM to 5:00 PM)
+        LocalTime startTime = LocalTime.of(8, 0);
+        LocalTime endTime = LocalTime.of(17, 0);
+        
+        LocalTime lunchStart = LocalTime.of(12, 0);
+        LocalTime lunchEnd = LocalTime.of(13, 0);
+        
+        if (time.isBefore(startTime) || time.isAfter(endTime)) {
+            JOptionPane.showMessageDialog(this, "Appointments must be between 8:00 AM and 5:00 PM.");
+            return false;
+        }
+        
+        if ((time.equals(lunchStart) || time.isAfter(lunchStart)) && time.isBefore(lunchEnd)) {
+            JOptionPane.showMessageDialog(this, "The clinic is on lunch break from 12:00 PM to 1:00 PM.");
+            return false;
+        }
+        
+        return true; 
+        
+    } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Could not parse time. Please check your entry.");
+        return false;
+    }
+}
+    
+private boolean isTimeSlotConflict(String apDate, String newTimeStr) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+    LocalTime newTime;
+    try {
+        newTime = LocalTime.parse(newTimeStr.toUpperCase(), formatter);
+    } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Invalid time format.");
+        return true; // treat as conflict to stop save
+    }
+
+    LocalTime bufferStart = newTime.minusMinutes(59);
+    LocalTime bufferEnd   = newTime.plusMinutes(59);
+
+    // Important: exclude the appointment we're currently editing!
+String query = 
+    "SELECT ap_time " +
+    "FROM appointment " +
+    "WHERE ap_date = ? " +
+    "  AND ap_id != ? " +
+    "  AND ap_status != 'Cancelled'";
+    try (Connection conn = config.connectDB();
+         PreparedStatement pst = conn.prepareStatement(query)) {
+
+        pst.setString(1, apDate);
+        pst.setInt(2, this.apId);           // ← this is the key change
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            String existingTimeStr = rs.getString("ap_time");
+            try {
+                LocalTime existingTime = LocalTime.parse(existingTimeStr.toUpperCase(), formatter);
+
+                if (existingTime.isAfter(bufferStart) && existingTime.isBefore(bufferEnd)) {
+                    JOptionPane.showMessageDialog(this,
+                        "Conflict: Another appointment exists at " + existingTimeStr +
+                        ".\nPlease allow at least 1 hour between appointments.");
+                    return true;
+                }
+            } catch (DateTimeParseException e) {
+                continue; // skip bad data
+            }
+        }
+
+        return false; // no conflict found
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error checking schedule: " + e.getMessage());
+        return true; // better to block save than risk double-booking
+    }
+}
     
 
     /**
@@ -236,6 +336,14 @@ try {
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
+        if (!validateTime(at)) {
+        ap_time.requestFocus(); // Focus back on time field for user correction
+        return; 
+    }
+if (isTimeSlotConflict(apDate, at)) {
+        ap_time.requestFocus();
+        return; // Stop if there is a conflict
+    }
 
         try (Connection conn = config.connectDB()) {
     

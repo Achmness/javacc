@@ -180,7 +180,7 @@ public class client extends javax.swing.JFrame {
         });
         appointpane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
-        jPanel2.add(appointpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 152, 50));
+        jPanel2.add(appointpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 174, 152, 50));
 
         petpane.setBackground(new java.awt.Color(21, 41, 62));
         petpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,7 +216,7 @@ public class client extends javax.swing.JFrame {
         });
         petpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 124, -1));
 
-        jPanel2.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 248, 152, 52));
+        jPanel2.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 274, 152, 52));
 
         accpane.setBackground(new java.awt.Color(21, 41, 62));
         accpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -256,7 +256,7 @@ public class client extends javax.swing.JFrame {
         });
         accpane.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 14, 146, 26));
 
-        jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 198, 152, 50));
+        jPanel2.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 224, 152, 50));
 
         outpane.setBackground(new java.awt.Color(21, 41, 62));
         outpane.addMouseListener(new java.awt.event.MouseAdapter() {

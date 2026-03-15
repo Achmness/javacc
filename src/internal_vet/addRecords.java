@@ -59,15 +59,18 @@ public class addRecords extends javax.swing.JFrame {
         species = new javax.swing.JLabel();
         breed = new javax.swing.JLabel();
         dateBirth = new javax.swing.JLabel();
-        r_diagnosis = new javax.swing.JTextField();
         ap_id = new javax.swing.JTextField();
-        r_treatment = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        r_prescription = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         r_notes = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        r_prescription = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        r_treatment = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        r_diagnosis = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
@@ -119,38 +122,35 @@ public class addRecords extends javax.swing.JFrame {
         species.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         species.setForeground(new java.awt.Color(210, 217, 226));
         species.setText("Diagnosis");
-        jPanel1.add(species, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 92, 118, -1));
+        jPanel1.add(species, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 90, 118, -1));
 
         breed.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         breed.setForeground(new java.awt.Color(210, 217, 226));
-        breed.setText("Treatment");
-        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 134, -1, -1));
+        breed.setText("Instructions");
+        jPanel1.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 162, -1, -1));
 
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         dateBirth.setForeground(new java.awt.Color(210, 217, 226));
         dateBirth.setText("Prescription");
-        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 168, 110, -1));
-        jPanel1.add(r_diagnosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 90, 172, 28));
+        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 52, 110, -1));
 
         ap_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ap_idActionPerformed(evt);
             }
         });
-        jPanel1.add(ap_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 50, 170, 28));
-        jPanel1.add(r_treatment, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 130, 172, 28));
+        jPanel1.add(ap_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 50, 174, 28));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("Notes");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 52, -1, -1));
-        jPanel1.add(r_prescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 166, 170, 28));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 130, -1, -1));
 
         r_notes.setColumns(20);
         r_notes.setRows(5);
         jScrollPane2.setViewportView(r_notes);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 48, 172, 108));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 130, 170, 72));
 
         jPanel3.setBackground(new java.awt.Color(47, 62, 80));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,11 +163,29 @@ public class addRecords extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(210, 217, 226));
         jLabel5.setText("Add");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 4, -1, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, -1, -1, 24));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 164, 82, 28));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 210, 82, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 202));
+        r_prescription.setColumns(20);
+        r_prescription.setRows(5);
+        jScrollPane3.setViewportView(r_prescription);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 50, 170, 70));
+
+        r_treatment.setColumns(20);
+        r_treatment.setRows(5);
+        jScrollPane4.setViewportView(r_treatment);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 162, 170, 70));
+
+        r_diagnosis.setColumns(20);
+        r_diagnosis.setRows(5);
+        jScrollPane5.setViewportView(r_diagnosis);
+
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 84, 174, 68));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 242));
 
         jPanel2.setBackground(new java.awt.Color(241, 243, 246));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -185,13 +203,13 @@ public class addRecords extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(appointmentTable);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 42, 564, 216));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 42, 564, 174));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 20)); // NOI18N
         jLabel4.setText("Appointments");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 6, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 203, 600, 264));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 241, 600, 226));
 
         pack();
         setLocationRelativeTo(null);
@@ -269,10 +287,13 @@ insert.setString(7, now.format(DateTimeFormatter.ofPattern("HH:mm")));   // r_ti
     JOptionPane.showMessageDialog(this, "Medical Record Added Successfully!");
 
     this.dispose();
+    vet vet = new vet();
+    vet.setVisible(true);
 
 } catch (Exception e) {
     e.printStackTrace();
 }    
+
     }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
@@ -327,11 +348,14 @@ insert.setString(7, now.format(DateTimeFormatter.ofPattern("HH:mm")));   // r_ti
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel name;
-    private javax.swing.JTextField r_diagnosis;
+    private javax.swing.JTextArea r_diagnosis;
     private javax.swing.JTextArea r_notes;
-    private javax.swing.JTextField r_prescription;
-    private javax.swing.JTextField r_treatment;
+    public javax.swing.JTextArea r_prescription;
+    private javax.swing.JTextArea r_treatment;
     private javax.swing.JLabel species;
     // End of variables declaration//GEN-END:variables
 }

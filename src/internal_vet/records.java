@@ -21,6 +21,7 @@ import internal.vet;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Frame;
+import java.awt.Graphics2D;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -35,12 +36,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -81,6 +85,11 @@ public class records extends javax.swing.JInternalFrame {
         db.displayData(sql, recordsTable);
     }
     
+    public java.awt.Font getFontStyle(int style, int size){
+    return new java.awt.Font("Arial", style, size);
+}
+    
+    
     
     public void searchTable(){
        DefaultTableModel model =  (DefaultTableModel)recordsTable.getModel();
@@ -88,100 +97,7 @@ public class records extends javax.swing.JInternalFrame {
        recordsTable.setRowSorter(tr);
        tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
-   private void showAndPrintMedicalRecord(String p_name, String p_species, String p_dateBirth,
-                                        String a_fname, String a_lname,
-                                        String vet_fname, String vet_lname,
-                                        String prescription, String instructions,
-                                        String diagnosis, String notes) {
-
-    String recordsText = buildMedicalRecord(
-            p_name, p_species, p_dateBirth,
-            a_fname, a_lname,
-            vet_fname, vet_lname,
-            prescription, instructions,
-            diagnosis, notes
-    );
-
-    JTextArea area = new JTextArea(recordsText, 30, 60);
-    area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
-    area.setEditable(false);
-
-    JScrollPane scroll = new JScrollPane(area);
-
-    JDialog dialog;
-dialog = new JDialog((Frame) null, "Medical Record", false);
-dialog.add(scroll);
-dialog.pack();
-dialog.setLocationRelativeTo(null);
-dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-dialog.setVisible(true);
-
-    // Automatically print medical record
-    try {
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintable((Printable) new records(recordsText));
-        job.print();
-    } catch (PrinterException e) {
-        JOptionPane.showMessageDialog(this, "Could not print medical record: " + e.getMessage());
-    }
-}
-    
-
-    
-private String buildMedicalRecord(String p_name, String p_species, String p_dateBirth,
-                                  String a_fname, String a_lname,
-                                  String vet_fname, String vet_lname,
-                                  String prescription, String instructions,
-                                  String diagnosis, String notes) {
-    String sql = "SELECT a.a_id, a.a_fname, a_";
-
-    String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-    String owner = a_fname + " " + a_lname;
-    String vet = vet_fname + " " + vet_lname;
-
-    StringBuilder sb = new StringBuilder();
-
-    sb.append("============================================================\n");
-    sb.append("                   VETERINARY MEDICAL RECORD\n");
-    sb.append("============================================================\n");
-
-    // TABLE HEADER
-    sb.append(String.format("| %-18s | %-18s | %-18s |\n", "Patient", "Species", "Date Birth"));
-    sb.append("------------------------------------------------------------\n");
-    sb.append(String.format("| %-18s | %-18s | %-18s |\n", p_name, p_species, p_dateBirth));
-    sb.append("------------------------------------------------------------\n");
-
-    sb.append(String.format("| %-18s | %-18s | %-18s |\n", "Owner", "Date", "Attending Vet"));
-    sb.append("------------------------------------------------------------\n");
-    sb.append(String.format("| %-18s | %-18s | %-18s |\n", owner, dateStr, vet));
-    sb.append("============================================================\n\n");
-
-
-    // PRESCRIPTION
-    sb.append("PRESCRIPTION:\n");
-    sb.append(prescription).append("\n\n");
-
-    // INSTRUCTIONS
-    sb.append("INSTRUCTIONS:\n");
-    sb.append(instructions).append("\n\n");
-
-    // DIAGNOSIS
-    sb.append("DIAGNOSIS:\n");
-    sb.append(diagnosis).append("\n\n");
-
-    // NOTES
-    sb.append("NOTES:\n");
-    sb.append(notes).append("\n\n");
-
-
-    // VET SIGNATURE RIGHT SIDE
-    sb.append(String.format("%50s\n", vet));
-    sb.append(String.format("%50s\n", "Attending Veterinarian"));
-
-    sb.append("============================================================\n");
-
-    return sb.toString();
-}
+   
 
 // You need to add this method to your class
 private PdfPCell getCell(String text, int alignment, boolean isBold) {
@@ -234,6 +150,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         recordsTable = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -256,6 +173,9 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel1MouseEntered(evt);
             }
@@ -268,7 +188,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wup.png"))); // NOI18N
         a_updatepane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
-        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 56, 88, 30));
+        jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 58, 88, 30));
 
         a_approvepane.setBackground(new java.awt.Color(21, 41, 62));
         a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -301,7 +221,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wadds.png"))); // NOI18N
         a_approvepane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, -1, -1));
 
-        jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 58, 86, 30));
+        jPanel1.add(a_approvepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 58, 86, 30));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -435,7 +355,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prin.png"))); // NOI18N
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 56, 86, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 58, 86, 30));
 
         recordsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -450,7 +370,10 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         ));
         jScrollPane1.setViewportView(recordsTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 120, -1, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 96, 564, 340));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 58, 24, 26));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -483,9 +406,10 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
     }//GEN-LAST:event_a_updatepaneMouseExited
 
     private void approveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveMouseClicked
-        this.dispose();
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
         addRecords addRecords = new addRecords();
-            addRecords.setVisible(true);
+        addRecords.setVisible(true);
     }//GEN-LAST:event_approveMouseClicked
 
     private void approveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveMouseEntered
@@ -520,7 +444,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
 int row = recordsTable.getSelectedRow();
 
 if (row == -1) {
-    JOptionPane.showMessageDialog(this, "Select a record first.");
+    JOptionPane.showMessageDialog(this, "Select a Medical Record first.");
     return;
 }
 
@@ -570,7 +494,7 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         clinic.setAlignment(Element.ALIGN_LEFT);
         document.add(clinic);
 
-        Paragraph address = new Paragraph("Brgy. Tuyan, Sitio Botong, Naga, Cebu 6037", smallFont);
+        Paragraph address = new Paragraph("Langtad, Naga, Cebu 6037", smallFont);
         document.add(address);
 
         document.add(new Paragraph(" "));
@@ -622,8 +546,6 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         document.add(new Paragraph("        " + rs.getString("r_prescription"), normalFont));
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
         
 
         // Diagnosis and Instructions
@@ -633,8 +555,7 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
+
         
         
         document.add(new Paragraph("Diagnosis: " + rs.getString("r_diagnosis"), normalFont));
@@ -646,7 +567,7 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
+
 
         // Vet Signature
         Paragraph signature = new Paragraph(
@@ -671,6 +592,49 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
     e.printStackTrace();
 }
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        int rowIndex = recordsTable.getSelectedRow();
+
+if (rowIndex < 0) {
+    JOptionPane.showMessageDialog(this, "Please select a Medical Record to update.");
+    return;
+}
+
+TableModel model = recordsTable.getModel();
+
+// Assuming column 5 is 'Status' (Change index based on your table)
+String recordStatus = model.getValueAt(rowIndex, 5).toString(); 
+
+// RESTRICTION LOGIC: Prevent editing if already finalized
+if ("Finalized".equalsIgnoreCase(recordStatus) || "Archived".equalsIgnoreCase(recordStatus)) {
+    JOptionPane.showMessageDialog(this, 
+        "This record is finalized and cannot be modified for medical integrity.", 
+        "Update Restricted", 
+        JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+// DATA EXTRACTION
+int recordId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+String diagnosis = model.getValueAt(rowIndex, 4).toString();
+String instructions = model.getValueAt(rowIndex, 5).toString();
+String prescription = model.getValueAt(rowIndex, 6).toString();
+String notes = model.getValueAt(rowIndex, 7).toString();
+
+// OPEN UPDATE FORM
+updateRecords updateForm = new updateRecords();
+updateForm.recordId = recordId;    
+updateForm.loadData(recordId);
+updateForm.r_diagnosis.setText(diagnosis);
+updateForm.r_instructions.setText(instructions);
+updateForm.r_prescription.setText(prescription);
+updateForm.r_notes.setText(notes);
+
+updateForm.setVisible(true);
+JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+mainFrame.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -719,6 +683,7 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
     private javax.swing.JPanel a_updatepane;
     private javax.swing.JLabel approve;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

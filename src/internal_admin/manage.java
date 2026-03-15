@@ -200,9 +200,7 @@ public class manage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lname = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         contact = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         email = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -212,6 +210,8 @@ public class manage extends javax.swing.JFrame {
         address = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         image = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -284,24 +284,8 @@ public class manage extends javax.swing.JFrame {
         });
         jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 78, 192, 28));
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 368, -1, -1));
-
         contact.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 334, 192, 28));
-
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 374, 70, 22));
 
         email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         email.addActionListener(new java.awt.event.ActionListener() {
@@ -352,11 +336,31 @@ public class manage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 202, 210, 154));
 
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel11.setText("Save");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 6, 46, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 362, 82, 32));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,27 +378,55 @@ public class manage extends javax.swing.JFrame {
         admin.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String us = email.getText().trim();
-    String em = user.getText().trim();
-    String fn = fname.getText().trim();
-    String ln = lname.getText().trim();
-    String cont = contact.getText().trim();
-    String addr = address.getText().trim();
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnameActionPerformed
 
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
 
+    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
+ JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/images/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1){
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }        
+    }//GEN-LAST:event_imageMouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        String us = email.getText().trim();
+        String em = user.getText().trim();
+        String fn = fname.getText().trim();
+        String ln = lname.getText().trim();
+        String cont = contact.getText().trim();
+        String addr = address.getText().trim();
 
         if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty() || em.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
-        
 
         try {
 
-        Connection conn = config.connectDB();
-        session sess = session.getInstance();
-        PreparedStatement pst;
+            Connection conn = config.connectDB();
+            session sess = session.getInstance();
+            PreparedStatement pst;
 
             if (path != null && !path.isEmpty()) {
                 File imageFile = new File(path);
@@ -424,59 +456,82 @@ public class manage extends javax.swing.JFrame {
                 pst.setInt(7, sess.getId());
             }
 
-            pst.executeUpdate(); 
+            pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "User details updated successfully!");
             this.dispose();
 
             users u = new users();
             admin adminFrame = new admin(u);
             adminFrame.setVisible(true);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jPanel3MouseClicked
 
-    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fnameActionPerformed
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        String us = email.getText().trim();
+        String em = user.getText().trim();
+        String fn = fname.getText().trim();
+        String ln = lname.getText().trim();
+        String cont = contact.getText().trim();
+        String addr = address.getText().trim();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty() || em.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in all fields");
+            return;
+        }
 
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
+        try {
 
-    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
- JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            try {
-                selectedFile = fileChooser.getSelectedFile();
-                destination = "src/images/" + selectedFile.getName();
-                path  = selectedFile.getAbsolutePath();
+            Connection conn = config.connectDB();
+            session sess = session.getInstance();
+            PreparedStatement pst;
 
-                if(FileExistenceChecker(path) == 1){
-                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
-                    destination = "";
-                    path="";
-                }else{
-                    image.setIcon(ResizeImage(path, null, image));
+            if (path != null && !path.isEmpty()) {
+                File imageFile = new File(path);
+                InputStream is = new FileInputStream(imageFile);
 
-                }
-            } catch (Exception ex) {
-                System.out.println("File Error!");
+                String sql = "UPDATE account SET a_email=?, a_user=?, a_fname=?, a_lname=?, a_contact=?, a_address=?, a_image=? WHERE a_id=?";
+                pst = conn.prepareStatement(sql);
+
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
+                pst.setString(5, cont);
+                pst.setString(6, addr);
+                pst.setBinaryStream(7, is, (int) imageFile.length());
+                pst.setInt(8, sess.getId());
+            } else {
+                String sql = "UPDATE account SET a_email=?, a_user=?, a_fname=?, a_lname=?, a_contact=?, a_address=? WHERE a_id=?";
+                pst = conn.prepareStatement(sql);
+
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
+                pst.setString(5, cont);
+                pst.setString(6, addr);
+                pst.setInt(7, sess.getId());
             }
-        }        
-    }//GEN-LAST:event_imageMouseClicked
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "User details updated successfully!");
+            this.dispose();
+
+            users u = new users();
+            admin adminFrame = new admin(u);
+            adminFrame.setVisible(true);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel11MouseClicked
 
     /**
      * @param args the command line arguments
@@ -529,9 +584,8 @@ public class manage extends javax.swing.JFrame {
     public javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -542,6 +596,7 @@ public class manage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;

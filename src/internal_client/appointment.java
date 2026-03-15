@@ -482,7 +482,7 @@ if ("Completed".equalsIgnoreCase(status)) {
     return;
 }else if("Cancelled".equalsIgnoreCase(status)){
     JOptionPane.showMessageDialog(this, 
-        "This appointment is already Approved and cannot be modified.", 
+        "This appointment is already Cancelled and cannot be modified.", 
         "Update Restricted", 
         JOptionPane.WARNING_MESSAGE);
     return;
@@ -516,7 +516,7 @@ mainFrame.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        int rowIndex = appointmentTable.getSelectedRow();
+       int rowIndex = appointmentTable.getSelectedRow();
 
 if(rowIndex < 0){
     JOptionPane.showMessageDialog(null, "Please Select an Appointment!");
@@ -524,30 +524,51 @@ if(rowIndex < 0){
 }
 
 TableModel model = appointmentTable.getModel();
+
+// 1. Get current status from the table (Adjust '7' to your actual Status column index)
+String currentStatus = model.getValueAt(rowIndex, 6).toString();
+
+// 2. Validation Check
+if ("Completed".equalsIgnoreCase(currentStatus) || "Approved".equalsIgnoreCase(currentStatus)) {
+    JOptionPane.showMessageDialog(null, 
+        "This appointment is already " + currentStatus + " and cannot be cancelled.", 
+        "Action Restricted", 
+        JOptionPane.WARNING_MESSAGE);
+    return;
+} 
+
+if ("Cancelled".equalsIgnoreCase(currentStatus)) {
+    JOptionPane.showMessageDialog(null, 
+        "This appointment is already Cancelled.", 
+        "Action Restricted", 
+        JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+// 3. Proceed with Cancellation if validation passes
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-
-String status = "Cancelled";
-
+String newStatus = "Cancelled";
 config db = new config();
 
 boolean success = db.updateRecords(
         "UPDATE appointment SET ap_status=? WHERE ap_id=?",
-        status,
+        newStatus,
         apId
 );
+
 session sess = session.getInstance();
 if (success) {
     JOptionPane.showMessageDialog(null, "Appointment Cancelled Successfully!");
-    String sql = "SELECT a.ap_id, a.ap_petId, p.p_name, a.ap_reasons, " +
+    String sql = "SELECT a.ap_id, p.p_id, a.ap_reasons, " +
                  "       a.ap_date, a.ap_time, a.ap_notes, a.ap_status " +
                  "FROM appointment a " +
                  "INNER JOIN pet p ON a.ap_petId = p.p_id " +
                  "WHERE a.ap_clientId = " + sess.getId();
     
     db.displayData(sql, appointmentTable);
-}else{
-    JOptionPane.showMessageDialog(null, "Cancelled Appointment Failed!");
-}      
+} else {
+    JOptionPane.showMessageDialog(null, "Cancellation Failed!");
+}   
     }//GEN-LAST:event_jLabel6MouseClicked
 
     /**

@@ -370,7 +370,7 @@ public class users extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "User Deleted Successfully!");
 
         db.displayData(
-            "SELECT a_id, a_email, a_type, a_contact, a_address, a_status FROM account",
+            "SELECT a_id, a_user, a_fname, a_lname, a_contact, a_email, a_type, a_address, a_status FROM account",
             userTable
         );
         
@@ -409,7 +409,6 @@ int id = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 updateUser update = new updateUser(id);
 update.setVisible(true);
 
-// Close current frame (optional)
 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 mainFrame.dispose();
 

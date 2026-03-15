@@ -66,10 +66,10 @@ public class updateUser extends javax.swing.JFrame {
                     lname.setText(rs.getString("a_lname"));
                     email.setText(rs.getString("a_email"));
                     user.setText(rs.getString("a_user"));
-                    contact.setText(rs.getString("a_contact"));
-                    userType.setText(rs.getString("a_type"));
+                    contact.setText("0"+rs.getString("a_contact"));
+                    userType.setSelectedItem(rs.getString("a_type"));
                     address.setText(rs.getString("a_address"));
-                    status.setText(rs.getString("a_status"));
+                    status.setSelectedItem(rs.getString("a_status"));
 
                     byte[] imgBytes = rs.getBytes("a_image");
                     if (imgBytes != null && image != null) {
@@ -198,15 +198,11 @@ public class updateUser extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         fname = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         contact = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        userType = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        status = new javax.swing.JTextField();
         addressTA = new javax.swing.JScrollPane();
         address = new javax.swing.JTextArea();
         email = new javax.swing.JTextField();
@@ -214,6 +210,10 @@ public class updateUser extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         image = new javax.swing.JLabel();
+        userType = new javax.swing.JComboBox<>();
+        status = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -285,41 +285,13 @@ public class updateUser extends javax.swing.JFrame {
             }
         });
         jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 68, 208, 28));
-
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 400, -1, -1));
         jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 304, 208, 28));
         jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 236, 208, 28));
-
-        jButton2.setText("Cancel");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 402, 70, 22));
 
         jLabel12.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(210, 217, 226));
         jLabel12.setText("User Type");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 340, -1, -1));
-
-        userType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTypeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 364, 210, 28));
 
         jLabel11.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(210, 217, 226));
@@ -330,13 +302,6 @@ public class updateUser extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(210, 217, 226));
         jLabel7.setText("Status");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 156, -1, -1));
-
-        status.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusActionPerformed(evt);
-            }
-        });
-        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 178, 210, 28));
 
         addressTA.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         addressTA.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -380,6 +345,32 @@ public class updateUser extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 238, 210, 154));
 
+        userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLIENT", "VETERINARIAN", "ADMIN" }));
+        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 362, 208, 28));
+
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Pending", "Suspend" }));
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 178, 208, 28));
+
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel13.setText("Save");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 6, 46, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 396, 82, 28));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -399,20 +390,190 @@ public class updateUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnameActionPerformed
+
+    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/images/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1){
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_imageMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.dispose();
+        users u = new users();
+        admin admin = new admin(u);
+        admin.setVisible(true);      
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+String em = email.getText().trim();
+    String us = user.getText().trim();
+    String fn = fname.getText().trim();
+    String ln = lname.getText().trim();
+    String cont = contact.getText().trim();
+    String ut = userType.getSelectedItem().toString();
+    String addr = address.getText().trim();
+    String st = status.getSelectedItem().toString();
+
+    // Basic required fields validation
+    if (us.isEmpty() || fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || 
+        ut.isEmpty() || addr.isEmpty() || em.isEmpty() || st.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields");
+        return;
+    }
+
+    if (!config.isValidEmail(em)) {
+        JOptionPane.showMessageDialog(this, "Invalid email format!\nExample: test@gmail.com");
+        return;
+    }
+
+    if (!cont.matches("09\\d{9}")) {
+        JOptionPane.showMessageDialog(this, "Contact number must be 11 digits and start with 09.");
+        return;
+    }
+
+    // ────────────────────────────────────────────────
+    //   EMAIL UNIQUENESS CHECK – VERY IMPORTANT PART
+    // ────────────────────────────────────────────────
+    try (Connection conn = config.connectDB()) {
+
+        // Check if email is already used by **another** user
+        String checkSql = "SELECT a_id FROM account WHERE a_email = ? AND a_id != ?";
+        
+        PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+        checkStmt.setString(1, em);
+        checkStmt.setInt(2, this.userId);   // ← exclude current user
+
+        ResultSet rs = checkStmt.executeQuery();
+
+        if (rs.next()) {
+            JOptionPane.showMessageDialog(this, "Email already exists. Please choose another.");
+            rs.close();
+            checkStmt.close();
+            return;
+        }
+
+        rs.close();
+        checkStmt.close();
+
+        // ────────────────────────────────────────────────
+        // Proceed with UPDATE if email is ok (or unchanged)
+        // ────────────────────────────────────────────────
+
+        PreparedStatement pst;
+        String sql;
+
+        if (path != null && !path.isEmpty()) {
+            File imageFile = new File(path);
+            try (InputStream is = new FileInputStream(imageFile)) {
+
+                sql = "UPDATE account SET a_user=?, a_email=?, a_fname=?, a_lname=?, " +
+                      "a_contact=?, a_type=?, a_image=?, a_address=?, a_status=? " +
+                      "WHERE a_id=?";
+
+                pst = conn.prepareStatement(sql);
+
+                pst.setString(1, us);
+                pst.setString(2, em);
+                pst.setString(3, fn);
+                pst.setString(4, ln);
+                pst.setString(5, cont);
+                pst.setString(6, ut);
+                pst.setBinaryStream(7, is, (int) imageFile.length());
+                pst.setString(8, addr);
+                pst.setString(9, st);
+                pst.setInt(10, userId);
+            }
+        } else {
+            sql = "UPDATE account SET a_user=?, a_email=?, a_fname=?, a_lname=?, " +
+                  "a_contact=?, a_type=?, a_address=?, a_status=? " +
+                  "WHERE a_id=?";
+
+            pst = conn.prepareStatement(sql);
+
+            pst.setString(1, us);
+            pst.setString(2, em);
+            pst.setString(3, fn);
+            pst.setString(4, ln);
+            pst.setString(5, cont);
+            pst.setString(6, ut);
+            pst.setString(7, addr);
+            pst.setString(8, st);
+            pst.setInt(9, userId);
+        }
+
+        int rows = pst.executeUpdate();
+
+        if (rows > 0) {
+            JOptionPane.showMessageDialog(this, "User updated successfully!");
+            this.dispose();
+            users u = new users();
+            admin adminFrame = new admin(u);
+            adminFrame.setVisible(true);
+        }
+
+        pst.close();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(updateUser.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(this, "Image file not found.");
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Unexpected error: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+    config db = new config();
     String em = email.getText().trim();    
     String us = user.getText().trim();   
     String fn = fname.getText().trim();        
     String ln = lname.getText().trim();        
     String cont = contact.getText().trim();  
-    String ut = userType.getText().trim();
+    String ut = userType.getSelectedItem().toString();
     String addr = address.getText();
-    String st = status.getText().trim();
+    String st = status.getSelectedItem().toString();
 
         if(us.isEmpty() ||fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || ut.isEmpty() || addr.isEmpty() || em.isEmpty() || st.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
+                    if (!config.isValidEmail(em)) {
+                JOptionPane.showMessageDialog(this, "Invalid email format!\nExample: test@gmail.com");
+                return;
+            }
+
+            if(!cont.matches("09\\d{9}")){
+                JOptionPane.showMessageDialog(this, "Contact number must be 11 digits and start with 09.");
+                return;
+            }
+
 
         try (Connection conn = config.connectDB()) {
             session sess = session.getInstance();
@@ -464,64 +625,7 @@ public class updateUser extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(updateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-       
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void userTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userTypeActionPerformed
-
-    private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusActionPerformed
-
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
-
-    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fnameActionPerformed
-
-    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            try {
-                selectedFile = fileChooser.getSelectedFile();
-                destination = "src/images/" + selectedFile.getName();
-                path  = selectedFile.getAbsolutePath();
-
-                if(FileExistenceChecker(path) == 1){
-                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
-                    destination = "";
-                    path="";
-                }else{
-                    image.setIcon(ResizeImage(path, null, image));
-
-                }
-            } catch (Exception ex) {
-                System.out.println("File Error!");
-            }
-        }
-    }//GEN-LAST:event_imageMouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);      
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -576,11 +680,10 @@ public class updateUser extends javax.swing.JFrame {
     public javax.swing.JTextField email;
     public javax.swing.JTextField fname;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -591,11 +694,12 @@ public class updateUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     public javax.swing.JTextField lname;
-    public javax.swing.JTextField status;
+    public javax.swing.JComboBox<String> status;
     public javax.swing.JTextField user;
-    public javax.swing.JTextField userType;
+    public javax.swing.JComboBox<String> userType;
     // End of variables declaration//GEN-END:variables
 }

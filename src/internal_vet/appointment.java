@@ -311,7 +311,7 @@ TableModel model = appointmentTable.getModel();
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 
 // Get current status from table (assuming ap_status is column 5)
-String currentStatus = model.getValueAt(rowIndex, 5).toString();
+String currentStatus = model.getValueAt(rowIndex, 6).toString();
 
 if(currentStatus.equalsIgnoreCase("Cancelled")){
     JOptionPane.showMessageDialog(null, 
@@ -412,11 +412,11 @@ TableModel model = appointmentTable.getModel();
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 
 // Get current status from table (assuming ap_status is column 5)
-String currentStatus = model.getValueAt(rowIndex, 5).toString();
+String currentStatus = model.getValueAt(rowIndex, 6).toString();
 
 if(currentStatus.equalsIgnoreCase("Cancelled")){
     JOptionPane.showMessageDialog(null, 
-            "Cancelled appointment cannot be approved!");
+            "Cancelled appointment cannot be completed!");
     return;
 }
 

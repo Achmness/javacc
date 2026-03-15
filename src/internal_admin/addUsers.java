@@ -193,9 +193,7 @@ public class addUsers extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lname = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         contact = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         email = new javax.swing.JTextField();
         user = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -205,8 +203,10 @@ public class addUsers extends javax.swing.JFrame {
         address = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         image = new javax.swing.JLabel();
-        userType = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        userType = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -234,7 +234,7 @@ public class addUsers extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(210, 217, 226));
-        jLabel2.setText("Account");
+        jLabel2.setText("Users");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 0, -1, 42));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -279,24 +279,8 @@ public class addUsers extends javax.swing.JFrame {
         });
         jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 68, 192, 28));
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 374, -1, -1));
-
         contact.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 302, 192, 28));
-
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 376, 70, 22));
 
         email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         email.addActionListener(new java.awt.event.ActionListener() {
@@ -346,17 +330,33 @@ public class addUsers extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 202, 210, 154));
 
-        userType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTypeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 358, 190, 28));
-
         jLabel10.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(210, 217, 226));
         jLabel10.setText("Contact Number");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 276, -1, -1));
+
+        userType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLIENT", "VETERINARIAN", "ADMIN" }));
+        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 360, 192, 30));
+
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel12.setText("Add");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 6, 46, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 362, 82, 32));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -384,12 +384,39 @@ public class addUsers extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fnameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/images/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1){
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_imageMouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         String em = email.getText().trim();
         String us = user.getText().trim();
         String fn = fname.getText().trim();
         String ln = lname.getText().trim();
-        String ut = userType.getText().trim();
+        String ut = userType.getSelectedItem().toString();
         String cont = contact.getText().trim();
         String addr = address.getText().trim();
         String pass = "qwe123";
@@ -398,6 +425,16 @@ public class addUsers extends javax.swing.JFrame {
 
             if(fn.isEmpty() || ln.isEmpty() || em.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please fill in all fields");
+                return;
+            }
+            
+            if (!config.isValidEmail(em)) {
+                JOptionPane.showMessageDialog(this, "Invalid email format!\nExample: test@gmail.com");
+                return;
+            }
+
+            if(!cont.matches("09\\d{9}")){
+                JOptionPane.showMessageDialog(this, "Contact number must be 11 digits and start with 09.");
                 return;
             }
 
@@ -456,46 +493,105 @@ public class addUsers extends javax.swing.JFrame {
             Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "I/O error", ex);
             JOptionPane.showMessageDialog(this, "Error closing file stream: " + ex.getMessage());
         }
+    }//GEN-LAST:event_jLabel12MouseClicked
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        config db = new config();
+        String em = email.getText().trim();
+        String us = user.getText().trim();
+        String fn = fname.getText().trim();
+        String ln = lname.getText().trim();
+        String ut = userType.getSelectedItem().toString();
+        String cont = contact.getText().trim();
+        String addr = address.getText().trim();
+        String pass = "qwe123";
+        String st = "Active";
+        String hashedPassword = config.hashPassword(pass);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
-
-    private void imageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageMouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            try {
-                selectedFile = fileChooser.getSelectedFile();
-                destination = "src/images/" + selectedFile.getName();
-                path  = selectedFile.getAbsolutePath();
-
-                if(FileExistenceChecker(path) == 1){
-                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
-                    destination = "";
-                    path="";
-                }else{
-                    image.setIcon(ResizeImage(path, null, image));
-
-                }
-            } catch (Exception ex) {
-                System.out.println("File Error!");
+            if(fn.isEmpty() || ln.isEmpty() || em.isEmpty() || cont.isEmpty() || addr.isEmpty() || us.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please fill in all fields");
+                return;
             }
-        }
-    }//GEN-LAST:event_imageMouseClicked
+            
+            if (!config.isValidEmail(em)) {
+                JOptionPane.showMessageDialog(this, "Invalid email format!\nExample: test@gmail.com");
+                return;
+            }
 
-    private void userTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userTypeActionPerformed
+            if(!cont.matches("09\\d{9}")){
+                JOptionPane.showMessageDialog(this, "Contact number must be 11 digits and start with 09.");
+                return;
+            }
+            
+            if (hashedPassword == null) {
+                JOptionPane.showMessageDialog(this, "Error processing password");
+                return;
+            }
+
+            String checkSql = "SELECT * FROM account WHERE a_email = ?";
+            java.util.List<java.util.Map<String, Object>> existing = db.fetchRecords(checkSql, em);
+
+            if (!existing.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Email already exists. Choose another.");
+                return;
+            }
+
+        String sql = "INSERT INTO account (a_fname, a_lname, a_email, a_user, a_contact, a_address, a_image, a_pass, a_type, a_status) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = config.connectDB();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, fn);
+            pst.setString(2, ln);
+            pst.setString(3, em);
+            pst.setString(4, us);
+            pst.setString(5, cont);
+            pst.setString(6, addr);
+
+            FileInputStream fis = null;
+            try {
+                if (path != null && !path.isEmpty()) {
+                    File imageFile = new File(path);
+                    fis = new FileInputStream(imageFile);
+                    pst.setBinaryStream(7, fis, (int) imageFile.length());
+                } else {
+
+                    pst.setNull(7, java.sql.Types.BLOB);
+                }
+
+                pst.setString(8, hashedPassword);
+                pst.setString(9, ut);
+                pst.setString(10, st);
+
+
+                int rowsInserted = pst.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(this, "User details added successfully!");
+                    this.dispose();
+
+                    users u = new users();
+                    admin adminFrame = new admin(u);
+                    adminFrame.setVisible(true);
+                }
+            } finally {
+                if (fis != null) {
+                    fis.close();
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "Database error", ex);
+            JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "File not found", ex);
+            JOptionPane.showMessageDialog(this, "Image Error: File not found.");
+        } catch (IOException ex) {
+            Logger.getLogger(manage.class.getName()).log(Level.SEVERE, "I/O error", ex);
+            JOptionPane.showMessageDialog(this, "Error closing file stream: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -545,10 +641,9 @@ public class addUsers extends javax.swing.JFrame {
     public javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -559,11 +654,12 @@ public class addUsers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField lname;
     public javax.swing.JTextField user;
-    private javax.swing.JTextField userType;
+    public javax.swing.JComboBox<String> userType;
     // End of variables declaration//GEN-END:variables
 }

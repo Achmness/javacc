@@ -132,7 +132,7 @@ public void displayAppointment() {
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(210, 217, 226));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("APPROVE");
+        jLabel1.setText("UPDATE");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -358,58 +358,38 @@ public void displayAppointment() {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
       int rowIndex = appointmentTable.getSelectedRow();
 
-if(rowIndex < 0){
+if (rowIndex < 0) {
     JOptionPane.showMessageDialog(null, "Please Select an Appointment!");
     return;
 }
 
 TableModel model = appointmentTable.getModel();
+// Index 6 for status as per your code
+String currentStatus = model.getValueAt(rowIndex, 6).toString().trim();
+
+// RESTRICTION LOGIC: Prevent opening if already processed
+if (currentStatus.equalsIgnoreCase("Cancelled") || 
+    currentStatus.equalsIgnoreCase("Approved") || 
+    currentStatus.equalsIgnoreCase("Completed")) {
+    
+    JOptionPane.showMessageDialog(null, "This appointment is already " + currentStatus + " and cannot be modified!");
+    return;
+}
+
+// DATA EXTRACTION
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
+String status = model.getValueAt(rowIndex, 6).toString();
 
-// Get current status from table (assuming ap_status is column 5)
-String currentStatus = model.getValueAt(rowIndex, 5).toString();
-
-if(currentStatus.equalsIgnoreCase("Cancelled")){
-    JOptionPane.showMessageDialog(null, 
-            "Cancelled appointment cannot be approved!");
-    return;
-}
-
-if(currentStatus.equalsIgnoreCase("Approved")){
-    JOptionPane.showMessageDialog(null, 
-            "Appointment is already approved!");
-    return;
-}
-if(currentStatus.equalsIgnoreCase("Completed")){
-    JOptionPane.showMessageDialog(null, 
-            "Appointment is already completed!");
-    return;
-}
-String status = "Approved";
-session sess = session.getInstance();
+// OPEN UPDATE FORM
+updateAppointmentAd upApp = new updateAppointmentAd();
+upApp.appId = apId; // Pass the ID to the JFrame variable
+upApp.loadData(apId);
+upApp.ap_status.setSelectedItem(status);
 
 
-
-config db = new config();
-
-boolean success = db.updateRecords(
-        "UPDATE appointment SET ap_status=?, ap_vetId=? WHERE ap_id=?",
-        status, sess.getId(),
-        apId
-);
-
-if(success){
-    JOptionPane.showMessageDialog(null, "Appointment Approved Successfully!");
-
-    // Refresh table
-    db.displayData(
-        "SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment",
-        appointmentTable
-    );
-
-}else{
-    JOptionPane.showMessageDialog(null, "Approval Failed!");
-}
+upApp.setVisible(true);
+JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+mainFrame.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
@@ -461,9 +441,20 @@ if(success){
 
         TableModel model = appointmentTable.getModel();
         int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
-
+        String currentStatus = model.getValueAt(rowIndex, 6).toString();
+        if(currentStatus.equalsIgnoreCase("Cancelled")){
+            JOptionPane.showMessageDialog(null, "Appointment is already cancelled!");
+            return;
+        }else if(currentStatus.equalsIgnoreCase("Completed")){
+            JOptionPane.showMessageDialog(null, "Appointment is already completed!");
+            return;
+        }else if(currentStatus.equalsIgnoreCase("Approved")){
+            JOptionPane.showMessageDialog(null, "Appointment is already approved!");
+            return;
+        }
+        
         String status = "Cancelled";
-
+        
         config db = new config();
 
         boolean success = db.updateRecords(
@@ -475,7 +466,10 @@ if(success){
         if(success){
             JOptionPane.showMessageDialog(null, "Appointment Cancel Successfully!");
 
-            db.displayData("SELECT ap_id, ap_reasons, ap_date, ap_time, ap_notes, ap_status FROM appointment", appointmentTable);
+            db.displayData("SELECT a.ap_id, a.ap_petId, a.ap_clientId, " +
+                 "a.ap_reasons, a.ap_date, a.ap_time, a.ap_status " +
+                 "FROM appointment a " +
+                 "INNER JOIN pet p ON a.ap_petId = p.p_id ", appointmentTable);
 
         }else{
             JOptionPane.showMessageDialog(null, "Cancelled Appointment Failed!");

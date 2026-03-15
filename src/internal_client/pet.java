@@ -413,7 +413,7 @@ public class pet extends javax.swing.JInternalFrame {
             int rowIndex = petTable.getSelectedRow();
 
 if (rowIndex < 0) {
-    JOptionPane.showMessageDialog(this, "Please select a user to update.");
+    JOptionPane.showMessageDialog(this, "Please select a pet to update.");
     return;
 }
 
@@ -427,7 +427,8 @@ String pDateBirth = model.getValueAt(rowIndex, 4).toString();
 
 updatePet updateForm = new updatePet();
 
-updateForm.petId = petId;         
+updateForm.petId = petId;     
+updateForm.loadData(petId);
 updateForm.p_name.setText(pName);     
 updateForm.p_species.setText(pScpecies);     
 updateForm.p_breed.setText(pBreed);

@@ -145,6 +145,10 @@ public class admin extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         images = new javax.swing.JLabel();
+        recordspane = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -201,7 +205,7 @@ public class admin extends javax.swing.JFrame {
         });
         accpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 12, 148, 26));
 
-        navbar.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 146, 146, 50));
+        navbar.add(accpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 164, 146, 50));
 
         userpane.setBackground(new java.awt.Color(21, 41, 62));
         userpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -241,7 +245,7 @@ public class admin extends javax.swing.JFrame {
         jLabel7.setText("jLabel7");
         userpane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 28, -1));
 
-        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 196, 146, 50));
+        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 214, 146, 50));
 
         username.setBackground(new java.awt.Color(0, 0, 0));
         username.setForeground(new java.awt.Color(210, 217, 226));
@@ -285,7 +289,7 @@ public class admin extends javax.swing.JFrame {
         });
         appointpane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 14, 146, 26));
 
-        navbar.add(appointpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 246, 146, 50));
+        navbar.add(appointpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 264, 146, 50));
 
         outpane.setBackground(new java.awt.Color(21, 41, 62));
         outpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -357,13 +361,66 @@ public class admin extends javax.swing.JFrame {
         });
         petpane.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 124, -1));
 
-        navbar.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 296, 146, 52));
+        navbar.add(petpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 314, 146, 52));
 
         jPanel2.setBackground(new java.awt.Color(241, 243, 246));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(images, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 114, 98));
 
         navbar.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 126, 110));
+
+        recordspane.setBackground(new java.awt.Color(21, 41, 62));
+        recordspane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                recordspaneMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                recordspaneMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                recordspaneMouseExited(evt);
+            }
+        });
+        recordspane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Medical ");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel14MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel14MouseExited(evt);
+            }
+        });
+        recordspane.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 8, -1, 18));
+
+        jLabel15.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Records");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel15MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel15MouseExited(evt);
+            }
+        });
+        recordspane.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 28, -1, -1));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/medi.png"))); // NOI18N
+        recordspane.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 12, -1, -1));
+
+        navbar.add(recordspane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 366, 150, 50));
 
         jPanel1.add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 480));
 
@@ -586,6 +643,45 @@ if (confirm == JOptionPane.YES_OPTION) {
         petpane.setBackground(navcolor);       
     }//GEN-LAST:event_petpaneMouseExited
 
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        internal_admin.recordsAd records = new internal_admin.recordsAd();
+        maindesktop.add(records).setVisible(true);
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseEntered
+        recordspane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel14MouseEntered
+
+    private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
+        recordspane.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel14MouseExited
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        internal_admin.recordsAd records = new internal_admin.recordsAd();
+        maindesktop.add(records).setVisible(true);
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseEntered
+        recordspane.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel15MouseEntered
+
+    private void jLabel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseExited
+        recordspane.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel15MouseExited
+
+    private void recordspaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordspaneMouseClicked
+        internal_admin.recordsAd records = new internal_admin.recordsAd();
+        maindesktop.add(records).setVisible(true);
+    }//GEN-LAST:event_recordspaneMouseClicked
+
+    private void recordspaneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordspaneMouseEntered
+        recordspane.setBackground(bodycolor);
+    }//GEN-LAST:event_recordspaneMouseEntered
+
+    private void recordspaneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordspaneMouseExited
+        recordspane.setBackground(navcolor);
+    }//GEN-LAST:event_recordspaneMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -638,6 +734,9 @@ if (confirm == JOptionPane.YES_OPTION) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -653,6 +752,7 @@ if (confirm == JOptionPane.YES_OPTION) {
     private javax.swing.JPanel navbar;
     private javax.swing.JPanel outpane;
     private javax.swing.JPanel petpane;
+    private javax.swing.JPanel recordspane;
     private javax.swing.JLabel username;
     private javax.swing.JPanel userpane;
     // End of variables declaration//GEN-END:variables

@@ -235,10 +235,9 @@ if (!config.isValidEmail(emailup)) {
 
         String insertSql = "INSERT INTO account(a_user, a_email, a_pass, a_type, a_status, a_fname, a_lname, a_contact, a_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         db.addRecord(insertSql, userup, emailup, hashedPassword, usertypeup, "Pending", fname, lname, contact, address);
-        JOptionPane.showMessageDialog(this, "Account Added Successfully!");
 
-        signin signin = new signin();
-        signin.setVisible(true);
+        success success = new success();
+        success.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButton2ActionPerformed

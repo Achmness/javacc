@@ -355,9 +355,10 @@ String pScpecies = model.getValueAt(rowIndex, 3).toString();
 String pBreed = model.getValueAt(rowIndex, 4).toString();
 String pDateBirth = model.getValueAt(rowIndex, 5).toString();
 
-updatePet updateForm = new updatePet();
+updatePetAd updateForm = new updatePetAd();
 
-updateForm.petId = petId;         
+updateForm.petId = petId;     
+updateForm.loadData(petId);
 updateForm.p_name.setText(pName);     
 updateForm.p_species.setText(pScpecies);     
 updateForm.p_breed.setText(pBreed);
@@ -446,7 +447,7 @@ updateForm.p_breed.setText(pBreed);
             JOptionPane.showMessageDialog(null, "Pet Deleted Successfully!");
 
             db.displayData(
-                "SELECT p_id, p_name, p_species, p_breed, p_dateBirth FROM pet",
+                "SELECT p_id, owner_id, p_name, p_species, p_breed, p_dateBirth FROM pet",
                 petTable
             );
 

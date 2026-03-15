@@ -164,6 +164,11 @@ public class signin extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(210, 217, 226));
         jLabel8.setText("Forgot password?");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -367,6 +372,14 @@ if (confirm == JOptionPane.YES_OPTION) {
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
         
     }//GEN-LAST:event_jButton2MouseExited
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        sendCode sc = new sendCode();
+        sc.setVisible(false);
+        sc.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,9 @@
 package internal_client;
 
 import config.config;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import config.session;
 import internal.admin;
 import internal.client;
@@ -72,6 +75,90 @@ public class addAppointment extends javax.swing.JFrame {
         ex.printStackTrace();
     }
     return false;
+}
+    public boolean validateTime(String apTime) {
+    if (apTime == null || apTime.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Time cannot be empty");
+        return false;
+    }
+    
+    // Regex pattern for HH:MM AM/PM format (supports 1 or 2 digit hours)
+    String timePattern = "^(0?[1-9]|1[0-2]):[0-5][0-9] (?i)(AM|PM)$";
+    
+    if (!apTime.matches(timePattern)) {
+        JOptionPane.showMessageDialog(this, "Invalid format. Use HH:MM AM/PM (e.g., 9:30 AM)");
+        return false;
+    }
+    
+    try {
+        // "h:mm a" handles "9:00 AM" and "11:00 AM"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        LocalTime time = LocalTime.parse(apTime.toUpperCase(), formatter);
+        
+        // Define Veterinary Clinic boundaries (8:00 AM to 5:00 PM)
+        LocalTime startTime = LocalTime.of(8, 0);
+        LocalTime endTime = LocalTime.of(17, 0);
+        
+        LocalTime lunchStart = LocalTime.of(12, 0);
+        LocalTime lunchEnd = LocalTime.of(13, 0);
+        
+        if (time.isBefore(startTime) || time.isAfter(endTime)) {
+            JOptionPane.showMessageDialog(this, "Appointments must be between 8:00 AM and 5:00 PM.");
+            return false;
+        }
+        
+        if ((time.equals(lunchStart) || time.isAfter(lunchStart)) && time.isBefore(lunchEnd)) {
+            JOptionPane.showMessageDialog(this, "The clinic is on lunch break from 12:00 PM to 1:00 PM.");
+            return false;
+        }
+        
+        return true; 
+        
+    } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Could not parse time. Please check your entry.");
+        return false;
+    }
+}
+    
+    private boolean isTimeSlotConflict(String apDate, String newTimeStr) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+    LocalTime newTime = LocalTime.parse(newTimeStr.toUpperCase(), formatter);
+    
+    // Define the buffer (1 hour before and 1 hour after)
+    LocalTime bufferStart = newTime.minusMinutes(59);
+    LocalTime bufferEnd = newTime.plusMinutes(59);
+
+    String query = "SELECT ap_time FROM appointment WHERE ap_date = ? AND ap_status != 'Cancelled'";
+
+    try (Connection conn = config.connectDB();
+         PreparedStatement pst = conn.prepareStatement(query)) {
+
+        pst.setString(1, apDate);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            String existingTimeStr = rs.getString("ap_time");
+            try {
+                LocalTime existingTime = LocalTime.parse(existingTimeStr.toUpperCase(), formatter);
+
+                // If existing time falls within the 1-hour window of the new time
+                // Example: Existing is 10:00 AM. New is 10:30 AM. 
+                // 10:30 is between 9:01 and 10:59 -> CONFLICT.
+                if (existingTime.isAfter(bufferStart) && existingTime.isBefore(bufferEnd)) {
+                    JOptionPane.showMessageDialog(this, 
+                        "Conflict: There is already an appointment at " + existingTimeStr + 
+                        ".\nPlease allow at least 1 hour between appointments.");
+                    return true; // Conflict found
+                }
+            } catch (DateTimeParseException e) {
+                // Skip entries that don't match the format
+                continue;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false; // No conflict
 }
 
     /**
@@ -251,7 +338,14 @@ if (ap_date.getDate() != null) {
 // --- Time validation ---
 // If using JTextField:
 String apTime = ap_time.getText().trim();
-// Or, if using JTimeChooser, get the time correctly (see notes below)
+if (!validateTime(apTime)) {
+        ap_time.requestFocus(); // Focus back on time field for user correction
+        return; 
+    }
+if (isTimeSlotConflict(apDate, apTime)) {
+        ap_time.requestFocus();
+        return; // Stop if there is a conflict
+    }
 
 String apNotes = ap_notes.getText().trim();
 String apPet = ap_pet.getText().trim();

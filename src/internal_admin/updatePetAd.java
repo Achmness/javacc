@@ -26,7 +26,9 @@ public class updatePetAd extends javax.swing.JFrame {
     public int petId;
     public updatePetAd() {
         initComponents();
+        p_id.setText(String.valueOf(petId));
         date();
+        
     }
     
     private void date(){
@@ -34,6 +36,12 @@ public class updatePetAd extends javax.swing.JFrame {
         p_dateBirth.setDateFormatString("MMMM dd, yyyy");
         p_dateBirth.setDate(date);
     }
+    
+    public void loadData(int id) {
+    this.petId = id; // Update the local variable
+    this.p_id.setText(String.valueOf(id)); // Display it in the JLabel
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,9 +63,12 @@ public class updatePetAd extends javax.swing.JFrame {
         dateBirth = new javax.swing.JLabel();
         p_species = new javax.swing.JTextField();
         p_name = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         p_breed = new javax.swing.JTextField();
         p_dateBirth = new com.toedter.calendar.JDateChooser();
+        name1 = new javax.swing.JLabel();
+        p_id = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -98,8 +109,8 @@ public class updatePetAd extends javax.swing.JFrame {
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         name.setForeground(new java.awt.Color(210, 217, 226));
-        name.setText("Name");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 86, -1, -1));
+        name.setText("Pet Id");
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 52, -1, -1));
 
         species.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         species.setForeground(new java.awt.Color(210, 217, 226));
@@ -114,7 +125,7 @@ public class updatePetAd extends javax.swing.JFrame {
         dateBirth.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         dateBirth.setForeground(new java.awt.Color(210, 217, 226));
         dateBirth.setText("Date Of Birth");
-        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 256, 110, -1));
+        jPanel1.add(dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 240, 110, -1));
         jPanel1.add(p_species, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 132, 192, 28));
 
         p_name.addActionListener(new java.awt.event.ActionListener() {
@@ -123,16 +134,37 @@ public class updatePetAd extends javax.swing.JFrame {
             }
         });
         jPanel1.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 84, 192, 28));
+        jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
+        jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 236, 190, 28));
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        name1.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
+        name1.setForeground(new java.awt.Color(210, 217, 226));
+        name1.setText("Name");
+        jPanel1.add(name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 86, -1, -1));
+
+        p_id.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        p_id.setForeground(new java.awt.Color(210, 217, 226));
+        jPanel1.add(p_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 46, 132, 30));
+
+        jPanel3.setBackground(new java.awt.Color(47, 62, 80));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 306, 70, 40));
-        jPanel1.add(p_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 186, 192, 28));
-        jPanel1.add(p_dateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 250, 190, 28));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(210, 217, 226));
+        jLabel12.setText("Save");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 6, 46, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 280, 82, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,7 +174,7 @@ public class updatePetAd extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -153,7 +185,61 @@ public class updatePetAd extends javax.swing.JFrame {
         // TODO addPet your handling code here:
     }//GEN-LAST:event_p_nameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.dispose();
+        users u = new users();
+        admin admin = new admin(u);
+        admin.setVisible(true);      
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+       String pn = p_name.getText().trim();
+        String ps = p_species.getText().trim();
+        String pb = p_breed.getText().trim();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String pdb = "";
+        if (p_dateBirth.getDate() != null) {
+            pdb = sdf.format(p_dateBirth.getDate());
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a date first!");
+            return;
+        }
+
+        if(pn.isEmpty() || ps.isEmpty() || pb.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in all fields");
+            return;
+        }
+
+        try (Connection conn = config.connectDB()) {
+            String sql = "UPDATE pet SET p_name=?, p_species=?, p_breed=?, p_dateBirth=? WHERE p_id=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1,pn);
+            pst.setString(2, ps);
+            pst.setString(3, pb);
+            pst.setString(4, pdb);
+            pst.setInt(5, petId);
+
+            int updated = pst.executeUpdate();
+
+            if (updated > 0) {
+                JOptionPane.showMessageDialog(this, "Pet details updated successfully!");
+                this.dispose();
+
+                users u = new users();
+                admin admin = new admin(u);
+                admin.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Update failed! Please try again.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         String pn = p_name.getText().trim();
         String ps = p_species.getText().trim();
         String pb = p_breed.getText().trim();
@@ -198,14 +284,7 @@ public class updatePetAd extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        this.dispose();
-        users u = new users();
-        admin admin = new admin(u);
-        admin.setVisible(true);      
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -246,15 +325,18 @@ public class updatePetAd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel breed;
     private javax.swing.JLabel dateBirth;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel name;
+    private javax.swing.JLabel name1;
     public javax.swing.JTextField p_breed;
     public com.toedter.calendar.JDateChooser p_dateBirth;
+    private javax.swing.JLabel p_id;
     public javax.swing.JTextField p_name;
     public javax.swing.JTextField p_species;
     private javax.swing.JLabel species;
