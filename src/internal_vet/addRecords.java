@@ -326,7 +326,14 @@ insert.setString(7, now.format(DateTimeFormatter.ofPattern("HH:mm")));   // r_ti
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addRecords().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                    new gui.signin().setVisible(true);
+                } else {
+
+                    internal_vet.account vet = new internal_vet.account();
+                    new vet().setVisible(true);
+                }
             }
         });
     }

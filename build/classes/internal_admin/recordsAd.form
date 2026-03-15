@@ -265,7 +265,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="22" y="58" width="86" height="30"/>
+              <AbsoluteConstraints x="22" y="58" width="90" height="30"/>
             </Constraint>
           </Constraints>
 
@@ -281,7 +281,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e2" green="d9" red="d2" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="PRINT"/>
+                <Property name="text" type="java.lang.String" value="EXPORT"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel6MouseClicked"/>

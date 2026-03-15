@@ -100,7 +100,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        a_updatepane.setBackground(new java.awt.Color(21, 41, 62));
+        a_updatepane.setBackground(new java.awt.Color(79, 105, 131));
         a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -133,7 +133,7 @@ public class appointment extends javax.swing.JInternalFrame {
 
         jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 58, 112, 30));
 
-        a_approvepane.setBackground(new java.awt.Color(21, 41, 62));
+        a_approvepane.setBackground(new java.awt.Color(79, 105, 131));
         a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         a_approvepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

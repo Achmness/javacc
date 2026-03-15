@@ -6,6 +6,9 @@
 package internal_vet;
 
 import config.config;
+import config.session;
+import internal.vet;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -263,7 +266,14 @@ public class owner extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new owner().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                    new gui.signin().setVisible(true);
+                } else {
+
+                    internal_vet.account vet = new internal_vet.account();
+                    new vet().setVisible(true);
+                }
             }
         });
     }

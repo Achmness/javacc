@@ -17,6 +17,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import config.config;
 import config.session;
+import internal.admin;
 import internal.vet;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -258,7 +259,7 @@ public class recordsAd extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(210, 217, 226));
-        jLabel6.setText("PRINT");
+        jLabel6.setText("EXPORT");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -269,7 +270,7 @@ public class recordsAd extends javax.swing.JInternalFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prin.png"))); // NOI18N
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 58, 86, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 58, 90, 30));
 
         recordsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -498,7 +499,14 @@ public class recordsAd extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new recordsAd().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }

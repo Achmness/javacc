@@ -6,6 +6,8 @@
 package internal_admin;
 
 import config.config;
+import config.session;
+import internal.admin;
 import internal_client.addAppointment;
 import internal_client.addPet;
 import java.awt.Color;
@@ -13,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -508,7 +511,14 @@ public class info extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new info().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }

@@ -265,7 +265,14 @@ this.dispose();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateRecords().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                    new gui.signin().setVisible(true);
+                } else {
+
+                    internal_vet.account vet = new internal_vet.account();
+                    new vet().setVisible(true);
+                }
             }
         });
     }

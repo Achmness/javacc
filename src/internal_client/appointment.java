@@ -120,7 +120,7 @@ public void displayAppointment() {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        a_updatepane.setBackground(new java.awt.Color(21, 41, 62));
+        a_updatepane.setBackground(new java.awt.Color(79, 105, 131));
         a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -154,7 +154,7 @@ public void displayAppointment() {
 
         jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 60, 90, 30));
 
-        a_addpane.setBackground(new java.awt.Color(21, 41, 62));
+        a_addpane.setBackground(new java.awt.Color(79, 105, 131));
         a_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         a_addpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -188,7 +188,7 @@ public void displayAppointment() {
 
         jPanel1.add(a_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 92, 30));
 
-        a_cancelpane.setBackground(new java.awt.Color(21, 41, 62));
+        a_cancelpane.setBackground(new java.awt.Color(79, 105, 131));
         a_cancelpane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_cancelpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

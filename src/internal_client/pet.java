@@ -107,7 +107,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 96, 545, 330));
 
-        p_updatepane.setBackground(new java.awt.Color(21, 41, 62));
+        p_updatepane.setBackground(new java.awt.Color(79, 105, 131));
         p_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         p_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -141,7 +141,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(p_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 58, 88, 30));
 
-        p_addpane.setBackground(new java.awt.Color(21, 41, 62));
+        p_addpane.setBackground(new java.awt.Color(79, 105, 131));
         p_addpane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         p_addpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -175,7 +175,7 @@ public class pet extends javax.swing.JInternalFrame {
 
         jPanel1.add(p_addpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, 88, 30));
 
-        p_deletepane.setBackground(new java.awt.Color(21, 41, 62));
+        p_deletepane.setBackground(new java.awt.Color(79, 105, 131));
         p_deletepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         p_deletepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

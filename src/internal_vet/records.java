@@ -145,7 +145,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        exportpanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -157,7 +157,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
         jPanel1.setBackground(new java.awt.Color(241, 243, 246));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        a_updatepane.setBackground(new java.awt.Color(21, 41, 62));
+        a_updatepane.setBackground(new java.awt.Color(79, 105, 131));
         a_updatepane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         a_updatepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -190,7 +190,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
 
         jPanel1.add(a_updatepane, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 58, 88, 30));
 
-        a_approvepane.setBackground(new java.awt.Color(21, 41, 62));
+        a_approvepane.setBackground(new java.awt.Color(79, 105, 131));
         a_approvepane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         a_approvepane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -339,23 +339,32 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
-        jPanel2.setBackground(new java.awt.Color(21, 41, 62));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        exportpanel.setBackground(new java.awt.Color(79, 105, 131));
+        exportpanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        exportpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exportpanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exportpanelMouseExited(evt);
+            }
+        });
+        exportpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(210, 217, 226));
-        jLabel6.setText("PRINT");
+        jLabel6.setText("EXPORT");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 4, -1, 22));
+        exportpanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 4, -1, 22));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prin.png"))); // NOI18N
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
+        exportpanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 4, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 58, 86, 30));
+        jPanel1.add(exportpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 58, 92, 30));
 
         recordsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -636,6 +645,14 @@ JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 mainFrame.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void exportpanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportpanelMouseEntered
+        exportpanel.setBackground(bodycolor);       
+    }//GEN-LAST:event_exportpanelMouseEntered
+
+    private void exportpanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportpanelMouseExited
+         exportpanel.setBackground(navcolor);    
+    }//GEN-LAST:event_exportpanelMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -682,6 +699,7 @@ mainFrame.dispose();
     private javax.swing.JPanel a_approvepane;
     private javax.swing.JPanel a_updatepane;
     private javax.swing.JLabel approve;
+    private javax.swing.JPanel exportpanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -693,7 +711,6 @@ mainFrame.dispose();
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;

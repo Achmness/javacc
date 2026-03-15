@@ -6,6 +6,7 @@
 package internal_admin;
 
 import config.config;
+import config.session;
 import internal.admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -395,7 +396,14 @@ try (Connection conn = config.connectDB()) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updateAppointmentAd().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }

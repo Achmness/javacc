@@ -7,6 +7,8 @@ package gui;
 
 import com.sun.org.glassfish.external.statistics.annotations.Reset;
 import config.config;
+import config.session;
+import internal.admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -323,7 +325,14 @@ JOptionPane.showMessageDialog(null, "code do not match");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new sendCode().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }

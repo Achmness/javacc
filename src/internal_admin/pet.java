@@ -6,6 +6,8 @@
 package internal_admin;
 
 import config.config;
+import config.session;
+import internal.admin;
 import internal_client.addPet;
 import internal_client.updatePet;
 import java.awt.Color;
@@ -514,7 +516,14 @@ updateForm.p_breed.setText(pBreed);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new pet().setVisible(true);
+                if (session.isInstanceEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
+                new gui.signin().setVisible(true);
+            } else {
+                // Only create frames if the user is actually logged in
+                internal_admin.users u = new internal_admin.users();
+                new admin(u).setVisible(true);
+            }
             }
         });
     }
