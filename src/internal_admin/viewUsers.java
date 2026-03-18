@@ -291,38 +291,31 @@ name.setText(fullName.trim());   // .trim() removes extra spaces if any field is
 
         status.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         status.setForeground(new java.awt.Color(210, 217, 226));
-        status.setText("1");
-        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 264, 154, 28));
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 264, 138, 28));
 
         user.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         user.setForeground(new java.awt.Color(210, 217, 226));
-        user.setText("1");
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 62, 176, 34));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 62, 160, 34));
 
         userType.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         userType.setForeground(new java.awt.Color(210, 217, 226));
-        userType.setText("1");
-        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 232, 154, 28));
+        jPanel1.add(userType, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 232, 138, 28));
 
         address.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         address.setForeground(new java.awt.Color(210, 217, 226));
-        address.setText("1");
-        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 200, 152, 28));
+        jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 200, 136, 28));
 
         contact.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         contact.setForeground(new java.awt.Color(210, 217, 226));
-        contact.setText("1");
-        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 166, 152, 28));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 166, 136, 28));
 
         name.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         name.setForeground(new java.awt.Color(210, 217, 226));
-        name.setText("1");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 134, 150, 28));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 134, 134, 28));
 
         email.setFont(new java.awt.Font("Georgia", 1, 16)); // NOI18N
         email.setForeground(new java.awt.Color(210, 217, 226));
-        email.setText("1");
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 100, 150, 30));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 100, 134, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

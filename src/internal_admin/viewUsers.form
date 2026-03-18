@@ -278,14 +278,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="264" width="154" height="28"/>
+              <AbsoluteConstraints x="446" y="264" width="138" height="28"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -297,14 +296,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="62" width="176" height="34"/>
+              <AbsoluteConstraints x="446" y="62" width="160" height="34"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -316,14 +314,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="232" width="154" height="28"/>
+              <AbsoluteConstraints x="446" y="232" width="138" height="28"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -335,14 +332,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="200" width="152" height="28"/>
+              <AbsoluteConstraints x="446" y="200" width="136" height="28"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -354,14 +350,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="166" width="152" height="28"/>
+              <AbsoluteConstraints x="446" y="166" width="136" height="28"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -373,14 +368,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="134" width="150" height="28"/>
+              <AbsoluteConstraints x="446" y="134" width="134" height="28"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -392,14 +386,13 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e2" green="d9" red="d2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="446" y="100" width="150" height="30"/>
+              <AbsoluteConstraints x="446" y="100" width="134" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
