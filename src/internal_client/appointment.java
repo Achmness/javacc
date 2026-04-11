@@ -377,7 +377,7 @@ try (Connection conn = db.connectDB()) {
                     "You must register a pet first before adding an appointment.",
                     "No Pet Found",
                     JOptionPane.WARNING_MESSAGE);
-            return; // STOP here
+            return; 
         }
     }
 
@@ -473,7 +473,7 @@ if ("Completed".equalsIgnoreCase(status)) {
         "This appointment is already Completed and cannot be modified.", 
         "Update Restricted", 
         JOptionPane.WARNING_MESSAGE);
-    return; // Stops the code from opening the updateForm
+    return; 
 }else if("Approved".equalsIgnoreCase(status)){
     JOptionPane.showMessageDialog(this, 
         "This appointment is already Approved and cannot be modified.", 
@@ -525,10 +525,10 @@ if(rowIndex < 0){
 
 TableModel model = appointmentTable.getModel();
 
-// 1. Get current status from the table (Adjust '7' to your actual Status column index)
+
 String currentStatus = model.getValueAt(rowIndex, 6).toString();
 
-// 2. Validation Check
+
 if ("Completed".equalsIgnoreCase(currentStatus) || "Approved".equalsIgnoreCase(currentStatus)) {
     JOptionPane.showMessageDialog(null, 
         "This appointment is already " + currentStatus + " and cannot be cancelled.", 
@@ -545,7 +545,6 @@ if ("Cancelled".equalsIgnoreCase(currentStatus)) {
     return;
 }
 
-// 3. Proceed with Cancellation if validation passes
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 String newStatus = "Cancelled";
 config db = new config();

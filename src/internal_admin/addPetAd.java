@@ -211,13 +211,12 @@ public class addPetAd extends javax.swing.JFrame {
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
          String pName = p_name.getText().trim();
-String ownerIdStr = p_owner.getText().trim(); // Get owner ID from text field
+String ownerIdStr = p_owner.getText().trim(); 
 String pSpecies = p_species.getText().trim();
 String pBreed = p_breed.getText().trim();
 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 String pDateBirth = "";
 
-// Validate date
 if (p_dateBirth.getDate() != null) {
     pDateBirth = sdf.format(p_dateBirth.getDate());
 } else {
@@ -225,13 +224,12 @@ if (p_dateBirth.getDate() != null) {
     return;
 }
 
-// Validate required fields
 if (pName.isEmpty() || pSpecies.isEmpty() || pBreed.isEmpty() || ownerIdStr.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Please fill in all fields including Owner ID!");
     return;
 }
 
-// Convert owner ID to integer
+
 int pOwner;
 try {
     pOwner = Integer.parseInt(ownerIdStr);
@@ -240,7 +238,6 @@ try {
     return;
 }
 
-// Validate owner exists and is of type Client
 config db = new config();
 try {
     String sqlCheck = "SELECT a_type FROM account WHERE a_id = ?";
@@ -269,7 +266,6 @@ try {
     return;
 }
 
-// Insert the pet
 String sqlInsert = "INSERT INTO pet (owner_id, p_name, p_species, p_breed, p_dateBirth) VALUES (?, ?, ?, ?, ?)";
 db.addRecord(sqlInsert, pOwner, pName, pSpecies, pBreed, pDateBirth);
 

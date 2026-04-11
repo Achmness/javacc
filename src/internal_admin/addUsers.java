@@ -121,15 +121,13 @@ public class addUsers extends javax.swing.JFrame {
     
         public static int getHeightFromWidth(String imagePath, int desiredWidth) {
         try {
-            // Read the image file
+
             File imageFile = new File(imagePath);
             BufferedImage image = ImageIO.read(imageFile);
             
-            // Get the original width and height of the image
             int originalWidth = image.getWidth();
             int originalHeight = image.getHeight();
-            
-            // Calculate the new height based on the desired width and the aspect ratio
+
             int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
             
             return newHeight;

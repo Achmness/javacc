@@ -97,7 +97,6 @@ public class addAppointmentAd extends javax.swing.JFrame {
         return false;
     }
     
-    // Regex pattern for HH:MM AM/PM format (supports 1 or 2 digit hours)
     String timePattern = "^(0?[1-9]|1[0-2]):[0-5][0-9] (?i)(AM|PM)$";
     
     if (!apTime.matches(timePattern)) {
@@ -106,11 +105,10 @@ public class addAppointmentAd extends javax.swing.JFrame {
     }
     
     try {
-        // "h:mm a" handles "9:00 AM" and "11:00 AM"
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         LocalTime time = LocalTime.parse(apTime.toUpperCase(), formatter);
         
-        // Define Veterinary Clinic boundaries (8:00 AM to 5:00 PM)
         LocalTime startTime = LocalTime.of(8, 0);
         LocalTime endTime = LocalTime.of(17, 0);
         
@@ -138,8 +136,7 @@ public class addAppointmentAd extends javax.swing.JFrame {
     private boolean isTimeSlotConflict(String apDate, String newTimeStr) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
     LocalTime newTime = LocalTime.parse(newTimeStr.toUpperCase(), formatter);
-    
-    // Define the buffer (1 hour before and 1 hour after)
+
     LocalTime bufferStart = newTime.minusMinutes(59);
     LocalTime bufferEnd = newTime.plusMinutes(59);
 
@@ -156,9 +153,6 @@ public class addAppointmentAd extends javax.swing.JFrame {
             try {
                 LocalTime existingTime = LocalTime.parse(existingTimeStr.toUpperCase(), formatter);
 
-                // If existing time falls within the 1-hour window of the new time
-                // Example: Existing is 10:00 AM. New is 10:30 AM. 
-                // 10:30 is between 9:01 and 10:59 -> CONFLICT.
                 if (existingTime.isAfter(bufferStart) && existingTime.isBefore(bufferEnd)) {
                     JOptionPane.showMessageDialog(this, 
                         "Conflict: There is already an appointment at " + existingTimeStr + 
@@ -166,14 +160,14 @@ public class addAppointmentAd extends javax.swing.JFrame {
                     return true; // Conflict found
                 }
             } catch (DateTimeParseException e) {
-                // Skip entries that don't match the format
+
                 continue;
             }
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return false; // No conflict
+    return false; 
 }
     
 
@@ -383,19 +377,18 @@ if(apReasons.isEmpty() || apTime.isEmpty() || apNotes.isEmpty()){
     return;
 }
 if (!validateTime(apTime)) {
-        ap_time.requestFocus(); // Focus back on time field for user correction
+        ap_time.requestFocus(); 
         return; 
     }
 if (isTimeSlotConflict(apDate, apTime)) {
         ap_time.requestFocus();
-        return; // Stop if there is a conflict
+        return; 
     }
 
 config db = new config();
 
 try (Connection conn = db.connectDB()) {
 
-    // 🔹 Get owner automatically from pet table
     String owner = "";
     String getOwner = "SELECT owner_id FROM pet WHERE p_id = ?";
     PreparedStatement pst = conn.prepareStatement(getOwner);
@@ -406,7 +399,6 @@ try (Connection conn = db.connectDB()) {
     if(rs.next()){
         owner = rs.getString("owner_id");
 
-        // optional: display owner in textbox
 
 
     }else{
@@ -416,7 +408,6 @@ try (Connection conn = db.connectDB()) {
         return;
     }
 
-    // 🔹 Insert appointment
     String sql = "INSERT INTO appointment (ap_petId, ap_clientId, ap_reasons, ap_date, ap_time, ap_notes, ap_status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     PreparedStatement insert = conn.prepareStatement(sql);

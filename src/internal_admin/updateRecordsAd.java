@@ -29,8 +29,8 @@ public class updateRecordsAd extends javax.swing.JFrame {
     }
     
     public void loadData(int id) {
-    this.recordId = id; // Update the local variable
-    this.r_id.setText(String.valueOf(id)); // Display it in the JLabel
+    this.recordId = id; 
+    this.r_id.setText(String.valueOf(id)); 
     
 }
     
@@ -207,7 +207,7 @@ public class updateRecordsAd extends javax.swing.JFrame {
         config db = new config();
 
         try (Connection conn = db.connectDB()) {
-            // You have 5 question marks, so you MUST have 5 insert.set... calls
+         
             String sql = "UPDATE records SET r_diagnosis=?, r_instructions=?, r_prescription=?, r_notes=? WHERE r_id=?";
 
             PreparedStatement updateStmt = conn.prepareStatement(sql);
@@ -265,7 +265,7 @@ public class updateRecordsAd extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
                 new gui.signin().setVisible(true);
             } else {
-                // Only create frames if the user is actually logged in
+            
                 internal_admin.users u = new internal_admin.users();
                 new admin(u).setVisible(true);
             }

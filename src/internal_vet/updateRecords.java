@@ -34,8 +34,8 @@ public class updateRecords extends javax.swing.JFrame {
         r_id.setText(String.valueOf(recordId));
     }
         public void loadData(int id) {
-    this.recordId = id; // Update the local variable
-    this.r_id.setText(String.valueOf(id)); // Display it in the JLabel
+    this.recordId = id; 
+    this.r_id.setText(String.valueOf(id)); 
     
 }
 
@@ -212,7 +212,7 @@ if(diagnosis.isEmpty() || instructions.isEmpty() || prescription.isEmpty() || no
 config db = new config();
 
 try (Connection conn = db.connectDB()) {
-    // You have 5 question marks, so you MUST have 5 insert.set... calls
+  
     String sql = "UPDATE records SET r_diagnosis=?, r_instructions=?, r_prescription=?, r_notes=? WHERE r_id=?";
 
     PreparedStatement updateStmt = conn.prepareStatement(sql);

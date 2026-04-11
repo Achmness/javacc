@@ -228,7 +228,6 @@ JOptionPane.showMessageDialog(null, "code do not match");
         return;
     }
 
-    // Check if email exists in database
     String sql = "SELECT * FROM account WHERE a_email = ?";
     PreparedStatement pst = conn.prepareStatement(sql);
     pst.setString(1, userEmail);
@@ -236,7 +235,6 @@ JOptionPane.showMessageDialog(null, "code do not match");
 
     if(rs.next()){
 
-        // Generate OTP
         Random rand = new Random();
         randomCode = 100000 + rand.nextInt(900000);
 

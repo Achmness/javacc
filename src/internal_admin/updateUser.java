@@ -125,15 +125,15 @@ public class updateUser extends javax.swing.JFrame {
     
         public static int getHeightFromWidth(String imagePath, int desiredWidth) {
         try {
-            // Read the image file
+
             File imageFile = new File(imagePath);
             BufferedImage image = ImageIO.read(imageFile);
             
-            // Get the original width and height of the image
+
             int originalWidth = image.getWidth();
             int originalHeight = image.getHeight();
             
-            // Calculate the new height based on the desired width and the aspect ratio
+
             int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
             
             return newHeight;
@@ -438,7 +438,7 @@ String em = email.getText().trim();
     String addr = address.getText().trim();
     String st = status.getSelectedItem().toString();
 
-    // Basic required fields validation
+
     if (us.isEmpty() || fn.isEmpty() || ln.isEmpty() || cont.isEmpty() || 
         ut.isEmpty() || addr.isEmpty() || em.isEmpty() || st.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please fill in all fields");
@@ -455,17 +455,14 @@ String em = email.getText().trim();
         return;
     }
 
-    // ────────────────────────────────────────────────
-    //   EMAIL UNIQUENESS CHECK – VERY IMPORTANT PART
-    // ────────────────────────────────────────────────
     try (Connection conn = config.connectDB()) {
 
-        // Check if email is already used by **another** user
+
         String checkSql = "SELECT a_id FROM account WHERE a_email = ? AND a_id != ?";
         
         PreparedStatement checkStmt = conn.prepareStatement(checkSql);
         checkStmt.setString(1, em);
-        checkStmt.setInt(2, this.userId);   // ← exclude current user
+        checkStmt.setInt(2, this.userId);  
 
         ResultSet rs = checkStmt.executeQuery();
 
@@ -479,9 +476,6 @@ String em = email.getText().trim();
         rs.close();
         checkStmt.close();
 
-        // ────────────────────────────────────────────────
-        // Proceed with UPDATE if email is ok (or unchanged)
-        // ────────────────────────────────────────────────
 
         PreparedStatement pst;
         String sql;
@@ -662,7 +656,7 @@ String em = email.getText().trim();
                 JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
                 new gui.signin().setVisible(true);
             } else {
-                // Only create frames if the user is actually logged in
+              
                                 int id = 0;
                 new updateUser(id).setVisible(true);
                 internal_admin.users u = new internal_admin.users();

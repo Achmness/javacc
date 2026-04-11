@@ -267,7 +267,6 @@ public class addRecordsAd extends javax.swing.JFrame {
 
         try (Connection conn = db.connectDB()) {
 
-            // 🔹 Check if appointment exists AND is completed
             String checkAppointment = "SELECT ap_status FROM appointment WHERE ap_id = ?";
             PreparedStatement pst = conn.prepareStatement(checkAppointment);
             pst.setString(1, apId);
@@ -300,8 +299,8 @@ public class addRecordsAd extends javax.swing.JFrame {
             insert.setString(4, prescription);
             insert.setString(5, notes);
             LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Manila"));
-            insert.setString(6, now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))); // r_date
-            insert.setString(7, now.format(DateTimeFormatter.ofPattern("HH:mm")));   // r_time
+            insert.setString(6, now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))); 
+            insert.setString(7, now.format(DateTimeFormatter.ofPattern("HH:mm"))); 
 
             insert.executeUpdate();
 

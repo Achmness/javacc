@@ -51,7 +51,7 @@ public class updateAppointment extends javax.swing.JFrame {
         return false;
     }
     
-    // Regex pattern for HH:MM AM/PM format (supports 1 or 2 digit hours)
+   
     String timePattern = "^(0?[1-9]|1[0-2]):[0-5][0-9] (?i)(AM|PM)$";
     
     if (!apTime.matches(timePattern)) {
@@ -60,11 +60,11 @@ public class updateAppointment extends javax.swing.JFrame {
     }
     
     try {
-        // "h:mm a" handles "9:00 AM" and "11:00 AM"
+       
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         LocalTime time = LocalTime.parse(apTime.toUpperCase(), formatter);
         
-        // Define Veterinary Clinic boundaries (8:00 AM to 5:00 PM)
+      
         LocalTime startTime = LocalTime.of(8, 0);
         LocalTime endTime = LocalTime.of(17, 0);
         
@@ -96,13 +96,13 @@ private boolean isTimeSlotConflict(String apDate, String newTimeStr) {
         newTime = LocalTime.parse(newTimeStr.toUpperCase(), formatter);
     } catch (DateTimeParseException e) {
         JOptionPane.showMessageDialog(this, "Invalid time format.");
-        return true; // treat as conflict to stop save
+        return true; 
     }
 
     LocalTime bufferStart = newTime.minusMinutes(59);
     LocalTime bufferEnd   = newTime.plusMinutes(59);
 
-    // Important: exclude the appointment we're currently editing!
+  
 String query = 
     "SELECT ap_time " +
     "FROM appointment " +
@@ -113,7 +113,7 @@ String query =
          PreparedStatement pst = conn.prepareStatement(query)) {
 
         pst.setString(1, apDate);
-        pst.setInt(2, this.apId);           // ← this is the key change
+        pst.setInt(2, this.apId);      
 
         ResultSet rs = pst.executeQuery();
 
@@ -129,16 +129,16 @@ String query =
                     return true;
                 }
             } catch (DateTimeParseException e) {
-                continue; // skip bad data
+                continue;
             }
         }
 
-        return false; // no conflict found
+        return false; 
 
     } catch (SQLException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Error checking schedule: " + e.getMessage());
-        return true; // better to block save than risk double-booking
+        return true; 
     }
 }
     
@@ -312,7 +312,7 @@ try {
     pid = Integer.parseInt(ap_pet.getText().trim());
 } catch (NumberFormatException e) {
     JOptionPane.showMessageDialog(this, "Invalid Pet ID. It must be a number.");
-    return; // stop further execution
+    return; 
 }       
         String petId = ap_pet.getText().trim();
         if(petId.isEmpty()){
@@ -337,18 +337,18 @@ try {
             return;
         }
         if (!validateTime(at)) {
-        ap_time.requestFocus(); // Focus back on time field for user correction
+        ap_time.requestFocus(); 
         return; 
     }
 if (isTimeSlotConflict(apDate, at)) {
         ap_time.requestFocus();
-        return; // Stop if there is a conflict
+        return; 
     }
 
         try (Connection conn = config.connectDB()) {
     
-    // --- STEP 1: VALIDATE PET ID EXISTENCE ---
-    String checkSql = "SELECT COUNT(*) FROM pet WHERE p_id = ?"; // Adjust table/column names
+   
+    String checkSql = "SELECT COUNT(*) FROM pet WHERE p_id = ?"; 
     PreparedStatement checkPst = conn.prepareStatement(checkSql);
     checkPst.setInt(1, pid);
     ResultSet rs = checkPst.executeQuery();
@@ -365,10 +365,10 @@ if (isTimeSlotConflict(apDate, at)) {
             JOptionPane.ERROR_MESSAGE);
         ap_pet.setText("");
         ap_pet.requestFocus();
-        return; // Exit the method early
+        return; 
     }
 
-    // --- STEP 2: PROCEED TO UPDATE ---
+    
     String sql = "UPDATE appointment SET ap_petId=?, ap_reasons=?, ap_date=?, ap_time=?, ap_notes=? WHERE ap_id=?";
     PreparedStatement pst = conn.prepareStatement(sql);
     

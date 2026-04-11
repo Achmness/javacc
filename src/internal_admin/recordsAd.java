@@ -101,7 +101,7 @@ public class recordsAd extends javax.swing.JInternalFrame {
     PdfPCell cell = new PdfPCell(new Phrase(text, font));
     cell.setPadding(5);
     cell.setHorizontalAlignment(alignment);
-    cell.setBorder(PdfPCell.NO_BORDER); // Common in these types of forms
+    cell.setBorder(PdfPCell.NO_BORDER); 
     return cell;
 }
 
@@ -348,7 +348,7 @@ public class recordsAd extends javax.swing.JInternalFrame {
 
             if (rs.next()) {
 
-                // Ask where to save PDF
+
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setSelectedFile(new File("Prescription.pdf"));
                 int option = fileChooser.showSaveDialog(this);
@@ -365,7 +365,7 @@ public class recordsAd extends javax.swing.JInternalFrame {
                 Font normalFont = new Font(Font.FontFamily.HELVETICA, 11);
                 Font smallFont = new Font(Font.FontFamily.HELVETICA, 9);
 
-                // Clinic Header
+        
                 Paragraph clinic = new Paragraph("PET CARE & VETERINARY", headerFont);
                 clinic.setAlignment(Element.ALIGN_LEFT);
                 document.add(clinic);
@@ -381,7 +381,6 @@ public class recordsAd extends javax.swing.JInternalFrame {
 
                 document.add(new Paragraph(" "));
 
-                // Patient Info Table
                 PdfPTable infoTable = new PdfPTable(4);
                 infoTable.setWidthPercentage(100);
                 infoTable.setWidths(new int[]{2,4,2,4});
@@ -417,14 +416,13 @@ public class recordsAd extends javax.swing.JInternalFrame {
                 document.add(new Paragraph(" "));
                 document.add(new Paragraph(" "));
 
-                // Prescription
                 document.add(new Paragraph("        " + rs.getString("r_prescription"), normalFont));
                 document.add(new Paragraph(" "));
                 document.add(new Paragraph(" "));
                 document.add(new Paragraph(" "));
                 document.add(new Paragraph(" "));
 
-                // Diagnosis and Instructions
+
                 document.add(new Paragraph("                "+ rs.getString("r_instructions"), normalFont));
 
                 document.add(new Paragraph(" "));
@@ -445,7 +443,7 @@ public class recordsAd extends javax.swing.JInternalFrame {
                 document.add(new Paragraph(" "));
                 document.add(new Paragraph(" "));
 
-                // Vet Signature
+
                 Paragraph signature = new Paragraph(
                     "Dr. " + rs.getString("vet_fname")+" "+rs.getString("vet_lname") + "\nVeterinarian",
                     normalFont

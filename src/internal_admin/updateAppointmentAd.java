@@ -44,10 +44,10 @@ public int appId;
                  "WHERE a_type = 'VETERINARIAN'";
     db.displayData(sql, vetTable);
 }
-// Change your existing loadData to this:
+
 public void loadData(int id) {
-    this.appId = id; // Update the local variable
-    this.ap_id.setText(String.valueOf(id)); // Display it in the JLabel
+    this.appId = id; 
+    this.ap_id.setText(String.valueOf(id)); 
     
 }
 
@@ -222,7 +222,7 @@ public void loadData(int id) {
 String vidStr = ap_vetId.getText().trim();
 
 
-// 1. Validate required field
+
 if (vidStr.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Please enter Vet ID!");
     return;
@@ -236,7 +236,7 @@ try {
     return;
 }
 
-// 2. Validate Vet exists and is of type 'VETERINARIAN'
+
 config db = new config();
 try (Connection conn = config.connectDB()) {
 
@@ -262,7 +262,7 @@ try (Connection conn = config.connectDB()) {
         return;
     }
 
-    // 3. Perform Update
+
     String sqlUpdate = "UPDATE appointment SET ap_vetId = ?, ap_status = ? WHERE ap_id = ?";
     PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdate);
 
@@ -296,7 +296,6 @@ try (Connection conn = config.connectDB()) {
 String vidStr = ap_vetId.getText().trim();
 
 
-// 1. Validate required field
 if (vidStr.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Please enter Vet ID!");
     return;
@@ -310,7 +309,7 @@ try {
     return;
 }
 
-// 2. Validate Vet exists and is of type 'VETERINARIAN'
+
 config db = new config();
 try (Connection conn = config.connectDB()) {
 
@@ -336,7 +335,7 @@ try (Connection conn = config.connectDB()) {
         return;
     }
 
-    // 3. Perform Update
+
     String sqlUpdate = "UPDATE appointment SET ap_vetId = ?, ap_status = ? WHERE ap_id = ?";
     PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdate);
 
@@ -400,7 +399,7 @@ try (Connection conn = config.connectDB()) {
                 JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
                 new gui.signin().setVisible(true);
             } else {
-                // Only create frames if the user is actually logged in
+
                 internal_admin.users u = new internal_admin.users();
                 new admin(u).setVisible(true);
             }

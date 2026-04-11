@@ -365,10 +365,10 @@ if (rowIndex < 0) {
 }
 
 TableModel model = appointmentTable.getModel();
-// Index 6 for status as per your code
+
 String currentStatus = model.getValueAt(rowIndex, 6).toString().trim();
 
-// RESTRICTION LOGIC: Prevent opening if already processed
+
 if (currentStatus.equalsIgnoreCase("Cancelled") || 
     currentStatus.equalsIgnoreCase("Approved") || 
     currentStatus.equalsIgnoreCase("Completed")) {
@@ -377,13 +377,12 @@ if (currentStatus.equalsIgnoreCase("Cancelled") ||
     return;
 }
 
-// DATA EXTRACTION
+
 int apId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 String status = model.getValueAt(rowIndex, 6).toString();
 
-// OPEN UPDATE FORM
 updateAppointmentAd upApp = new updateAppointmentAd();
-upApp.appId = apId; // Pass the ID to the JFrame variable
+upApp.appId = apId; 
 upApp.loadData(apId);
 upApp.ap_status.setSelectedItem(status);
 

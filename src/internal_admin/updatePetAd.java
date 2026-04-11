@@ -39,8 +39,8 @@ public class updatePetAd extends javax.swing.JFrame {
     }
     
     public void loadData(int id) {
-    this.petId = id; // Update the local variable
-    this.p_id.setText(String.valueOf(id)); // Display it in the JLabel
+    this.petId = id;
+    this.p_id.setText(String.valueOf(id)); 
     
 }
 
@@ -322,7 +322,7 @@ public class updatePetAd extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
                 new gui.signin().setVisible(true);
             } else {
-                // Only create frames if the user is actually logged in
+              
                 internal_admin.users u = new internal_admin.users();
                 new admin(u).setVisible(true);
             }

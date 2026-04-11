@@ -55,9 +55,9 @@ public class viewUsers extends javax.swing.JFrame {
                 if (rs.next()) {
 
 
-                    // Option 1: Simple concatenation (most popular)
+                  
 String fullName = rs.getString("a_fname") + " " + rs.getString("a_lname");
-name.setText(fullName.trim());   // .trim() removes extra spaces if any field is null/empty
+name.setText(fullName.trim());  
                     email.setText(rs.getString("a_email"));
                     user.setText(rs.getString("a_user"));
                     contact.setText("0"+rs.getString("a_contact"));
@@ -119,15 +119,14 @@ name.setText(fullName.trim());   // .trim() removes extra spaces if any field is
     
         public static int getHeightFromWidth(String imagePath, int desiredWidth) {
         try {
-            // Read the image file
+
             File imageFile = new File(imagePath);
             BufferedImage image = ImageIO.read(imageFile);
-            
-            // Get the original width and height of the image
+
             int originalWidth = image.getWidth();
             int originalHeight = image.getHeight();
             
-            // Calculate the new height based on the desired width and the aspect ratio
+           
             int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
             
             return newHeight;
@@ -377,7 +376,7 @@ name.setText(fullName.trim());   // .trim() removes extra spaces if any field is
                 JOptionPane.showMessageDialog(null, "Unauthorized. Please log in.");
                 new gui.signin().setVisible(true);
             } else {
-                // Only create frames if the user is actually logged in
+             
                                 int id = 0;
                 new updateUser(id).setVisible(true);
                 internal_admin.users u = new internal_admin.users();

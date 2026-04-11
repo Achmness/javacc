@@ -97,9 +97,7 @@ public class records extends javax.swing.JInternalFrame {
        recordsTable.setRowSorter(tr);
        tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
     }
-   
 
-// You need to add this method to your class
 private PdfPCell getCell(String text, int alignment, boolean isBold) {
     Font font;
     if (isBold) {
@@ -111,7 +109,7 @@ private PdfPCell getCell(String text, int alignment, boolean isBold) {
     PdfPCell cell = new PdfPCell(new Phrase(text, font));
     cell.setPadding(5);
     cell.setHorizontalAlignment(alignment);
-    cell.setBorder(PdfPCell.NO_BORDER); // Common in these types of forms
+    cell.setBorder(PdfPCell.NO_BORDER);
     return cell;
 }
 
@@ -481,7 +479,7 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
 
     if (rs.next()) {
 
-        // Ask where to save PDF
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setSelectedFile(new File("Prescription.pdf"));
         int option = fileChooser.showSaveDialog(this);
@@ -498,7 +496,6 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         Font normalFont = new Font(Font.FontFamily.HELVETICA, 11);
         Font smallFont = new Font(Font.FontFamily.HELVETICA, 9);
 
-        // Clinic Header
         Paragraph clinic = new Paragraph("PET CARE & VETERINARY", headerFont);
         clinic.setAlignment(Element.ALIGN_LEFT);
         document.add(clinic);
@@ -514,7 +511,6 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
 
         document.add(new Paragraph(" "));
 
-        // Patient Info Table
         PdfPTable infoTable = new PdfPTable(4);
         infoTable.setWidthPercentage(100);
         infoTable.setWidths(new int[]{2,4,2,4});
@@ -551,13 +547,13 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
 
-        // Prescription
+
         document.add(new Paragraph("        " + rs.getString("r_prescription"), normalFont));
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
         
 
-        // Diagnosis and Instructions
+
         document.add(new Paragraph("                "+ rs.getString("r_instructions"), normalFont));
         
         document.add(new Paragraph(" "));
@@ -578,7 +574,7 @@ String sql = "SELECT r.*, p.p_name, p.p_species, p.p_dateBirth, " +
         document.add(new Paragraph(" "));
 
 
-        // Vet Signature
+
         Paragraph signature = new Paragraph(
                 "Dr. " + rs.getString("vet_fname")+" "+rs.getString("vet_lname") + "\nVeterinarian",
                 normalFont
@@ -612,10 +608,10 @@ if (rowIndex < 0) {
 
 TableModel model = recordsTable.getModel();
 
-// Assuming column 5 is 'Status' (Change index based on your table)
+
 String recordStatus = model.getValueAt(rowIndex, 5).toString(); 
 
-// RESTRICTION LOGIC: Prevent editing if already finalized
+
 if ("Finalized".equalsIgnoreCase(recordStatus) || "Archived".equalsIgnoreCase(recordStatus)) {
     JOptionPane.showMessageDialog(this, 
         "This record is finalized and cannot be modified for medical integrity.", 
@@ -624,14 +620,14 @@ if ("Finalized".equalsIgnoreCase(recordStatus) || "Archived".equalsIgnoreCase(re
     return;
 }
 
-// DATA EXTRACTION
+
 int recordId = Integer.parseInt(model.getValueAt(rowIndex, 0).toString());
 String diagnosis = model.getValueAt(rowIndex, 4).toString();
 String instructions = model.getValueAt(rowIndex, 5).toString();
 String prescription = model.getValueAt(rowIndex, 6).toString();
 String notes = model.getValueAt(rowIndex, 7).toString();
 
-// OPEN UPDATE FORM
+
 updateRecords updateForm = new updateRecords();
 updateForm.recordId = recordId;    
 updateForm.loadData(recordId);

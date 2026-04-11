@@ -59,7 +59,7 @@ public class info extends javax.swing.JInternalFrame {
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            total = rs.getInt(1); // first column (COUNT result)
+            total = rs.getInt(1);
         }
         
 
@@ -101,11 +101,10 @@ public class info extends javax.swing.JInternalFrame {
     config db = new config();
     try (Connection conn = db.connectDB()) {
 
-        // Get today's date in yyyy-MM-dd format
+
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(new java.util.Date());
 
-        // ✅ Only count appointments with status 'Accepted'
         String sql = "SELECT COUNT(*) FROM appointment WHERE ap_date = ? AND ap_status = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1, today);

@@ -39,8 +39,8 @@ public class updatePet extends javax.swing.JFrame {
     }
     
         public void loadData(int id) {
-    this.petId = id; // Update the local variable
-    this.p_id.setText(String.valueOf(id)); // Display it in the JLabel
+    this.petId = id;
+    this.p_id.setText(String.valueOf(id));
     
 }
 

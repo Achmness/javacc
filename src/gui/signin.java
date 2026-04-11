@@ -258,7 +258,6 @@ public class signin extends javax.swing.JFrame {
         return;
     }
 
-    // Get values from result
     Object idObj = result.get(0).get("a_id");
     Object statusObj = result.get(0).get("a_status");
     Object typeObj = result.get(0).get("a_type");
@@ -290,9 +289,6 @@ public class signin extends javax.swing.JFrame {
 
 }
 
-    // ==========================
-    // Populate Singleton (prof-style)
-    // ==========================
      session sess = session.getInstance();
     sess.setFullDetails(
         accId,

@@ -246,7 +246,7 @@ config db = new config();
 
 try (Connection conn = db.connectDB()) {
 
-    // 🔹 Check if appointment exists AND is completed
+ 
     String checkAppointment = "SELECT ap_status FROM appointment WHERE ap_id = ?";
     PreparedStatement pst = conn.prepareStatement(checkAppointment);
     pst.setString(1, apId);
